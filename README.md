@@ -4,7 +4,7 @@
 ### Frontend
 I recommend installing nodeJS 16.13.0 (LTS)
 
-For npm, the lastest version is works for me
+For npm, the lastest version works for me
 
 ```cd frontend/```
 
