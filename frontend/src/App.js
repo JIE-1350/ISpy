@@ -1,13 +1,16 @@
 import React from "react";
 import Table from "./components/Table"
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 const App = () => {
     const [data, setData] = React.useState('')
     const [user, setUser] = React.useState('')
-    const [since, setSince] = React.useState('2021-01-1')
-    const [until, setUntil] = React.useState('2022-01-1')
-    const [keyword, setKeyword] = React.useState('covid')
+    const [since, setSince] = React.useState('')
+    const [until, setUntil] = React.useState('')
+    const [keyword, setKeyword] = React.useState('')
 
     const scrapeData = () => {
         fetch('http://127.0.0.1:8000/?user=' + user + '&keyword=' + keyword + '&since=' + since + '&until=' + until)
@@ -23,11 +26,11 @@ const App = () => {
     return (
         <div>
             <h1>Python Scraper</h1>
-            <input type="text" value={user} onChange={e => setUser(e.target.value)}/>
-            <input type="text" value={since} onChange={e => setSince(e.target.value)}/>
-            <input type="text" value={until} onChange={e => setUntil(e.target.value)}/>
-            <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)}/>
-            <button onClick={scrapeData}>Scrape Data</button>
+            <TextField label="Username" variant="outlined" onChange={e => setUser(e.target.value)}/>
+            <TextField label="Start Date" variant="outlined" onChange={e => setSince(e.target.value)}/>
+            <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
+            <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
+            <Button variant="contained" onClick={scrapeData}>Search</Button>
             <Table data={data}></Table>
         </div>
     );
