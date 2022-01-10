@@ -1,4 +1,4 @@
-# temp
+# Intelligent Scraping with Python (ISpy)
 
 ## Prototype
 
