@@ -2,23 +2,32 @@
 
 ## Installation
 ### Frontend
-I recommend installing nodeJS 16.13.0 (LTS)
+#### Setup
+Install NodeJS. I recommend installing nodeJS 16.13.0 (LTS)
 
-For npm, the lastest version works for me
+Install npm. (The latest version works for me)
 
 ```cd frontend/```
 
 ```npm install```
 
+#### Run
 ```npm run dev```
 
 ### Backend
-I recommend creating a virtual environment first then run these commands to install dependencies:
+#### Setup
+I recommend creating a virtual environment then install the dependencies:
+
+```cd backend/```
+
+```python3 -m venv venv```
+
+```source venv/bin/activate```
 
 ```pip install -r requirements.txt```
 
 
-To run manually:
+#### To run manually and test:
 
 ```python server.py```
 
