@@ -11,7 +11,10 @@ Install npm. (The latest version works for me)
 
 ```npm install```
 
-#### Run
+#### Run frontend only
+```npm start```
+
+#### Run frontend and backend
 ```npm run dev```
 
 ### Backend
