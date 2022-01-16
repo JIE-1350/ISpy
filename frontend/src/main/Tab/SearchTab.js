@@ -1,11 +1,17 @@
 import React from "react";
-import Table from "./components/Table"
+import {createUseStyles} from 'react-jss'
 
+import Table from "./../components/Table"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import SearchTabStyle from './../../jss/Tab/SearchTabStyle.js';
 
-const App = () => {
+const useStyles = createUseStyles(SearchTabStyle)
+
+const SearchTab = () => {
+    const classes = useStyles()
+
     const [data, setData] = React.useState('')
     const [user, setUser] = React.useState('')
     const [since, setSince] = React.useState('')
@@ -24,8 +30,9 @@ const App = () => {
     }
 
     return (
-        <div>
-            <h1>Python Scraper</h1>
+    <div className={classes.searchTab}>
+        <div className={classes.directoryWindow}> directoryWindow </div>
+        <div className={classes.mainWindow}>
             <TextField label="Username" variant="outlined" onChange={e => setUser(e.target.value)}/>
             <TextField label="Start Date" variant="outlined" onChange={e => setSince(e.target.value)}/>
             <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
@@ -33,7 +40,8 @@ const App = () => {
             <Button variant="contained" onClick={scrapeData}>Search</Button>
             <Table data={data}></Table>
         </div>
-    );
+    </div>
+    )
 }
 
-export default App;
+export default SearchTab
