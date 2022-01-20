@@ -2,8 +2,10 @@ from queries import user_search
 from flask import Flask, request
 import pandas as pd
 from flask_cors import cross_origin
+from Application import Application
 
 app = Flask(__name__)
+application = Application()
 
 
 @app.route("/")
@@ -21,6 +23,32 @@ def search():
         # except FileNotFoundError:
         #     user_search("JoeBiden", "2021-01-1", "2022-01-1", "covid")
         #     return pd.read_csv('../backend/data/2021-01-1.csv').to_json(orient="index")
+    except Exception as exception:
+        return str(exception)
+
+
+@app.route("/filter/add")
+@cross_origin()
+def add_filter():
+    try:
+        type = request.args.get('type')
+        feature = request.args.get('feature')
+        value = request.args.get('value')
+        application.add_filter(type, feature, value)
+        return {'status_msg': "Successfully added filter",
+                'state': application.state()}
+    except Exception as exception:
+        return str(exception)
+
+
+@app.route("/filter/remove")
+@cross_origin()
+def remove_filter():
+    try:
+        remove_index = request.args.get('index')
+        application.remove_filter(remove_index)
+        return {'status_msg': "Successfully removed filter",
+                'state': application.state()}
     except Exception as exception:
         return str(exception)
 
