@@ -11,7 +11,20 @@ const SearchTabStyle = () => {
         mainWindow: {
             height: "100%",
             width: "75%",
-        }
+        },
+		"@global": {
+			"#overlay": {
+			
+			"visibility": "hidden",
+			"position": "absolute",
+			"left": "0px",
+			"top": "0px",
+			"width": "50%",
+			"height": "50%",
+			"textAlign": "center",
+			"zIndex": "1000"
+			}
+		}
     };
 };
 

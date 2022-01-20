@@ -47,6 +47,12 @@ const SearchTab = () => {
 	  filterCounter = filterCounter + 1;
 	}
 	
+	const filterDropdown = () => {
+		let elm = document.getElementById("overlay");
+		elm.style.visibility = (elm.style.visibility == "visible") ? "hidden" : "visible";
+		console.log();		
+	}
+	
     return (
 	<body>
     <div className={classes.searchTab}>
@@ -58,9 +64,9 @@ const SearchTab = () => {
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
 			 <Button variant="contained" onClick={addFilterButton}>Apply Filter Test</Button>
-			<Button variant="contained" onClick="filterDropdown">Add Filter (Context)</Button>
-			  <div id="appliedFilterList">
-			  </div>
+			<Button variant="contained" onClick={filterDropdown}>Add Filter (Context)</Button>
+			  <div id="appliedFilterList"></div>
+			  <div id="overlay"><div><p>"Test content"</p></div></div>
             <Table data={data}></Table>
         </div>
     </div>
