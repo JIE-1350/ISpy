@@ -1,18 +1,22 @@
 import React from "react";
-import {createUseStyles} from 'react-jss'
+import {createUseStyles} from 'react-jss';
+import { connect } from "react-redux"
 
-import Table from "./../components/Table"
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import FilterForm from "./../components/FilterForm";
+import FilterBox from "./../components/FilterBox";
+import Table from "./../components/Table";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 import SearchTabStyle from './../../jss/Tab/SearchTabStyle.js';
 
 const useStyles = createUseStyles(SearchTabStyle)
 
-const SearchTab = () => {
+
+
+const SearchTab = (props) => {
     const classes = useStyles()
 
-    const [data, setData] = React.useState('')
     const [user, setUser] = React.useState('')
     const [since, setSince] = React.useState('')
     const [until, setUntil] = React.useState('')
@@ -21,9 +25,19 @@ const SearchTab = () => {
     const scrapeData = () => {
         fetch('http://127.0.0.1:8000/?user=' + user + '&keyword=' + keyword + '&since=' + since + '&until=' + until)
         .then((res)=>{
-            return res.text();
-        }).then((data)=>{
-            setData(data);
+            return res.json();
+        }).then((obj)=>{
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "UPDATE_STATE",
+                        payload: obj
+                    }
+                )
+            }
+            else {
+                throw(JSON.stringify(obj))
+            }
         }).catch(e=>{
             alert(e);
         })
@@ -38,10 +52,20 @@ const SearchTab = () => {
             <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
-            <Table data={data}></Table>
+            <div className={classes.filterBar}>
+                {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
+                    <FilterBox index={index}></FilterBox>))
+                }
+                <FilterForm/>
+            </div>
+            <Table></Table>
         </div>
     </div>
     )
 }
 
-export default SearchTab
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(SearchTab)

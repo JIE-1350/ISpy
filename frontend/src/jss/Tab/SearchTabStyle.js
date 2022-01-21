@@ -11,6 +11,12 @@ const SearchTabStyle = () => {
         mainWindow: {
             height: "100%",
             width: "75%",
+        },
+        filterBar: {
+            height: "50px",
+            width: "100%",
+            borderTop: "solid 1px gray",
+            borderBottom: "solid 1px gray"
         }
     };
 };

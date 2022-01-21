@@ -1,8 +1,8 @@
 import React from "react";
 import {createUseStyles} from 'react-jss'
 
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import TabPanel from './components/TabPanel.js';
 import SearchTab from './Tab/SearchTab.js';
@@ -13,7 +13,7 @@ const useStyles = createUseStyles(AppStyle)
 const App = () => {
     const classes = useStyles()
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(1);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
