@@ -1,7 +1,8 @@
 import React from "react";
-import {createUseStyles} from 'react-jss'
+import {createUseStyles} from 'react-jss';
 
-import Table from "./../components/Table"
+import FilterForm from "./../components/FilterForm";
+import Table from "./../components/Table";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -49,7 +50,7 @@ const SearchTab = () => {
 	
 	const filterDropdown = () => {
 		let elm = document.getElementById("overlay");
-		elm.style.visibility = (elm.style.visibility == "visible") ? "hidden" : "visible";
+		elm.style.visibility = (elm.style.visibility === "visible") ? "hidden" : "visible";
 		console.log();		
 	}
 	
@@ -63,10 +64,13 @@ const SearchTab = () => {
             <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
-			 <Button variant="contained" onClick={addFilterButton}>Apply Filter Test</Button>
+			<Button variant="contained" onClick={addFilterButton}>Apply Filter Test</Button>
 			<Button variant="contained" onClick={filterDropdown}>Add Filter (Context)</Button>
-			  <div id="appliedFilterList"></div>
-			  <div id="overlay"><div><p>"Test content"</p></div></div>
+            <div id="appliedFilterList"></div>
+            <div id="overlay"><div><p>"Test content"</p></div></div>
+            <div className={classes.filterBar}>
+                <FilterForm/>
+            </div>
             <Table data={data}></Table>
         </div>
     </div>
