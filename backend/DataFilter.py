@@ -11,9 +11,9 @@ class DataFilter:
             if filter['type'] == "equal":
                 data = data[data[filter['feature']] == filter['value']]
             elif filter['type'] == "less":
-                data = data[data[filter['feature']] < filter['value']]
+                data = data[data[filter['feature']] < int(filter['value'])]
             elif filter['type'] == "greater":
-                data = data[data[filter['feature']] > filter['value']]
+                data = data[data[filter['feature']] > int(filter['value'])]
             elif filter['type'] == "null":
                 data = data[data[filter['feature']].isnull()]
             elif filter['type'] == "not_null":
