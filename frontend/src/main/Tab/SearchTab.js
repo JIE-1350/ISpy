@@ -3,6 +3,7 @@ import {createUseStyles} from 'react-jss';
 import { connect } from "react-redux"
 
 import FilterForm from "./../components/FilterForm";
+import FilterBox from "./../components/FilterBox";
 import Table from "./../components/Table";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -16,13 +17,10 @@ const useStyles = createUseStyles(SearchTabStyle)
 const SearchTab = (props) => {
     const classes = useStyles()
 
-    const [data, setData] = React.useState('')
     const [user, setUser] = React.useState('')
     const [since, setSince] = React.useState('')
     const [until, setUntil] = React.useState('')
     const [keyword, setKeyword] = React.useState('')
-    const [state, setState] = React.useState('')
-	let filterCounter = 0; //this keeps track of how many filters are applied and determines filter IDs
 
     const scrapeData = () => {
         fetch('http://127.0.0.1:8000/?user=' + user + '&keyword=' + keyword + '&since=' + since + '&until=' + until)
@@ -45,30 +43,7 @@ const SearchTab = (props) => {
         })
     }
 
-	const addFilterButton = () => {
-	  let btn = document.createElement("Button");
-	  btn.innerText = "testbutton" + filterCounter;
-	  btn.id = "testbutton" + filterCounter;
-	  btn.InnerHTML = "testbutton" + filterCounter;
-	  btn.variant = "contained";
-	  btn.className = "Button";
-	  btn.onclick = function () {
-		  let elem = document.getElementById(btn.id);
-		  document.getElementById("appliedFilterList").removeChild(elem);
-		  filterCounter = filterCounter - 1;
-		};
-	  document.getElementById("appliedFilterList").appendChild(btn);
-	  filterCounter = filterCounter + 1;
-	}
-	
-	const filterDropdown = () => {
-		let elm = document.getElementById("overlay");
-		elm.style.visibility = (elm.style.visibility === "visible") ? "hidden" : "visible";
-		console.log();		
-	}
-	
     return (
-	<body>
     <div className={classes.searchTab}>
         <div className={classes.directoryWindow}> directoryWindow </div>
         <div className={classes.mainWindow}>
@@ -77,17 +52,15 @@ const SearchTab = (props) => {
             <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
-			<Button variant="contained" onClick={addFilterButton}>Apply Filter Test</Button>
-			<Button variant="contained" onClick={filterDropdown}>Add Filter (Context)</Button>
-            <div id="appliedFilterList"></div>
-            <div id="overlay"><div><p>"Test content"</p></div></div>
             <div className={classes.filterBar}>
+                {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
+                    <FilterBox index={index}></FilterBox>))
+                }
                 <FilterForm/>
             </div>
             <Table></Table>
         </div>
     </div>
-	</body>
     )
 }
 
