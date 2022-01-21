@@ -1,3 +1,4 @@
+import json
 import os
 from DataFilter import DataFilter
 import pandas as pd
@@ -21,6 +22,7 @@ class Application:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
             self.data = pd.read_csv(self.data_path + file)
+            self.data = self.data.where((pd.notnull(self.data)), None)
         else:
             raise Exception("File not found")
 
@@ -38,7 +40,7 @@ class Application:
     def state(self):
         return {'files': self.files,
                 'filters': self.data_filter.filters,
-                'data': self.data.to_json(orient="index")}
+                'data': self.data.to_dict()}
 
 
 if __name__ == '__main__':
