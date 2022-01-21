@@ -1,11 +1,10 @@
 import React from "react";
 import {createUseStyles} from 'react-jss';
+import { connect } from "react-redux"
 
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -32,9 +31,19 @@ const FilterForm = (props) => {
     const addFilter = (event) => {
         fetch('http://127.0.0.1:8000/filter/add?type=' + type + '&feature=' + feature + '&value=' + value)
         .then((res)=>{
-            return res.text();
-        }).then((data)=>{
-            props.setState(data);
+            return res.json();
+        }).then((obj)=>{
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "UPDATE_STATE",
+                        payload: obj
+                    }
+                )
+            }
+            else {
+                throw(JSON.stringify(obj))
+            }
         }).catch(e=>{
             alert(e);
         })
@@ -86,9 +95,9 @@ const FilterForm = (props) => {
                                 size={'small'}
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
+                                    <MenuItem value={feature}>{feature}</MenuItem>))
+                                }
                             </Select>
                     </FormControl>
                     <TextField
@@ -108,4 +117,9 @@ const FilterForm = (props) => {
     );
 }
 
-export default FilterForm;
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(FilterForm)

@@ -1,5 +1,6 @@
 import React from "react";
 import {createUseStyles} from 'react-jss';
+import { connect } from "react-redux"
 
 import FilterForm from "./../components/FilterForm";
 import Table from "./../components/Table";
@@ -10,7 +11,9 @@ import SearchTabStyle from './../../jss/Tab/SearchTabStyle.js';
 
 const useStyles = createUseStyles(SearchTabStyle)
 
-const SearchTab = () => {
+
+
+const SearchTab = (props) => {
     const classes = useStyles()
 
     const [data, setData] = React.useState('')
@@ -24,25 +27,23 @@ const SearchTab = () => {
     const scrapeData = () => {
         fetch('http://127.0.0.1:8000/?user=' + user + '&keyword=' + keyword + '&since=' + since + '&until=' + until)
         .then((res)=>{
-            return res.text();
-        }).then((data)=>{
-            setData(data);
+            return res.json();
+        }).then((obj)=>{
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "UPDATE_STATE",
+                        payload: obj
+                    }
+                )
+            }
+            else {
+                throw(JSON.stringify(obj))
+            }
         }).catch(e=>{
             alert(e);
         })
     }
-
-    const getState = () => {
-        fetch('http://127.0.0.1:8000/state')
-        .then((res)=>{
-            return res.text();
-        }).then((data)=>{
-            setState(data);
-        }).catch(e=>{
-            alert(e);
-        })
-    }
-    getState()
 
 	const addFilterButton = () => {
 	  let btn = document.createElement("Button");
@@ -81,16 +82,17 @@ const SearchTab = () => {
             <div id="appliedFilterList"></div>
             <div id="overlay"><div><p>"Test content"</p></div></div>
             <div className={classes.filterBar}>
-                <FilterForm
-                    state={state}
-                    setState={setState}
-                />
+                <FilterForm/>
             </div>
-            <Table data={state}></Table>
+            <Table></Table>
         </div>
     </div>
 	</body>
     )
 }
 
-export default SearchTab
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(SearchTab)

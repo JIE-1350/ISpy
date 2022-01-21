@@ -1,12 +1,18 @@
 import React from "react";
+import { connect } from "react-redux"
 
 
 const Table = (props) => {
     return (
         <div>
-            {props.data}
+            {JSON.stringify(props)}
         </div>
     );
 }
 
-export default Table;
+
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(Table)
