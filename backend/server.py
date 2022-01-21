@@ -53,6 +53,16 @@ def remove_filter():
         return str(exception)
 
 
+@app.route("/state")
+@cross_origin()
+def get_state():
+    try:
+        return {'status_msg': "Successfully removed filter",
+                'state': application.state()}
+    except Exception as exception:
+        return str(exception)
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
 

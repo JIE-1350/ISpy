@@ -3,8 +3,8 @@ import {createUseStyles} from 'react-jss';
 
 import FilterForm from "./../components/FilterForm";
 import Table from "./../components/Table";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 import SearchTabStyle from './../../jss/Tab/SearchTabStyle.js';
 
@@ -18,7 +18,7 @@ const SearchTab = () => {
     const [since, setSince] = React.useState('')
     const [until, setUntil] = React.useState('')
     const [keyword, setKeyword] = React.useState('')
-	
+    const [state, setState] = React.useState('')
 	let filterCounter = 0; //this keeps track of how many filters are applied and determines filter IDs
 
     const scrapeData = () => {
@@ -31,6 +31,18 @@ const SearchTab = () => {
             alert(e);
         })
     }
+
+    const getState = () => {
+        fetch('http://127.0.0.1:8000/state')
+        .then((res)=>{
+            return res.text();
+        }).then((data)=>{
+            setState(data);
+        }).catch(e=>{
+            alert(e);
+        })
+    }
+    getState()
 
 	const addFilterButton = () => {
 	  let btn = document.createElement("Button");
@@ -69,9 +81,12 @@ const SearchTab = () => {
             <div id="appliedFilterList"></div>
             <div id="overlay"><div><p>"Test content"</p></div></div>
             <div className={classes.filterBar}>
-                <FilterForm/>
+                <FilterForm
+                    state={state}
+                    setState={setState}
+                />
             </div>
-            <Table data={data}></Table>
+            <Table data={state}></Table>
         </div>
     </div>
 	</body>
