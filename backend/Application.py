@@ -2,6 +2,7 @@ import json
 import os
 from DataFilter import DataFilter
 import pandas as pd
+from queries import twint_search
 
 
 class Application:
@@ -42,12 +43,21 @@ class Application:
                 'filters': self.data_filter.filters,
                 'data': self.data.to_dict()}
 
+    def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
+        twint_search(userid=None, word=None, since=None, until=None, days=None, path=self.data_path)
+        print("--------------------------")
+        print(self.files)
+        self.update_files()
+        print(self.files)
+        print("--------------------------")
 
 if __name__ == '__main__':
     application = Application()
-    application.add_filter('equal', 'fd', 1)
-    print(application.files)
-    print(application.data_filter)
-    print(application.data)
+    # application.add_filter('equal', 'fd', 1)
+    # print(application.files)
+    # print(application.data_filter)
+    # print(application.data)
+    application.twitter_search("elonmusk", "", "", "", 3)
+
 
 
