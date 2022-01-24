@@ -35,7 +35,8 @@ class DataFilter:
         })
 
     def remove(self, index):
-        self.filters.pop(index)
+        indexInt = int(index)
+        self.filters.pop(indexInt)
 
     def __str__(self):
         return self.filters.__str__()
