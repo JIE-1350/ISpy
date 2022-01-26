@@ -2,6 +2,7 @@ import React from "react";
 import {createUseStyles} from 'react-jss';
 import { connect } from "react-redux"
 
+
 import FilterForm from "./../components/FilterForm";
 import FilterBox from "./../components/FilterBox";
 import Table from "./../components/Table";
@@ -43,6 +44,27 @@ const SearchTab = (props) => {
         })
     }
 
+    const saveAs = () => {
+        fetch('http://127.0.0.1:8000/getfile')
+        .then((res)=>{
+            return res.json();
+        }).then((obj)=>{
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "UPDATE_STATE",
+                        payload: obj
+                    }
+                )
+            }
+            else {
+                throw(JSON.stringify(obj))
+            }
+        }).catch(e=>{
+            alert(e);
+        })
+    }
+
     return (
     <div className={classes.searchTab}>
         <div className={classes.directoryWindow}> directoryWindow </div>
@@ -59,6 +81,7 @@ const SearchTab = (props) => {
                 <FilterForm/>
             </div>
             <Table></Table>
+            <Button variant="contained" onClick={saveAs}>Download</Button>
         </div>
     </div>
     )
