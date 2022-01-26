@@ -13,7 +13,7 @@ const SearchTabStyle = () => {
             width: "75%",
         },
         filterBar: {
-            height: "50px",
+            height: "70px",
             width: "100%",
             borderTop: "solid 1px gray",
             borderBottom: "solid 1px gray"
