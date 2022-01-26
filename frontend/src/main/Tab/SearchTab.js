@@ -2,12 +2,9 @@ import React from "react";
 import {createUseStyles} from 'react-jss';
 import { connect } from "react-redux"
 
-<<<<<<< HEAD
 import { display } from '@mui/system';
-=======
 
 import FilesBar from "./../components/FilesBar";
->>>>>>> development
 import FilterForm from "./../components/FilterForm";
 import FilterBox from "./../components/FilterBox";
 import Table from "./../components/Table";
