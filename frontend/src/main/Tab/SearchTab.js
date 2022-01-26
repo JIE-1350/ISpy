@@ -70,6 +70,7 @@ const SearchTab = (props) => {
     
     const [search_type, setSearchType] = React.useState('Keyword');
     const [time_range, setTimeRange] = React.useState('dateRange');
+    const [is_Days = time_range === "days" ? true : false, setIsDays] = React.useState();
 
     const handleSearchChange = (event) => {
         setSearchType(event.target.value);
@@ -77,7 +78,9 @@ const SearchTab = (props) => {
 
     const handleTimeChange = (event) => {
         setTimeRange(event.target.value);
+        setIsDays(event.target.value === "days" ? true : false);
     };
+
 
     return (
     <div className={classes.searchTab}>
@@ -104,8 +107,15 @@ const SearchTab = (props) => {
                     ))}
                 </TextField>
             </div>
-            <TextField label="Start Date" className={classes.textFeild} variant="outlined" sx={{paddingRight: '5px', paddingBottom: '5px'}} onChange={e => setSince(e.target.value)}/>
-            <TextField label="To Date" className={classes.textFeild} variant="outlined" sx={{paddingRight: '5px', paddingBottom: '5px'}} onChange={e => setUntil(e.target.value)}/>
+            {is_Days
+                ? <div className = "search_by_days">
+                    <TextField label="# of Days" className={classes.textFeild} variant="outlined" sx={{paddingRight: '5px', paddingBottom: '5px'}} onChange={e => setDays(e.target.value)}/>
+                </div>
+                : <div className = "search_by_range">
+                    <TextField label="Start Date" className={classes.textFeild} variant="outlined" sx={{paddingRight: '5px', paddingBottom: '5px'}} onChange={e => setSince(e.target.value)}/>
+                    <TextField label="To Date" className={classes.textFeild} variant="outlined" sx={{paddingRight: '5px', paddingBottom: '5px'}} onChange={e => setUntil(e.target.value)}/>
+                </div>
+            }
             <Button variant="contained" onClick={scrapeData}>Search</Button>
             </div>
             <div className={classes.filterBar}>
