@@ -1,5 +1,3 @@
-import { padding } from "@mui/system";
-
 const SearchTabStyle = () => {
     return {
         searchTab: {
@@ -16,15 +14,6 @@ const SearchTabStyle = () => {
             width: "80%",
             justifyContent: 'flex-end',
             flexWrap: 'wrap'
-        },
-        searchBar: {
-            display: "flex",
-            width: "100%",
-            paddingBottom: "10px",
-            flexWrap: 'wrap'
-        },
-        textFeild: {
-            width: "150px",
         },
         filterBar: {
             height: "50px",
