@@ -2,7 +2,12 @@ import React from "react";
 import {createUseStyles} from 'react-jss';
 import { connect } from "react-redux"
 
+<<<<<<< HEAD
 import { display } from '@mui/system';
+=======
+
+import FilesBar from "./../components/FilesBar";
+>>>>>>> development
 import FilterForm from "./../components/FilterForm";
 import FilterBox from "./../components/FilterBox";
 import Table from "./../components/Table";
@@ -46,6 +51,7 @@ const SearchTab = (props) => {
         })
     }
 
+
     const searchType = [
         {
             value: 'Keyword',
@@ -82,9 +88,31 @@ const SearchTab = (props) => {
     };
 
 
+    const saveAs = () => {
+        fetch('http://127.0.0.1:8000/getfile')
+        .then((res)=>{
+            return res.json();
+        }).then((obj)=>{
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "UPDATE_STATE",
+                        payload: obj
+                    }
+                )
+            }
+            else {
+                throw(JSON.stringify(obj))
+            }
+        }).catch(e=>{
+            alert(e);
+        })
+    }
+
+
     return (
     <div className={classes.searchTab}>
-        <div className={classes.directoryWindow}> directoryWindow </div>
+        <div className={classes.directoryWindow}> <FilesBar/> </div>
         <div className={classes.mainWindow}>
             <div className={classes.searchBar}>
             <div> 
@@ -125,6 +153,7 @@ const SearchTab = (props) => {
                 <FilterForm/>
             </div>
             <Table></Table>
+            <Button variant="contained" onClick={saveAs}>Download</Button>
         </div>
     </div>
     )
