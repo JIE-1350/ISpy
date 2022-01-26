@@ -28,8 +28,13 @@ const getState = () => {
         else {
             throw(JSON.stringify(obj))
         }
-    }).catch(e=>{
-        alert(e);
+    }).catch(error=>{
+        if (error instanceof TypeError) {
+            setTimeout(function(){
+               getState()
+            }, 1000);
+        }
+        console.log(error)
     })
 }
 getState()
