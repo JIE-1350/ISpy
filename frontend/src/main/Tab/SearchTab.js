@@ -3,6 +3,7 @@ import {createUseStyles} from 'react-jss';
 import { connect } from "react-redux"
 
 
+import FilesBar from "./../components/FilesBar";
 import FilterForm from "./../components/FilterForm";
 import FilterBox from "./../components/FilterBox";
 import Table from "./../components/Table";
@@ -67,7 +68,7 @@ const SearchTab = (props) => {
 
     return (
     <div className={classes.searchTab}>
-        <div className={classes.directoryWindow}> directoryWindow </div>
+        <div className={classes.directoryWindow}> <FilesBar/> </div>
         <div className={classes.mainWindow}>
             <TextField label="Username" variant="outlined" onChange={e => setUser(e.target.value)}/>
             <TextField label="Start Date" variant="outlined" onChange={e => setSince(e.target.value)}/>
