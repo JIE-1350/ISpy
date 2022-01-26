@@ -53,9 +53,11 @@ const SearchTab = (props) => {
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
             <div className={classes.filterBar}>
-                {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
-                    <FilterBox index={index}></FilterBox>))
-                }
+				<div style={{display: "inline-flex"}}>
+					{props.state === undefined ? '' : props.state.filters.map((filter, index) => (
+						<FilterBox index={index}></FilterBox>))
+					}
+				</div>
                 <FilterForm/>
             </div>
             <Table></Table>
