@@ -24,6 +24,9 @@ const FilterForm = (props) => {
     const handleChange = (event) => {
         setFeature(event.target.value);
     };
+	const handleChangeType = (event) => {
+        setType(event.target.value);
+    };
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -74,12 +77,28 @@ const FilterForm = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    <TextField
-                        label="Type"
-                        variant="outlined"
-                        size={'small'}
-                        onChange={e => setType(e.target.value)}
-                    />
+                    <FormControl fullWidth>
+                        <InputLabel
+                            id="type-simple-select-label"
+                            size={'small'}
+                        >
+                            Type
+                        </InputLabel>
+                            <Select
+                                labelId="type-simple-select-label"
+                                id="type-simple-select"
+                                value={type}
+                                label="Type"
+                                size={'small'}
+                                onChange={handleChangeType}
+                            >
+                                <MenuItem value='equal'>Equal</MenuItem>
+								<MenuItem value="less">Less</MenuItem>
+								<MenuItem value="greater">Greater</MenuItem>
+								<MenuItem value="null">Null</MenuItem>
+								<MenuItem value="not_null">Not Null</MenuItem>
+                            </Select>
+                    </FormControl>
                     <FormControl fullWidth>
                         <InputLabel
                             id="demo-simple-select-label"
