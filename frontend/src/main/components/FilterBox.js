@@ -36,18 +36,13 @@ const FilterBox = (props) => {
         }).catch(e=>{
             alert(e);
         })
-		//location.reload(); //this can be used to bodge the issue with filter removal 
+		window.location.reload(); //this can be used to bodge the issue with filter removal 
 		//hiding all later indexed filters from view until 'page' is reloaded
-    };
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-		event.currentTarget.remove();
     };
 	
     return (
-        <div id={index}>
-			<Button variant="contained" className={classes.addButton} id={index} onClick={removeFilter}>{props.state === undefined ? '' : index + JSON.stringify(props.state.filters[index])}</Button>
+        <div id={index} style={{display: 'inline-block'}}>
+			<Button variant="contained" size="small" className={classes.addButton} id={index} onClick={removeFilter}>{props.state === undefined ? '' : index + JSON.stringify(props.state.filters[index])}</Button>
 		</div>
     );
 }
