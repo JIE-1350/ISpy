@@ -1,48 +1,40 @@
-# raise Exception(os.getcwd() + c.Output)
+from fileinput import filename
+from json.tool import main
 import twint
+from datetime import date, datetime, timedelta
 
 
-def search_keyword(keyword, limit=10, output="data", save_cvs=True):
+def twint_search(word=None, userid=None, since=None, until=None, days=None, path=None):
     c = twint.Config()
-    c.Search = keyword
-    c.Limit = limit
-    c.Store_csv = save_cvs
-    c.Output = output
+    filename = str(date.today())
+    now = datetime.now()
+    filename += "_" + now.strftime("%H-%M-%S")
+    if word:
+        c.Search = word
+        filename += "_" + word
+        
+    if userid:
+        c.Username = userid
+        filename += "_" + userid
+    
+    if days:
+        c.Until = str(date.today() + timedelta(2))
+        c.Since = str(date.today() - timedelta(int(days)))
+        filename += "_f_" + c.Since
+    else:
+        if since:
+            c.Since = since
+            filename += "_f_" + since
+        if until:
+            c.Until = until
+            filename += "_t_" + until
+    filename += ".csv"
+    c.Store_csv = True
+    c.Output = path + filename
     twint.run.Search(c)
+    return filename
 
-
-def search_hashtag(hashtag, limit=10, output="data", save_cvs=True):
-    c = twint.Config()
-    c.Search = "#" + hashtag
-    c.Limit = limit
-    c.Store_csv = save_cvs
-    c.Output = output
-    twint.run.Search(c)
-
-
-def user_search(userid, since=None, until=None, word='', limit=None, output="data/", save_cvs=True):
-    c = twint.Config()
-
-    c.Search = word
-    c.Username = userid
-
-    c.Limit = limit
-
-    c.Since = since
-    c.Until = until
-    c.Lang = "en"
-
-    c.Store_csv = save_cvs
-    file_name = userid + ".csv"
-    c.Output = output + file_name
-    twint.run.Search(c)
-    return file_name
-
-
-# user("JoeBiden", "2020-01-1", "2021-01-1")
-# user("JoeBiden", "2021-01-1", "2022-01-1")
-
-# user("JoeBiden", "2020-01-1", "2021-01-1", "covid mask")
-# user("JoeBiden", "2021-01-1", "2022-01-1", "covid")
-
+# if __name__ == "__main__":
+#    twint_search("elonmusk", "covid", "", "", "", "backend/data/")
+#    twint_search("elonmusk", "covid", "", "", "", "")
 
