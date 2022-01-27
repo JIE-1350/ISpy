@@ -60,12 +60,13 @@ const FilterForm = (props) => {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div>
+        <div className={classes.addButtonContainer}>
             <Button
                 className={classes.addButton}
                 variant="contained"
                 onClick={handleClick}
             > + </Button>
+
             <Popover
                 id={id}
                 open={open}

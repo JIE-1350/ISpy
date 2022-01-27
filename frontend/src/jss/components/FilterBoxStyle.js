@@ -1,14 +1,18 @@
 const FilterBoxStyle = () => {
     return {
+        filterContainer: {
+            display: 'inline',
+            paddingRight: '5px',
+        },
         Button: {
             display: 'inline-block',
             position: "relative"
         },
-            ".relative":{
+        ".relative":{
             "position": "relative",
             "backgroundColor": "#fff",
         },
-            ".addButton":{
+        ".addButton":{
             position: "relative",
             display: 'inline-block'
         }

@@ -15,7 +15,7 @@ const FilterBar = (props) => {
     return (
         <div className={classes.filterBar}>
             <FilterForm/>
-            <div style={{display: "inline-flex"}, {width: "120%"}}>
+            <div className={classes.filtersBox}>
                 {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
                     <FilterBox index={index}></FilterBox>))
                 }

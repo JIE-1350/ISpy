@@ -15,7 +15,7 @@ const FilterBox = (props) => {
 
     const removeFilter = (event) => {
         setAnchorEl(event.currentTarget);
-		event.currentTarget.remove();
+        //event.currentTarget.remove();
 		let indexInt = parseInt(event.currentTarget.id);
         fetch('http://127.0.0.1:8000/filter/remove?index=' + indexInt)
         .then((res)=>{
@@ -36,14 +36,13 @@ const FilterBox = (props) => {
         }).catch(e=>{
             alert(e);
         })
-		window.location.reload(); //this can be used to bodge the issue with filter removal 
+        //window.location.reload(); //this can be used to bodge the issue with filter removal
 		//hiding all later indexed filters from view until 'page' is reloaded
     };
 	
     return (
-        <div id={index} style={{display: 'inline-block'}}>
+        <div className={classes.filterContainer} id={index}>
 			<Button
-			    className={classes.addButton}
                 variant="contained"
                 size="small"
                 id={index}

@@ -1,5 +1,9 @@
 const FilterFormStyle = () => {
     return {
+        addButtonContainer: {
+            paddingRight: '5px',
+            alignSelf: 'center'
+        },
         addButton: {
             '&.MuiButton-root': {
                 minWidth: "0px",
