@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import date, datetime, timedelta
 from DataFilter import DataFilter
 import pandas as pd
 
@@ -36,6 +37,18 @@ class Application:
 
     def update_files(self):
         self.files = os.listdir(self.data_path)
+
+    def get_file(self):
+        self.data.to_csv(self.data_path + self.get_file_name())
+        self.update_files()
+
+
+    def get_file_name(self):
+        filename = str(date.today())
+        now = datetime.now()
+        filename += "_" + now.strftime("%H-%M-%S")
+        filename += ".csv"
+        return filename
 
     def state(self):
         return {'files': self.files,
