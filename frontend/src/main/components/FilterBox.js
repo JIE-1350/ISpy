@@ -10,12 +10,9 @@ const useStyles = createUseStyles(FilterBoxStyle)
 
 const FilterBox = (props) => {
     const classes = useStyles()
-	const [anchorEl, setAnchorEl] = React.useState(null);
     const {index} = props
 
     const removeFilter = (event) => {
-        setAnchorEl(event.currentTarget);
-        //event.currentTarget.remove();
 		let indexInt = parseInt(event.currentTarget.id);
         fetch('http://127.0.0.1:8000/filter/remove?index=' + indexInt)
         .then((res)=>{
@@ -36,8 +33,6 @@ const FilterBox = (props) => {
         }).catch(e=>{
             alert(e);
         })
-        //window.location.reload(); //this can be used to bodge the issue with filter removal
-		//hiding all later indexed filters from view until 'page' is reloaded
     };
 	
     return (

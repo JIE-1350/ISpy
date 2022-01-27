@@ -5,10 +5,7 @@ import { connect } from "react-redux"
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
 import FilterFormStyle from './../../jss/components/FilterFormStyle.js';
 
@@ -117,7 +114,7 @@ const FilterForm = (props) => {
                         className={classes.addButton}
                         variant="contained"
                         onClick={addFilter}
-                        disabled={!feature || !value && (type!=="null" && type!=="not_null")}
+                        disabled={(!feature || !value) && (type!=="null" && type!=="not_null")}
                     > Add </Button>
                 </div>
             </Popover>
