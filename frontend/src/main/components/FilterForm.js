@@ -92,11 +92,11 @@ const FilterForm = (props) => {
                                 size={'small'}
                                 onChange={handleChangeType}
                             >
-                                <MenuItem value='equal'>Equal</MenuItem>
-								<MenuItem value="less">Less</MenuItem>
-								<MenuItem value="greater">Greater</MenuItem>
-								<MenuItem value="null">Null</MenuItem>
-								<MenuItem value="not_null">Not Null</MenuItem>
+                                <MenuItem value='equal'>Equal To</MenuItem>
+								<MenuItem value="less">Less Than</MenuItem>
+								<MenuItem value="greater">Greater Than</MenuItem>
+								<MenuItem value="null">Is Null</MenuItem>
+								<MenuItem value="not_null">Is Not Null</MenuItem>
                             </Select>
                     </FormControl>
                     <FormControl fullWidth>

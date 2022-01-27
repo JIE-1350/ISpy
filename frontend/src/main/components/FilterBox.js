@@ -42,7 +42,19 @@ const FilterBox = (props) => {
 	
     return (
         <div id={index} style={{display: 'inline-block'}}>
-			<Button variant="contained" size="small" className={classes.addButton} id={index} onClick={removeFilter}>{props.state === undefined ? '' : index + JSON.stringify(props.state.filters[index])}</Button>
+			<Button
+			    className={classes.addButton}
+                variant="contained"
+                size="small"
+                id={index}
+                onClick={removeFilter}
+			>
+			    {props.state === undefined ? '' :
+                    props.state.filters[index].feature + ' ' +
+                    props.state.filters[index].type + ' ' +
+                    props.state.filters[index].value
+			    }
+			</Button>
 		</div>
     );
 }
