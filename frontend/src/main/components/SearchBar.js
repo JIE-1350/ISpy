@@ -22,7 +22,7 @@ const SearchBar = (props) => {
     const [days, setDays] = React.useState('')
 
     const search = () => {
-        fetch('http://127.0.0.1:8000/?user=' + user + '&word=' + word + '&days=' + days + '&since=' + since + '&until=' + until)
+        fetch('http://127.0.0.1:8000/search?user=' + user + '&word=' + word + '&days=' + days + '&since=' + since + '&until=' + until)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{
@@ -78,7 +78,6 @@ const SearchBar = (props) => {
         setIsDays(event.target.value === "days" ? true : false);
     };
 
-
     return (
         <div className={classes.searchBar}>
             <div>
@@ -110,7 +109,7 @@ const SearchBar = (props) => {
                     <TextField label="To Date" className={classes.textField} variant="outlined" onChange={e => setUntil(e.target.value)} size={'small'} sx={TextFieldStyle}/>
                 </div>
             }
-            <Button variant="contained" onClick={search}>Search</Button>
+            <Button variant="contained" disabled = {!word && !user} onClick={search}>Search</Button>
         </div>
     );
 }
