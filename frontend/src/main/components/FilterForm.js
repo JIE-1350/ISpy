@@ -24,6 +24,9 @@ const FilterForm = (props) => {
     const handleChange = (event) => {
         setFeature(event.target.value);
     };
+	const handleChangeType = (event) => {
+        setType(event.target.value);
+    };
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -57,12 +60,13 @@ const FilterForm = (props) => {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div>
+        <div className={classes.addButtonContainer}>
             <Button
                 className={classes.addButton}
                 variant="contained"
                 onClick={handleClick}
             > + </Button>
+
             <Popover
                 id={id}
                 open={open}
@@ -74,12 +78,28 @@ const FilterForm = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    <TextField
-                        label="Type"
-                        variant="outlined"
-                        size={'small'}
-                        onChange={e => setType(e.target.value)}
-                    />
+                    <FormControl fullWidth>
+                        <InputLabel
+                            id="type-simple-select-label"
+                            size={'small'}
+                        >
+                            Type
+                        </InputLabel>
+                            <Select
+                                labelId="type-simple-select-label"
+                                id="type-simple-select"
+                                value={type}
+                                label="Type"
+                                size={'small'}
+                                onChange={handleChangeType}
+                            >
+                                <MenuItem value='equal'>Equal To</MenuItem>
+								<MenuItem value="less">Less Than</MenuItem>
+								<MenuItem value="greater">Greater Than</MenuItem>
+								<MenuItem value="null">Is Null</MenuItem>
+								<MenuItem value="not_null">Is Not Null</MenuItem>
+                            </Select>
+                    </FormControl>
                     <FormControl fullWidth>
                         <InputLabel
                             id="demo-simple-select-label"

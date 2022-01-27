@@ -4,8 +4,7 @@ import { connect } from "react-redux"
 
 import SearchBar from "./../components/SearchBar";
 import FilesBar from "./../components/FilesBar";
-import FilterForm from "./../components/FilterForm";
-import FilterBox from "./../components/FilterBox";
+import FilterBar from "./../components/FilterBar";
 import Table from "./../components/Table";
 import Button from '@mui/material/Button';
 
@@ -46,12 +45,7 @@ const SearchTab = (props) => {
         <div className={classes.directoryWindow}> <FilesBar/> </div>
         <div className={classes.mainWindow}>
             <SearchBar></SearchBar>
-            <div className={classes.filterBar}>
-                {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
-                    <FilterBox index={index}></FilterBox>))
-                }
-                <FilterForm/>
-            </div>
+            <FilterBar></FilterBar>
             <Table></Table>
             <Button variant="contained" onClick={saveAs}>Download</Button>
         </div>
