@@ -117,6 +117,7 @@ const FilterForm = (props) => {
                         className={classes.addButton}
                         variant="contained"
                         onClick={addFilter}
+                        disabled={!feature || !value && (type!=="null" && type!=="not_null")}
                     > Add </Button>
                 </div>
             </Popover>
