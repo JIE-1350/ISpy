@@ -81,7 +81,7 @@ const SearchBar = (props) => {
     return (
         <div className={classes.searchBar}>
             <div>
-                <TextField select label="Search Type:" className={classes.textField} onChange={handleSearchChange} size={'small'} sx={TextFieldStyle}>
+                <TextField select defaultValue="Keyword" label="Search Type:" className={classes.textField} onChange={handleSearchChange} size={'small'} sx={TextFieldStyle}>
                     {searchType.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                         {option.label}
@@ -92,7 +92,7 @@ const SearchBar = (props) => {
             <TextField label= {search_type} className={classes.textField} variant="outlined" onChange={e => setWord(e.target.value)} size={'small'} sx={TextFieldStyle}/>
             <TextField label="Username" className={classes.textField} variant="outlined" onChange={e => setUser(e.target.value)} size={'small'} sx={TextFieldStyle}/>
             <div>
-                <TextField select label="Search by:" className={classes.textField} onChange={handleTimeChange} size={'small'} sx={TextFieldStyle}>
+                <TextField select defaultValue="date_range" label="Search by:" className={classes.textField} onChange={handleTimeChange} size={'small'} sx={TextFieldStyle}>
                     {timeRange.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                         {option.label}
