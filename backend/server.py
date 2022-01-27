@@ -69,17 +69,19 @@ def get_state():
         return {'status': 'fail',
                 'status_msg': str(exception)}
 
-@app.route("/getfile")
+
+@app.route("/save")
 @cross_origin()
 def get_file():
     try:
-        application.get_file()
+        application.save()
         return {'status': 'success',
                 'status_msg': "Successfully downloaded csv file",
                 'state': application.state()}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)

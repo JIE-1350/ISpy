@@ -44,7 +44,7 @@ class Application:
     def update_files(self):
         self.files = os.listdir(self.data_path)
 
-    def get_file(self):
+    def save(self):
         self.data.to_csv(self.data_path + self.get_file_name())
         self.update_files()
 
