@@ -1,11 +1,9 @@
-//Template for react component. Replace Template with the name of your component
-
 import React from "react";
 import { connect } from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import TemplateStyle from './../../jss/components/TemplateStyle.js';
-const useStyles = createUseStyles(FilterBoxStyle)
+const useStyles = createUseStyles(TemplateStyle)
 
 
 const Template = (props) => {

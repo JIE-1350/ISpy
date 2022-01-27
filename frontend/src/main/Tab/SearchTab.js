@@ -4,8 +4,7 @@ import { connect } from "react-redux"
 
 
 import FilesBar from "./../components/FilesBar";
-import FilterForm from "./../components/FilterForm";
-import FilterBox from "./../components/FilterBox";
+import FilterBar from "./../components/FilterBar";
 import Table from "./../components/Table";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -75,15 +74,7 @@ const SearchTab = (props) => {
             <TextField label="To Date" variant="outlined" onChange={e => setUntil(e.target.value)}/>
             <TextField label="Keyword" variant="outlined" onChange={e => setKeyword(e.target.value)}/>
             <Button variant="contained" onClick={scrapeData}>Search</Button>
-            <div className={classes.filterBar}>
-				<FilterForm/>
-				<div style={{display: "inline-flex"}, {width: "120%"}}>
-					{props.state === undefined ? '' : props.state.filters.map((filter, index) => (
-						<FilterBox index={index}></FilterBox>))
-					}
-				</div>
-                
-            </div>
+            <FilterBar></FilterBar>
             <Table></Table>
             <Button variant="contained" onClick={saveAs}>Download</Button>
         </div>
