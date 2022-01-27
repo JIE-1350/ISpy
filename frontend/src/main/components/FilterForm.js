@@ -14,8 +14,6 @@ import FilterFormStyle from './../../jss/components/FilterFormStyle.js';
 
 const useStyles = createUseStyles(FilterFormStyle)
 
-const TextFieldStyle = {paddingRight: '5px'}
-
 const FilterForm = (props) => {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -80,37 +78,41 @@ const FilterForm = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    <TextField select
-                        defaultValue="equal"
-                        label="Search Type"
-                        onChange={handleChangeType}
-                        size={'small'}
-                        sx={TextFieldStyle}
-                        className={classes.textField}
-                    >
-                        <MenuItem value='equal'>Equal To</MenuItem>
-                        <MenuItem value="less">Less Than</MenuItem>
-                        <MenuItem value="greater">Greater Than</MenuItem>
-                        <MenuItem value="null">Is Null</MenuItem>
-                        <MenuItem value="not_null">Is Not Null</MenuItem>
-                    </TextField>
-                    <TextField select
-                        label="Feature"
-                        onChange={handleChange}
-                        size={'small'}
-                        sx={TextFieldStyle}
-                        className={classes.textField}
-                    >
-                        {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
-                            <MenuItem value={feature}>{feature}</MenuItem>))
-                        }
-                    </TextField>
-                    <TextField
-                        label="Value"
-                        variant="outlined"
-                        size={'small'}
-                        onChange={e => setValue(e.target.value)}
-                    />
+                    <div className={classes.TextFieldContainer}>
+                        <TextField select
+                            defaultValue="equal"
+                            label="Search Type"
+                            onChange={handleChangeType}
+                            size={'small'}
+                            className={classes.textField}
+                        >
+                            <MenuItem value='equal'>Equal To</MenuItem>
+                            <MenuItem value="less">Less Than</MenuItem>
+                            <MenuItem value="greater">Greater Than</MenuItem>
+                            <MenuItem value="null">Is Null</MenuItem>
+                            <MenuItem value="not_null">Is Not Null</MenuItem>
+                        </TextField>
+                    </div>
+                    <div className={classes.TextFieldContainer}>
+                        <TextField select
+                            label="Feature"
+                            onChange={handleChange}
+                            size={'small'}
+                            className={classes.textField}
+                        >
+                            {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
+                                <MenuItem value={feature}>{feature}</MenuItem>))
+                            }
+                        </TextField>
+                    </div>
+                    <div className={classes.TextFieldContainer}>
+                        <TextField
+                            label="Value"
+                            variant="outlined"
+                            size={'small'}
+                            onChange={e => setValue(e.target.value)}
+                        />
+                    </div>
                     <Button
                         className={classes.addButton}
                         variant="contained"
