@@ -43,7 +43,7 @@ const FilterBox = (props) => {
     return (
         <div className={classes.filterContainer} id={index}>
 			<Button
-                variant="contained"
+                variant="outlined"
                 size="small"
                 id={index}
                 onClick={removeFilter}
@@ -51,7 +51,7 @@ const FilterBox = (props) => {
 			    {props.state === undefined ? '' :
                     props.state.filters[index].feature + ' ' +
                     props.state.filters[index].type + ' ' +
-                    props.state.filters[index].value
+                    props.state.filters[index].value + ' x'
 			    }
 			</Button>
 		</div>
