@@ -14,6 +14,9 @@ const FilterFormStyle = () => {
             border: 'solid 1px gray',
             borderRadius: '4px',
             width: '200px'
+        },
+        textField: {
+            width: "200px",
         }
     };
 };

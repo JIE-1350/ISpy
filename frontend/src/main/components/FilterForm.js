@@ -14,6 +14,8 @@ import FilterFormStyle from './../../jss/components/FilterFormStyle.js';
 
 const useStyles = createUseStyles(FilterFormStyle)
 
+const TextFieldStyle = {paddingRight: '5px'}
+
 const FilterForm = (props) => {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -78,48 +80,31 @@ const FilterForm = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    <FormControl fullWidth>
-                        <InputLabel
-                            id="type-simple-select-label"
-                            size={'small'}
-                        >
-                            Type
-                        </InputLabel>
-                            <Select
-                                labelId="type-simple-select-label"
-                                id="type-simple-select"
-                                value={type}
-                                label="Type"
-                                size={'small'}
-                                onChange={handleChangeType}
-                            >
-                                <MenuItem value='equal'>Equal To</MenuItem>
-								<MenuItem value="less">Less Than</MenuItem>
-								<MenuItem value="greater">Greater Than</MenuItem>
-								<MenuItem value="null">Is Null</MenuItem>
-								<MenuItem value="not_null">Is Not Null</MenuItem>
-                            </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel
-                            id="demo-simple-select-label"
-                            size={'small'}
-                        >
-                            Feature
-                        </InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={feature}
-                                label="Feature"
-                                size={'small'}
-                                onChange={handleChange}
-                            >
-                                {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
-                                    <MenuItem value={feature}>{feature}</MenuItem>))
-                                }
-                            </Select>
-                    </FormControl>
+                    <TextField select
+                        defaultValue="equal"
+                        label="Search Type"
+                        onChange={handleChangeType}
+                        size={'small'}
+                        sx={TextFieldStyle}
+                        className={classes.textField}
+                    >
+                        <MenuItem value='equal'>Equal To</MenuItem>
+                        <MenuItem value="less">Less Than</MenuItem>
+                        <MenuItem value="greater">Greater Than</MenuItem>
+                        <MenuItem value="null">Is Null</MenuItem>
+                        <MenuItem value="not_null">Is Not Null</MenuItem>
+                    </TextField>
+                    <TextField select
+                        label="Feature"
+                        onChange={handleChange}
+                        size={'small'}
+                        sx={TextFieldStyle}
+                        className={classes.textField}
+                    >
+                        {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
+                            <MenuItem value={feature}>{feature}</MenuItem>))
+                        }
+                    </TextField>
                     <TextField
                         label="Value"
                         variant="outlined"
