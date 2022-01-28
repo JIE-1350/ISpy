@@ -1,11 +1,42 @@
 # Intelligent Scraping with Python (ISpy)
 
+## Release Notes
+
+[//]: # (### Version 0.2.0)
+
+[//]: # (#### New Features)
+
+[//]: # (* Feature 1 for this release)
+
+[//]: # (* feature 2 for this release)
+
+[//]: # ()
+[//]: # (#### Bug Fixes)
+
+[//]: # (* bug fixed 1)
+
+[//]: # (* bug fixed 2)
+
+[//]: # (---)
+
+### Version 0.1.0:
+#### New Features
+* Scrape data from Twitter by keyword, hashtag, userid, or recent tweets.
+* Filter data using interactive user interface
+* Save data as a CSV file
+
+#### Bug Fixes
+* N/A
+
+---
+
 ## Installation
 ### Frontend
-#### Setup
-Install NodeJS. I recommend installing nodeJS 16.13.0 (LTS)
+#### Requirements
+* nodeJS 16.13.0 or newer (LTS)
+* npm
 
-Install npm. (The latest version works for me)
+#### Setup
 
 ```cd frontend/```
 
@@ -17,9 +48,11 @@ Install npm. (The latest version works for me)
 #### Run frontend and backend
 ```npm run dev```
 
+---
+
 ### Backend
 #### Setup
-I recommend creating a virtual environment then install the dependencies:
+Create a virtual environment and install the dependencies:
 
 ```cd backend/```
 
@@ -30,12 +63,6 @@ I recommend creating a virtual environment then install the dependencies:
 ```pip install -r requirements.txt```
 
 
-#### To run manually and test:
+#### Run manually for testing:
 
 ```python server.py```
-
-```http://localhost:8000/?user=joebiden&keyword=covid&since=2021-01-1&until=2022-01-1```
-
-## Prototype
-
-![](Prototype/prototype1.png)
