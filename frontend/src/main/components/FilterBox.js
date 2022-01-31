@@ -21,7 +21,7 @@ const FilterBox = (props) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "UPDATE_STATE",
+                        type: "REMOVE_FILTER",
                         payload: obj
                     }
                 )
@@ -43,10 +43,10 @@ const FilterBox = (props) => {
                 id={index}
                 onClick={removeFilter}
 			>
-			    {props.state === undefined ? '' :
-                    props.state.filters[index].feature + ' ' +
-                    props.state.filters[index].type + ' ' +
-                    props.state.filters[index].value + ' x'
+			    {props === undefined ? '' :
+                    props.filters[index].feature + ' ' +
+                    props.filters[index].type + ' ' +
+                    props.filters[index].value + ' x'
 			    }
 			</Button>
 		</div>

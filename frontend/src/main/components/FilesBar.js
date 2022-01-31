@@ -14,7 +14,7 @@ const FilesBar = (props) => {
 
     return (
         <div className={classes.root}>
-            {(props.state === undefined ? '' : props.state.files.map((file) => (
+            {(props === undefined ? '' : props.files.map((file) => (
                 <Typography>{file}</Typography>
             )))}
         </div>

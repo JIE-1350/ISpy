@@ -16,7 +16,7 @@ const FilterBar = (props) => {
         <div className={classes.filterBar}>
             <FilterForm/>
             <div className={classes.filtersBox}>
-                {props.state === undefined ? '' : props.state.filters.map((filter, index) => (
+                {props === undefined ? '' : props.filters.map((filter, index) => (
                     <FilterBox index={index}></FilterBox>))
                 }
             </div>

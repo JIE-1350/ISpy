@@ -36,10 +36,14 @@ class Application:
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
         self.filtered_data = self.data_filter(self.data)
+        return {'filters': self.data_filter.filters,
+                'table': self.filtered_data.to_dict()}
 
     def remove_filter(self, index):
         self.data_filter.remove(index)
         self.filtered_data = self.data_filter(self.data)
+        return {'filters': self.data_filter.filters,
+                'table': self.filtered_data.to_dict()}
 
     def update_files(self):
         self.files = os.listdir(self.data_path)
@@ -47,6 +51,7 @@ class Application:
     def save(self):
         self.data.to_csv(self.data_path + self.get_file_name())
         self.update_files()
+        return {'files': self.files}
 
     def get_file_name(self):
         filename = str(date.today())
@@ -58,11 +63,14 @@ class Application:
     def state(self):
         return {'files': self.files,
                 'filters': self.data_filter.filters,
-                'data': self.filtered_data.to_dict()}
+                'table': self.filtered_data.to_dict()}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         filename = twint_search(userid, word, since, until, days, path=self.data_path)
         self.open_file(filename)
+        return {'files': self.files,
+                'filters': self.data_filter.filters,
+                'table': self.filtered_data.to_dict()}
 
 
 if __name__ == '__main__':

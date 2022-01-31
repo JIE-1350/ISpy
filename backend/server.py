@@ -17,11 +17,11 @@ def search():
         since = request.args.get('since')
         until = request.args.get('until')   
         
-        application.twitter_search(word, user, since, until, days)
+        data = application.twitter_search(word, user, since, until, days)
 
         return {'status': 'success',
                 'status_msg': "Search successfully",
-                'state': application.state()}
+                'data': data}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -33,10 +33,10 @@ def add_filter():
         type = request.args.get('type')
         feature = request.args.get('feature')
         value = request.args.get('value')
-        application.add_filter(type, feature, value)
+        data = application.add_filter(type, feature, value)
         return {'status': 'success',
                 'status_msg': "Successfully added filter",
-                'state': application.state()}
+                'data': data}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -46,10 +46,10 @@ def add_filter():
 def remove_filter():
     try:
         remove_index = request.args.get('index')
-        application.remove_filter(remove_index)
+        data = application.remove_filter(remove_index)
         return {'status': 'success',
                 'status_msg': "Successfully removed filter",
-                'state': application.state()}
+                'data': data}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -60,7 +60,7 @@ def get_state():
     try:
         return {'status': 'success',
                 'status_msg': "Successfully retrieved state",
-                'state': application.state()}
+                'data': application.state()}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -69,10 +69,10 @@ def get_state():
 @app.route("/save")
 def save():
     try:
-        application.save()
+        data = application.save()
         return {'status': 'success',
                 'status_msg': "Successfully downloaded csv file",
-                'state': application.state()}
+                'data': data}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -80,5 +80,4 @@ def save():
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
-    # application.twitter_search("elonmusk", "covid", "", "", "")
 

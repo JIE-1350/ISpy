@@ -36,7 +36,7 @@ const FilterForm = (props) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "UPDATE_STATE",
+                        type: "ADD_FILTER",
                         payload: obj
                     }
                 )
@@ -97,7 +97,7 @@ const FilterForm = (props) => {
                             size={'small'}
                             className={classes.textField}
                         >
-                            {props.state === undefined ? '' : Object.keys(props.state.data).map((feature) => (
+                            {props === undefined ? '' : Object.keys(props.table).map((feature) => (
                                 <MenuItem value={feature}>{feature}</MenuItem>))
                             }
                         </TextField>

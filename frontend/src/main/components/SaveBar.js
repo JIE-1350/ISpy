@@ -19,7 +19,7 @@ const SaveBar = (props) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "UPDATE_STATE",
+                        type: "SAVE_FILE",
                         payload: obj
                     }
                 )

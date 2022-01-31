@@ -29,7 +29,7 @@ const SearchBar = (props) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "UPDATE_STATE",
+                        type: "SEARCH_COMPLETED",
                         payload: obj
                     }
                 )
