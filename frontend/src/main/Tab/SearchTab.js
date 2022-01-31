@@ -6,7 +6,7 @@ import SearchBar from "./../components/SearchBar";
 import FilesBar from "./../components/FilesBar";
 import FilterBar from "./../components/FilterBar";
 import Table from "./../components/Table";
-import SaveButton from "./../components/SaveButton";
+import SaveBar from "./../components/SaveBar";
 
 import SearchTabStyle from './../../jss/Tab/SearchTabStyle.js';
 
@@ -24,7 +24,7 @@ const SearchTab = (props) => {
             <SearchBar></SearchBar>
             <FilterBar></FilterBar>
             <Table></Table>
-            <SaveButton></SaveButton>
+            <SaveBar></SaveBar>
         </div>
     </div>
     )

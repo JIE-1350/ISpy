@@ -4,11 +4,11 @@ import {createUseStyles} from 'react-jss';
 
 import Button from '@mui/material/Button';
 
-import SaveButtonStyle from './../../jss/components/SaveButtonStyle.js';
-const useStyles = createUseStyles(SaveButtonStyle)
+import SaveBarStyle from './../../jss/components/SaveBarStyle.js';
+const useStyles = createUseStyles(SaveBarStyle)
 
 
-const SaveButton = (props) => {
+const SaveBar = (props) => {
     const classes = useStyles()
 
     const saveAs = () => {
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps)(SaveButton)
+export default connect(mapStateToProps)(SaveBar)
