@@ -1,14 +1,13 @@
-from queries import twint_search
 from flask import Flask, request
-from flask_cors import cross_origin
+from flask_cors import CORS
 from Application import Application
 
 app = Flask(__name__)
+CORS(app)
 application = Application()
 
 
 @app.route("/search")
-@cross_origin()
 def search():
     try:             
         word = request.args.get('word')
@@ -29,7 +28,6 @@ def search():
 
 
 @app.route("/filter/add")
-@cross_origin()
 def add_filter():
     try:
         type = request.args.get('type')
@@ -45,7 +43,6 @@ def add_filter():
 
 
 @app.route("/filter/remove")
-@cross_origin()
 def remove_filter():
     try:
         remove_index = request.args.get('index')
@@ -59,7 +56,6 @@ def remove_filter():
 
 
 @app.route("/state")
-@cross_origin()
 def get_state():
     try:
         return {'status': 'success',
@@ -71,8 +67,7 @@ def get_state():
 
 
 @app.route("/save")
-@cross_origin()
-def get_file():
+def save():
     try:
         application.save()
         return {'status': 'success',
