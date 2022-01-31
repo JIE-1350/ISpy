@@ -20,14 +20,11 @@ class Application:
 
     def open_file(self, file):
         self.update_files()
-        print(file)
         if file in self.files:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
             self.data = pd.read_csv(self.data_path + file)
-                        # self.data = pd.read_csv('e:/Test/ISpy/backend/data/temp1.csv')
-
             self.data = self.data.where((pd.notnull(self.data)), None)
             self.filtered_data = self.data
         else:

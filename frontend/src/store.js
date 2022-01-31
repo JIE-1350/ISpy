@@ -43,6 +43,8 @@ function filters(state = [], action) {
             return action.payload.data.filters
         case 'REMOVE_FILTER':
             return action.payload.data.filters
+        case 'SEARCH_COMPLETED':
+            return action.payload.data.filters
         default:
             return state
     }
