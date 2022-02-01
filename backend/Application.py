@@ -95,7 +95,9 @@ class Application:
         to_exclude = [i for i in range(num_lines) if i not in index_list]
         self.filtered_data = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
         self.filtered_data = self.filtered_data.where((pd.notnull(self.filtered_data)), None)
-        return {'table': self.filtered_data.to_dict()}
+        table = self.get_table()
+        table['rows'] = num_lines
+        return {'table': table}
 
 
 # if __name__ == '__main__':
