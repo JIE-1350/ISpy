@@ -5,16 +5,12 @@
 [//]: # (### Version 0.2.0)
 
 [//]: # (#### New Features)
-
 [//]: # (* Feature 1 for this release)
-
 [//]: # (* feature 2 for this release)
 
 [//]: # ()
 [//]: # (#### Bug Fixes)
-
-[//]: # (* bug fixed 1)
-
+[//]: # (* Fixed hashtag search not applying hashtag)
 [//]: # (* bug fixed 2)
 
 [//]: # (---)

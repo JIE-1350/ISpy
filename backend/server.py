@@ -12,10 +12,13 @@ def search():
     try:             
         word = request.args.get('word')
         user = request.args.get('user')
-
         days = request.args.get('days')
         since = request.args.get('since')
-        until = request.args.get('until')   
+        until = request.args.get('until')
+        search_type = request.args.get('type')
+
+        if search_type == "Hashtag" and word:
+            word = "#" + word
         
         data = application.twitter_search(word, user, since, until, days)
 
@@ -30,10 +33,10 @@ def search():
 @app.route("/filter/add")
 def add_filter():
     try:
-        type = request.args.get('type')
+        filter_type = request.args.get('type')
         feature = request.args.get('feature')
         value = request.args.get('value')
-        data = application.add_filter(type, feature, value)
+        data = application.add_filter(filter_type, feature, value)
         return {'status': 'success',
                 'status_msg': "Successfully added filter",
                 'data': data}

@@ -97,7 +97,7 @@ const FilterForm = (props) => {
                             size={'small'}
                             className={classes.textField}
                         >
-                            {props === undefined ? '' : Object.keys(props.table.data).map((feature) => (
+                            {props.table.data === undefined ? '' : Object.keys(props.table.data).map((feature) => (
                                 <MenuItem value={feature}>{feature}</MenuItem>))
                             }
                         </TextField>

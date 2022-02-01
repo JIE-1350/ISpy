@@ -22,7 +22,7 @@ const SearchBar = (props) => {
     const [days, setDays] = React.useState('')
 
     const search = () => {
-        fetch('http://127.0.0.1:8000/search?user=' + user + '&word=' + word + '&days=' + days + '&since=' + since + '&until=' + until)
+        fetch('http://127.0.0.1:8000/search?user=' + user + '&word=' + word + '&days=' + days + '&since=' + since + '&until=' + until + '&type=' + search_type)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{
