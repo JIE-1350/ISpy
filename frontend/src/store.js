@@ -22,8 +22,6 @@ function table(state = {}, action) {
             return action.payload.data.table
         case 'REMOVE_FILTER':
             return action.payload.data.table
-        case 'REMOVE_FILTER':
-            return action.payload.data.table
         case 'SEARCH_COMPLETED':
             return action.payload.data.table
         case 'UPDATE_TABLE':
