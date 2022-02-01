@@ -55,7 +55,7 @@ function searching(state = false, action) {
         case 'SEARCH_COMPLETED':
             return false
         case 'SEARCHING':
-            return true
+            return action.payload
         default:
             return state
     }

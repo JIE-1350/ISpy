@@ -38,8 +38,11 @@ const SearchBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e=>{
+            props.dispatch({type: "SEARCHING", payload: false})
             alert(e);
         })
+        console.log('searching')
+        props.dispatch({type: "SEARCHING", payload: true})
     }
 
 

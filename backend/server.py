@@ -78,6 +78,18 @@ def save():
                 'status_msg': str(exception)}
 
 
+@app.route("/update-table")
+def update_table():
+    try:
+        data = application.get_table_searching()
+        return {'status': 'success',
+                'status_msg': "Successfully downloaded csv file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
 
