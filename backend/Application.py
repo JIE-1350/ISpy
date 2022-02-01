@@ -39,6 +39,9 @@ class Application:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
             self.filtered_data = self.data
+            return {'files': self.files,
+                    'filters': self.data_filter.filters,
+                    'table': self.get_table()}
         else:
             raise FileNotFoundError("File not found:" + file)
 
@@ -73,10 +76,7 @@ class Application:
         self.file = get_file_name()
         try:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
-            self.open_file(self.file)
-            return {'files': self.files,
-                    'filters': self.data_filter.filters,
-                    'table': self.get_table()}
+            return self.open_file(self.file)
         except FileNotFoundError as error:
             return {'files': self.files,
                     'filters': [],

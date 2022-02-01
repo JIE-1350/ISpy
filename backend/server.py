@@ -93,6 +93,19 @@ def update_table():
                 'status_msg': str(exception)}
 
 
+@app.route("/select-file")
+def select_file():
+    try:
+        file_name = request.args.get('filename')
+        data = application.open_file(file_name)
+        return {'status': 'success',
+                'status_msg': "Successfully downloaded csv file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
 
