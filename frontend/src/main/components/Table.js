@@ -4,35 +4,37 @@ import { useEffect } from 'react'
 
 
 const Table = (props) => {
+    const searching = props.searching
+    const dispatch = props.dispatch
 
-    const updateTable = () => {
-        fetch('http://127.0.0.1:8000/update-table')
-        .then((res)=>{
-            return res.json();
-        }).then((obj)=>{
-            if (obj.status === 'success') {
-                props.dispatch(
-                    {
-                        type: "UPDATE_TABLE",
-                        payload: obj
-                    }
-                )
-            }
-            else {
-                throw(JSON.stringify(obj))
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
-    }
     useEffect(() => {
+        const updateTable = () => {
+            fetch('http://127.0.0.1:8000/update-table')
+            .then((res)=>{
+                return res.json();
+            }).then((obj)=>{
+                if (obj.status === 'success') {
+                    dispatch(
+                        {
+                            type: "UPDATE_TABLE",
+                            payload: obj
+                        }
+                    )
+                }
+                else {
+                    throw(JSON.stringify(obj))
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
         const interval = setInterval(() => {
-            if (props.searching === true) {
+            if (searching === true) {
                 updateTable();
             }
         }, 1000)  // update table every 1000 milliseconds
         return () => clearInterval(interval)
-    }, [props.searching]);
+    }, [searching, dispatch]);
 
 
     return (
