@@ -33,14 +33,14 @@ class Application:
     def open_file(self, file):
         self.update_files()
         if file in self.files:
+            self.data = pd.read_csv(self.data_path + file)
+            self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
-            self.data = pd.read_csv(self.data_path + file)
-            self.data = self.data.where((pd.notnull(self.data)), None)
             self.filtered_data = self.data
         else:
-            raise Exception("File not found:" + file)
+            raise FileNotFoundError("File not found:" + file)
 
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
@@ -71,11 +71,16 @@ class Application:
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name()
-        twint_search(self.file, userid, word, since, until, days, path=self.data_path)
-        self.open_file(self.file)
-        return {'files': self.files,
-                'filters': self.data_filter.filters,
-                'table': self.get_table()}
+        try:
+            twint_search(self.file, userid, word, since, until, days, path=self.data_path)
+            self.open_file(self.file)
+            return {'files': self.files,
+                    'filters': self.data_filter.filters,
+                    'table': self.get_table()}
+        except FileNotFoundError as error:
+            return {'files': self.files,
+                    'filters': [],
+                    'table': {'cols': 0, 'rows': 0, 'data': {}}}
 
     def get_table(self):
         num_row, num_col = self.filtered_data.shape
