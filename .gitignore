@@ -4,3 +4,5 @@ __pycache__/
 backend/data/
 .DS_Store
 *.pyc
+backend/myenv/
+
