@@ -74,7 +74,7 @@ def save():
     try:
         data = application.save()
         return {'status': 'success',
-                'status_msg': "Successfully downloaded csv file",
+                'status_msg': "Successfully saved csv file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
@@ -86,7 +86,7 @@ def update_table():
     try:
         data = application.get_table_searching()
         return {'status': 'success',
-                'status_msg': "Successfully downloaded csv file",
+                'status_msg': "Successfully updated table",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
@@ -99,7 +99,7 @@ def select_file():
         file_name = request.args.get('filename')
         data = application.open_file(file_name)
         return {'status': 'success',
-                'status_msg': "Successfully downloaded csv file",
+                'status_msg': "Successfully selected file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
