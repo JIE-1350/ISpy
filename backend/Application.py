@@ -84,8 +84,8 @@ class Application:
 
     def get_table(self):
         num_row, num_col = self.filtered_data.shape
-        self.filtered_data = self.filtered_data.head(DISPLAY).append(self.filtered_data.tail(DISPLAY))
-        return {'data': self.filtered_data.to_dict(),
+        table = self.filtered_data.head(DISPLAY).append(self.filtered_data.tail(DISPLAY))
+        return {'data': table.to_dict(),
                 'rows': num_row,
                 'cols': num_col}
 
@@ -93,11 +93,9 @@ class Application:
         num_lines = sum(1 for _ in open(self.data_path + self.file))
         index_list = np.append(np.arange(num_lines - DISPLAY, num_lines), np.arange(DISPLAY + 1)).tolist()
         to_exclude = [i for i in range(num_lines) if i not in index_list]
-        self.filtered_data = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
-        self.filtered_data = self.filtered_data.where((pd.notnull(self.filtered_data)), None)
-        table = self.get_table()
-        table['rows'] = num_lines
-        return {'table': table}
+        table = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
+        table = table.where((pd.notnull(table)), None)
+        return {'table': {'data': table.to_dict(), 'rows': num_lines, 'cols': self.filtered_data.shape[1]}}
 
 
 # if __name__ == '__main__':
