@@ -4,6 +4,7 @@ import pandas as pd
 class DataFilter:
     def __init__(self):
         self.filters = []
+        self.sorts = {}
         self.valid_type = ['equal', 'less', 'greater', 'null', 'not_null']
 
     def __call__(self, data):
@@ -41,6 +42,23 @@ class DataFilter:
     def remove(self, index):
         indexInt = int(index)
         self.filters.pop(indexInt)
+
+    def sort(self, data, feature):
+        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html
+        # perform the sort INPLACE using pandas
+        if not self.sorts:
+            for feature in list(data.columns):
+                self.sorts[feature] = None
+        if self.sorts[feature]:
+            # perform non-default sort here
+            self.sorts[feature] = False
+        else:
+            # perform default sort here
+            self.sorts[feature] = True
+        # no need to return because of inplace operation
+
+    def reset_sort(self):
+        self.sorts = {}
 
     def __str__(self):
         return self.filters.__str__()

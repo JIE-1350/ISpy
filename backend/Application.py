@@ -38,6 +38,7 @@ class Application:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
+            self.data_filter.reset_sort()
             self.filtered_data = self.data
             return {'files': self.files,
                     'filters': self.data_filter.filters,
@@ -48,16 +49,18 @@ class Application:
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
         self.filtered_data = self.data_filter(self.data)
-        self.filtered_data = self.filtered_data.head(DISPLAY).append(self.filtered_data.tail(DISPLAY))
         return {'filters': self.data_filter.filters,
                 'table': self.get_table()}
 
     def remove_filter(self, index):
         self.data_filter.remove(index)
         self.filtered_data = self.data_filter(self.data)
-        self.filtered_data = self.filtered_data.head(DISPLAY).append(self.filtered_data.tail(DISPLAY))
         return {'filters': self.data_filter.filters,
                 'table': self.get_table()}
+
+    def sort(self, feature):
+        self.data_filter.sort(self.filtered_data, feature)
+        return {'table': self.get_table()}
 
     def update_files(self):
         self.files = os.listdir(self.data_path)
