@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 
 import FilesBar from "./../components/FilesBar";
 import InsightSelectBar from "./../components/InsightSelectBar";
+import InsightPanel from "./../components/InsightPanel";
 
 import InsightsTabStyle from './../../jss/Tab/InsightsTabStyle.js';
 
@@ -19,6 +20,11 @@ const SearchTab = (props) => {
         <div className={classes.directoryWindow}> <FilesBar/> </div>
         <div className={classes.mainWindow}>
             <InsightSelectBar/>
+            <div>
+                {props.insights === undefined ? '' : props.insights.map((insight, index) => (
+                    <InsightPanel index={index}></InsightPanel>))
+                }
+            </div>
         </div>
     </div>
     )

@@ -115,6 +115,8 @@ class Application:
             self.insights_gen.get_top_hashtags(self.data)
         elif insight_type == "stats":
             self.insights_gen.get_feature_stats(self.data, feature)
+        data = self.insights_gen.get_insights()
+        return {'insights': data}
 
 if __name__ == '__main__':
     application = Application()

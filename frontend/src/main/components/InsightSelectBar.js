@@ -52,8 +52,7 @@ const InsightSelectBar = (props) => {
         }).catch(e=>{
             alert(e);
         })
-        console.log('searching')
-        props.dispatch({type: "SEARCHING", payload: true})
+        console.log('Generating Insight')
     }
 
     const handleInsightChange = (event) => {
