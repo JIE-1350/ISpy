@@ -2,8 +2,8 @@ const SearchTabStyle = () => {
     return {
         searchTab: {
             width: "100%",
-            display: "flex",
-            paddingTop: "10px"
+            height: "calc(100vh - 52px)",
+            display: "flex"
         },
         directoryWindow: {
             height: "100%",

@@ -13,7 +13,7 @@ const FilesBar = (props) => {
     const classes = useStyles()
 
     return (
-        <div className={classes.root}>
+        <div className={classes.filesBar}>
             {(props === undefined ? '' : props.files.map((file) => (
                 <Typography>{file}</Typography>
             )))}
