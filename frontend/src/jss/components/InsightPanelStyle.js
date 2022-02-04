@@ -1,5 +1,6 @@
 const InsightPanelStyle = () => {
     return {
+<<<<<<< HEAD
         insightPanel: {
             paddingLeft: "10px",
             borderBottom: "solid 1px gainsboro",
@@ -8,6 +9,9 @@ const InsightPanelStyle = () => {
         insightPanelHeader: {
             display: "flex",
             justifyContent: "space-between"
+=======
+        insightPanel:{
+>>>>>>> Add InsightPanel
         }
     };
 };

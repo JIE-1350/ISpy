@@ -118,12 +118,15 @@ class Application:
             self.insights_gen.get_feature_stats(self.data, feature)
         data = self.insights_gen.get_insights()
         return {'insights': data}
+<<<<<<< HEAD
 
     def remove_insight(self, index: int):
         self.insights_gen.remove(index)
         data = self.insights_gen.get_insights()
         return {'insights': data}
 
+=======
+>>>>>>> Add InsightPanel
 
 if __name__ == '__main__':
     application = Application()
