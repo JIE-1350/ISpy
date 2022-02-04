@@ -23,7 +23,7 @@ const App = () => {
     return (
         <div className={classes.root}>
             <div className={classes.tabBarContainer}>
-                <Tabs className={classes.tabBar}
+                <Tabs
                     value={value}
                     onChange={handleChange}
                     aria-label="Tab Bar"
