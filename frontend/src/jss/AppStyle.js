@@ -8,7 +8,7 @@ const AppStyle = () => {
 
         tabBarContainer: {
             paddingBottom: "3px",
-            borderBottom: "solid 1px gray",
+            borderBottom: "solid 1px gainsboro",
         }
     };
 };

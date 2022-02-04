@@ -3,8 +3,8 @@ const FilterBarStyle = () => {
         filterBar: {
             minHeight: "50px",
             width: "100%",
-            borderTop: "solid 1px gray",
-            borderBottom: "solid 1px gray",
+            borderTop: "solid 1px gainsboro",
+            borderBottom: "solid 1px gainsboro",
             display: "inline-flex",
             paddingLeft: "5px"
         },
