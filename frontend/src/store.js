@@ -65,11 +65,21 @@ function searching(state = false, action) {
     }
 }
 
+function insights(state = [], action) {
+    switch (action.type) {
+        case 'INSIGHT_GENERATED':
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
-    searching
+    searching,
+    insights
 })
 
 const store = createStore(reducers, {})

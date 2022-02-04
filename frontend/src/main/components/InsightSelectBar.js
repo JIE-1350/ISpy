@@ -50,8 +50,7 @@ const InsightSelectBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e=>{
-            props.dispatch({type: "GENERATING_INSIGHT", payload: false})
-//            alert(e);
+            alert(e);
         })
         console.log('searching')
         props.dispatch({type: "SEARCHING", payload: true})
