@@ -84,7 +84,8 @@ class Application:
     def state(self):
         return {'files': self.files,
                 'filters': self.data_filter.filters,
-                'table': get_table(self.data)}
+                'table': get_table(self.data),
+                'insights': self.insights_gen.get_insights()}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name(".csv")
@@ -117,6 +118,7 @@ class Application:
             self.insights_gen.get_feature_stats(self.data, feature)
         data = self.insights_gen.get_insights()
         return {'insights': data}
+
 
 if __name__ == '__main__':
     application = Application()

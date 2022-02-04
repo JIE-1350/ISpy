@@ -67,6 +67,8 @@ function searching(state = false, action) {
 
 function insights(state = [], action) {
     switch (action.type) {
+        case 'LOAD_SEARCH_TAB':
+            return action.payload.data.insights
         case 'INSIGHT_GENERATED':
             return action.payload.data.insights
         default:
