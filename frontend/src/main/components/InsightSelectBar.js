@@ -15,25 +15,33 @@ const TextFieldStyle = {paddingRight: '5px'}
 const InsightSelectBar = (props) => {
     const classes = useStyles()
 
-    const [insightType, setInsightType] = React.useState('Keyword');
+    const [insightType, setInsightType] = React.useState('sentiment');
+    const [feature, setFeature] = React.useState('replies_count');
 
     const insightList = [
-        {value: 'Sentiment', label: 'Sentiment'},
-        {value: 'Influence', label: 'Influence'},
-        {value: 'Frequency', label: 'Frequency'},
-        {value: 'Top', label: 'Top'},
-        {value: 'Statistic', label: 'Statistic'},
+        {value: 'sentiment', label: 'Sentiment Analysis'},
+        {value: 'influence', label: 'Influence Score'},
+        {value: 'frequency', label: 'Tweets Frequency'},
+        {value: 'topHashtags', label: 'Top Hashtags'},
+        {value: 'stats', label: 'Feature Stats'},
+    ]
+
+    const featureList = [
+        {value: 'replies_count', label: 'Replies Count'},
+        {value: 'retweets_count', label: 'Retweets Count'},
+        {value: 'likes_count', label: 'Likes Count'},
+        {value: 'video', label: 'Videos Count'}
     ]
 
     const generate = () => {
-        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType)
+        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType + "&feature=" + feature)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "SEARCH_COMPLETED",
+                        type: "INSIGHT_GENERATED",
                         payload: obj
                     }
                 )
@@ -42,8 +50,8 @@ const InsightSelectBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e=>{
-            props.dispatch({type: "SEARCHING", payload: false})
-            alert(e);
+            props.dispatch({type: "GENERATING_INSIGHT", payload: false})
+//            alert(e);
         })
         console.log('searching')
         props.dispatch({type: "SEARCHING", payload: true})
@@ -53,11 +61,15 @@ const InsightSelectBar = (props) => {
         setInsightType(event.target.value);
     };
 
+    const handleFeatureChange = (event) => {
+        setFeature(event.target.value);
+    };
+
     return (
         <div className={classes.InsightSelectBar}>
             <TextField select
                 className={classes.textField}
-                defaultValue="Sentiment"
+                defaultValue="sentiment"
                 label="Insight Type:"
                 onChange={handleInsightChange}
                 size={'small'}
@@ -68,7 +80,20 @@ const InsightSelectBar = (props) => {
                     </MenuItem>
                 ))}
             </TextField>
-
+            <TextField select
+                className={classes.textField}
+                defaultValue="replies_count"
+                label="Feature:"
+                onChange={handleFeatureChange}
+                size={'small'}
+                disabled={insightType!=='stats'}
+                sx={TextFieldStyle}>
+                {featureList.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                    </MenuItem>
+                ))}
+            </TextField>
             <Button variant="contained" disabled = {false} onClick={generate}>Generate</Button>
         </div>
     );

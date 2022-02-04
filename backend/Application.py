@@ -1,8 +1,10 @@
 import os
 from datetime import date, datetime
 from DataFilter import DataFilter
+from InsightsGen import InsightsGen
 import pandas as pd
 import numpy as np
+
 from queries import twint_search
 from utils import get_table
 
@@ -26,6 +28,8 @@ class Application:
     def __init__(self):
         self.data_filters = {}
         self.data_filter = None
+        self.insights_gens = {}
+        self.insights_gen = None
         self.files = []
         self.file = ''
         self.data = None
@@ -42,7 +46,10 @@ class Application:
             self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
+            if file not in self.insights_gens:
+                self.insights_gens[file] = InsightsGen()
             self.data_filter = self.data_filters[file]
+            self.insights_gen = self.insights_gens[file]
             return {'files': self.files,
                     'filters': self.data_filter.filters,
                     'table': get_table(self.data)}
@@ -97,6 +104,17 @@ class Application:
         data_frame = data_frame.where((pd.notnull(data_frame)), None)
         return {'table': get_table(data_frame)}
 
+    def generate_insight(self, insight_type: str, feature: str = None):
+        if insight_type == "sentiment":
+            self.insights_gen.get_sentiment_analysis(self.data)
+        elif insight_type == "influence":
+            self.insights_gen.get_influence_score(self.data)
+        elif insight_type == "frequency":
+            self.insights_gen.get_tweet_frequency(self.data)
+        elif insight_type == "topHashtags":
+            self.insights_gen.get_top_hashtags(self.data)
+        elif insight_type == "stats":
+            self.insights_gen.get_feature_stats(self.data, feature)
 
 if __name__ == '__main__':
     application = Application()
