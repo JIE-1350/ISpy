@@ -34,7 +34,7 @@ const InsightSelectBar = (props) => {
     ]
 
     const generate = () => {
-        fetch('http://127.0.0.1:8000/insight/generate?type=' + insightType + "&feature=" + feature)
+        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType + "&feature=" + feature)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{

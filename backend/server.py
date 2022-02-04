@@ -107,20 +107,7 @@ def select_file():
                 'status_msg': str(exception)}
 
 
-@app.route("/sort")
-def sort_table():
-    try:
-        feature = request.args.get('feature')
-        data = application.sort(feature)
-        return {'status': 'success',
-                'status_msg': "Successfully sorted feature",
-                'data': data}
-    except Exception as exception:
-        return {'status': 'fail',
-                'status_msg': str(exception)}
-
-
-@app.route("/insight/generate")
+@app.route("/generate-insight")
 def generate_insight():
     try:
         insight_type = request.args.get('type')
