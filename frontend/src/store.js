@@ -71,6 +71,8 @@ function insights(state = [], action) {
             return action.payload.data.insights
         case 'INSIGHT_GENERATED':
             return action.payload.data.insights
+        case 'REMOVE_INSIGHT':
+            return action.payload.data.insights
         default:
             return state
     }

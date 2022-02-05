@@ -120,7 +120,7 @@ def sort_table():
                 'status_msg': str(exception)}
 
 
-@app.route("/generate-insight")
+@app.route("/insight/generate")
 def generate_insight():
     try:
         insight_type = request.args.get('type')
@@ -129,6 +129,19 @@ def generate_insight():
         data = application.generate_insight(insight_type, feature)
         return {'status': 'success',
                 'status_msg': "Successfully generated insight",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/insight/remove")
+def remove_insight():
+    try:
+        remove_index = int(request.args.get('index'))
+        data = application.remove_insight(remove_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed insight",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',

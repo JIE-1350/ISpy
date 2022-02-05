@@ -20,7 +20,7 @@ class InsightsGen:
     def get_feature_stats(self, data: pd.DataFrame, feature: str):
         self.insights.append("get_feature_stats()")
 
-    def remove_insight(self, index: int):
+    def remove(self, index: int):
         self.insights.pop(index)
 
     def get_insights(self):

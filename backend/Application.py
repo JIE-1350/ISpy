@@ -119,6 +119,11 @@ class Application:
         data = self.insights_gen.get_insights()
         return {'insights': data}
 
+    def remove_insight(self, index: int):
+        self.insights_gen.remove(index)
+        data = self.insights_gen.get_insights()
+        return {'insights': data}
+
 
 if __name__ == '__main__':
     application = Application()
