@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux"
 import {createUseStyles} from 'react-jss';
 
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import InsightPanelStyle from './../../jss/components/InsightPanelStyle.js';
@@ -36,9 +37,10 @@ const InsightPanel = (props) => {
 
     return (
         <div className={classes.insightPanel}>
-            <Button variant="outlined" size="small" onClick={removeInsight}>
-                X
-			</Button>
+            <div className={classes.insightPanelHeader}>
+                <Typography variant="h5">Name of insight</Typography>
+                <Button variant="text" onClick={removeInsight}>X</Button>
+            </div>
             {props.insights[index]}
         </div>
     );
