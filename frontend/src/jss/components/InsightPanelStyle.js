@@ -3,7 +3,6 @@ const InsightPanelStyle = () => {
         insightPanel: {
             paddingLeft: "10px",
             borderBottom: "solid 1px gainsboro",
-            height: "33vh", // TEMPORARY, DELETE LATER
         },
         insightPanelHeader: {
             display: "flex",

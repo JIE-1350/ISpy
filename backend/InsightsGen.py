@@ -24,10 +24,10 @@ class InsightsGen:
                          {'color': 'green', 'string': str(round(analysis_mean[2] * 100)) + '% positive tweets'},
                          {'color': 'yellow', 'string': str(round(analysis_mean[1] * 100)) + '% neutral tweets'},
                          {'color': 'red', 'string': str(round(analysis_mean[0] * 100)) + '% negative tweets'}],
-                'graph': [{'name': 'Negative', 'count': round(analysis_count[0])},
-                          {'name': 'Neutral', 'count': round(analysis_count[1])},
-                          {'name': 'Positive', 'count': round(analysis_count[2])}]}
-        self.insights.append(data)
+                'graph': [{'name': 'Negative', 'Negative Count': round(analysis_count[0])},
+                          {'name': 'Neutral', 'Neutral Count': round(analysis_count[1])},
+                          {'name': 'Positive', 'Positive Count': round(analysis_count[2])}]}
+        self.insights.append(data)\
 
     def get_influence_score(self, data: pd.DataFrame):
         self.insights.append("get_influence_score()")
