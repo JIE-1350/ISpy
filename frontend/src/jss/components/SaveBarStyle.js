@@ -2,11 +2,9 @@
 const SaveBarStyle = () => {
     return {
         ButtonContainer: {
-            display: "flex",
-            alignItems: "flex-start"
+            float: "right",
         },
         textField: {
-            width: "15%"
         }
     };
 };
