@@ -41,7 +41,7 @@ const SaveBar = (props) => {
     }
 
     return (
-        <div>
+        <div className={classes.saveBar}>
             <Button variant="contained" className={classes.saveAs} onClick={saveAs}>Save As</Button>
             <TextField select label="Save File Type:" 
             className={classes.textField} 

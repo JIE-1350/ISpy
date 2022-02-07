@@ -1,6 +1,9 @@
 
 const SaveBarStyle = () => {
     return {
+        saveBar: {
+            padding: "5px"
+        },
         saveAs: {
             float: "right"
         },
