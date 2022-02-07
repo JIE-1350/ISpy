@@ -127,5 +127,10 @@ class Application:
 
 if __name__ == '__main__':
     application = Application()
+<<<<<<< HEAD
+=======
+    application.open_file("a.csv")
+    application.generate_insight('sentiment')
+>>>>>>> Add sentiment analysis backend
 
 

@@ -42,3 +42,4 @@ Werkzeug==2.0.2
 yarl==1.7.2
 zipp==3.6.0
 openpyxl==3.0.9
+nltk==3.6.7
