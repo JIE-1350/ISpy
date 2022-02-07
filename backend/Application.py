@@ -86,7 +86,7 @@ class Application:
                 'table': self.get_table()}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
-        self.file = get_file_name()
+        self.file = get_file_name(".csv")
         try:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
             return self.open_file(self.file)
