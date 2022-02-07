@@ -19,7 +19,8 @@ class InsightsGen:
         sentiments = np.array(sentiments)
         analysis_count = np.sum(sentiments, axis=0)
         analysis_mean = np.mean(sentiments, axis=0)
-        data = {'list': [{'color': 'green', 'string': str(round(analysis_mean[3], 3)) + ' sentiment score'},
+        data = {'type': 'Sentiment Analysis',
+                'list': [{'color': 'green', 'string': str(round(analysis_mean[3], 3)) + ' sentiment score'},
                          {'color': 'green', 'string': str(round(analysis_mean[2] * 100)) + '% positive tweets'},
                          {'color': 'yellow', 'string': str(round(analysis_mean[1] * 100)) + '% neutral tweets'},
                          {'color': 'red', 'string': str(round(analysis_mean[0] * 100)) + '% negative tweets'}],

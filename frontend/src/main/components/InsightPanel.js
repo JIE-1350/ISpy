@@ -5,6 +5,8 @@ import {createUseStyles} from 'react-jss';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import InsightSentiment from "./../components/InsightSentiment";
+
 import InsightPanelStyle from './../../jss/components/InsightPanelStyle.js';
 const useStyles = createUseStyles(InsightPanelStyle)
 
@@ -34,17 +36,23 @@ const InsightPanel = (props) => {
             alert(e);
         })
     };
+    let insightComponent
+    if (props.insights[index].type === 'Sentiment Analysis') {
+        insightComponent = <InsightSentiment data={props.insights[index]}/>
+    } else if (props.insights[index].type === 'other insight name') {
+        insightComponent = 'other insight component'
+    }
 
     return (
         <div className={classes.insightPanel}>
             <div className={classes.insightPanelHeader}>
-                <Typography variant="h5">Name of insight</Typography>
+                <Typography variant="h5">{props.insights[index].type}</Typography>
                 <Button variant="text" onClick={removeInsight}>X</Button>
             </div>
             <Button variant="outlined" size="small" onClick={removeInsight}>
                 X
 			</Button>
-            {props.insights[index]}
+            {insightComponent}
         </div>
     );
 }
