@@ -1,10 +1,12 @@
 
 const SaveBarStyle = () => {
     return {
-        ButtonContainer: {
-            float: "right",
+        saveAs: {
+            float: "right"
         },
         textField: {
+            float: "right",
+            width: "15%"
         }
     };
 };

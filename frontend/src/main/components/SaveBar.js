@@ -41,7 +41,8 @@ const SaveBar = (props) => {
     }
 
     return (
-        <div className={classes.ButtonContainer}>
+        <div>
+            <Button variant="contained" className={classes.saveAs} onClick={saveAs}>Save As</Button>
             <TextField select label="Save File Type:" 
             className={classes.textField} 
             onChange={handlefileTypeChange} 
@@ -50,7 +51,6 @@ const SaveBar = (props) => {
                 <MenuItem value={".xlsx"}>.xlsx</MenuItem>
                 <MenuItem value={".json"}>.json</MenuItem>
             </TextField>
-            <Button variant="contained" onClick={saveAs}>Save As</Button>
         </div>
 
     );
