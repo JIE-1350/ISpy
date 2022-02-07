@@ -1,7 +1,15 @@
+
 const SaveBarStyle = () => {
     return {
-        ButtonContainer: {
-
+        saveBar: {
+            padding: "5px"
+        },
+        saveAs: {
+            float: "right"
+        },
+        textField: {
+            float: "right",
+            width: "15%"
         }
     };
 };
