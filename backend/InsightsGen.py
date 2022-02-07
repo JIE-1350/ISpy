@@ -5,6 +5,15 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
 
 
+def get_sentiment_color(value, threshold1, threshold2):
+    if value <= threshold1:
+        return "red"
+    elif value <= threshold2:
+        return "gray"
+    else:
+        return "green"
+
+
 class InsightsGen:
     def __init__(self):
         self.insights = []
@@ -19,10 +28,11 @@ class InsightsGen:
         sentiments = np.array(sentiments)
         analysis_count = np.sum(sentiments, axis=0)
         analysis_mean = np.mean(sentiments, axis=0)
+        sentiment_color = get_sentiment_color(analysis_mean[3], -1.0/3.0, 1.0/3.0)
         data = {'type': 'Sentiment Analysis',
-                'list': [{'color': 'green', 'string': str(round(analysis_mean[3], 3)) + ' sentiment score'},
+                'list': [{'color': sentiment_color, 'string': str(round(analysis_mean[3], 3)) + ' sentiment score'},
                          {'color': 'green', 'string': str(round(analysis_mean[2] * 100)) + '% positive tweets'},
-                         {'color': 'yellow', 'string': str(round(analysis_mean[1] * 100)) + '% neutral tweets'},
+                         {'color': 'gray', 'string': str(round(analysis_mean[1] * 100)) + '% neutral tweets'},
                          {'color': 'red', 'string': str(round(analysis_mean[0] * 100)) + '% negative tweets'}],
                 'graph': [{'name': 'Negative', 'Negative Count': round(analysis_count[0])},
                           {'name': 'Neutral', 'Neutral Count': round(analysis_count[1])},
