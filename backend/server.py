@@ -72,8 +72,8 @@ def get_state():
 @app.route("/save")
 def save():
     try:
-        fileType = request.args.get('fileType')
-        data = application.save(fileType)
+        file_type = request.args.get('fileType')
+        data = application.save(file_type)
         return {'status': 'success',
                 'status_msg': "Successfully saved csv file",
                 'data': data}

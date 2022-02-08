@@ -8,16 +8,16 @@ from queries import twint_search
 DISPLAY = 5
 
 
-def get_file_name(fileType):
+def get_file_name(file_type=".csv"):
     filename = str(date.today())
     now = datetime.now()
     filename += "_" + now.strftime("%H-%M-%S")
-    if (fileType == ".csv"):
+    if file_type == ".csv":
         filename += ".csv"
-    elif (fileType == ".xlsx"):
+    elif file_type == ".xlsx":
         filename += ".xlsx"
-    elif (fileType == ".json"):
-        filename+= ".json"
+    elif file_type == ".json":
+        filename += ".json"
     return filename
 
 
@@ -70,13 +70,13 @@ class Application:
     def update_files(self):
         self.files = os.listdir(self.data_path)
 
-    def save(self, fileType):
-        if (fileType == ".csv"):
-            self.data.to_csv(self.data_path + get_file_name(fileType))
-        elif (fileType == ".xlsx"):
-            self.data.to_excel(self.data_path + get_file_name(fileType))
-        elif (fileType == ".json"):
-            self.data.to_json(self.data_path + get_file_name(fileType))
+    def save(self, file_type):
+        if file_type == ".csv":
+            self.data.to_csv(self.data_path + get_file_name(file_type))
+        elif file_type == ".xlsx":
+            self.data.to_excel(self.data_path + get_file_name(file_type))
+        elif file_type == ".json":
+            self.data.to_json(self.data_path + get_file_name(file_type))
         self.update_files()
         return {'files': self.files}
 
