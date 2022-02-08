@@ -103,7 +103,7 @@ class Application:
                 'cols': num_col}
 
     def get_table_searching(self):
-        num_lines = sum(1 for _ in open(self.data_path + self.file))
+        num_lines = sum(1 for _ in open(self.data_path + self.file, encoding='utf-8'))
         index_list = np.append(np.arange(num_lines - DISPLAY, num_lines), np.arange(DISPLAY + 1)).tolist()
         to_exclude = [i for i in range(num_lines) if i not in index_list]
         table = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
