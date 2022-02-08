@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux"
 import { useEffect } from 'react'
+import { useRef } from 'react'
 
 // import { JsonToTable } from "react-json-to-table";
 
@@ -16,6 +17,7 @@ const Table = (props) => {
 	const classes = useStyles()
     const searching = props.searching
     const dispatch = props.dispatch
+	const tableBodyRef = useRef(null);
 	
 	// this is a hacky solution
 	const transposeTable = (tbody, newContainerType = "tbody") => {
@@ -68,7 +70,7 @@ const Table = (props) => {
         return () => clearInterval(interval)
     }, [searching, dispatch]);
 
-	// transposeTable(document.querySelector("tbody")); //currently errors at times because execution is not deferred
+    // transposeTable(document.querySelector("tbody")); // currently errors at times because execution is not deferred
 	
     return (
         <div style={{'overflow-x':'auto'}}>
@@ -90,13 +92,13 @@ const Table = (props) => {
                     {props.table.data === undefined ? '' : Object.keys(props.table.data).map(
 						(key)=>{
 							return(
-								<td className={classes.tableCell}>{key}</td>
+								<th className={classes.tableCell}>{key}</th>
 							)
 						}
 					)}
 					</tr>
                 </thead>
-				<tbody>
+				<tbody ref={tableBodyRef}>
                     {props.table.data === undefined ? '' : Object.entries(props.table.data).map(
 						([idx, value])=>{
 							return(
