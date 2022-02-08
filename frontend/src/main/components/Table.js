@@ -76,7 +76,7 @@ const Table = (props) => {
                     {props.table.data === undefined ? '' : Object.entries(props.table.data).map(
 						([idx, value])=>{
 							return(
-								<td className={classes.tableRow} key={idx}>
+								<td key={idx}>
 								{Object.values(value).map((i) => (
 									<tr className={classes.tableCell}>{i}</tr>
 								))}
