@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux"
 import { useEffect } from 'react'
 
-import { JsonToTable } from "react-json-to-table";
+// import { JsonToTable } from "react-json-to-table";
 
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
@@ -16,7 +16,29 @@ const Table = (props) => {
 	const classes = useStyles()
     const searching = props.searching
     const dispatch = props.dispatch
+	
+	// this is a hacky solution
+	const transposeTable = (tbody, newContainerType = "tbody") => {
+	  const rows = Array.from(tbody.querySelectorAll("tr"))
+	  const newTbody = document.createElement(newContainerType)
 
+	  for (let rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+		const row = rows[rowIdx]
+		const cells = Array.from(row.querySelectorAll("td, th"))
+
+		for (let cellIdx = 0; cellIdx < cells.length; cellIdx++ ) {
+		  const cell = cells[cellIdx]
+		  const newRow = newTbody.children[cellIdx] || document.createElement("tr")
+		  if (!newTbody.children[cellIdx]) {
+			newTbody.appendChild(newRow)
+		  }
+		  newRow.appendChild(cell.cloneNode(true))
+		}
+	  } 
+	  tbody.parentElement.appendChild(newTbody)
+	  tbody.parentElement.removeChild(tbody)
+	}
+	
     useEffect(() => {
         const updateTable = () => {
             fetch('http://127.0.0.1:8000/update-table')
@@ -45,6 +67,8 @@ const Table = (props) => {
         }, 1000)  // update table every 1000 milliseconds
         return () => clearInterval(interval)
     }, [searching, dispatch]);
+
+	// transposeTable(document.querySelector("tbody")); //currently errors at times because execution is not deferred
 	
     return (
         <div style={{'overflow-x':'auto'}}>
@@ -76,16 +100,17 @@ const Table = (props) => {
                     {props.table.data === undefined ? '' : Object.entries(props.table.data).map(
 						([idx, value])=>{
 							return(
-								<td key={idx}>
+								<tr className={classes.tableRow} key={idx}>
 								{Object.values(value).map((i) => (
-									<tr className={classes.tableCell}>{i}</tr>
+									<td className={classes.tableCell}>{i}</td>
 								))}
-								</td>
+								</tr>
 							)
 						}
 					)}
 			     </tbody>
             </table>
+			
         </div>
     );
 }
