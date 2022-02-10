@@ -107,19 +107,6 @@ def select_file():
                 'status_msg': str(exception)}
 
 
-@app.route("/sort")
-def sort_table():
-    try:
-        feature = request.args.get('feature')
-        data = application.sort(feature)
-        return {'status': 'success',
-                'status_msg': "Successfully sorted feature",
-                'data': data}
-    except Exception as exception:
-        return {'status': 'fail',
-                'status_msg': str(exception)}
-
-
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
 
