@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 
 import MaterialTable from "material-table";
 
+import tableIcons from "./MaterialTableIcons";
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import { CircularProgress } from '@mui/material';
@@ -63,10 +64,26 @@ const Table = (props) => {
             </Box>
        
 			<div style={{ maxWidth: "100%" }}>
-			<MaterialTable
+			<MaterialTable 
 			  title="Retrieved Tweets"
+              icons={tableIcons}
 			  columns={props.table.columns}
 			  data = {props.table.data}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#1976d2',
+                  color: '#FFF',
+                  padding: '10px',
+                  borderRight: "0.5px solid white",
+                  textAlign:'center'
+                },
+                cellStyle: {
+                    padding: '10px',
+                    textAlign:'center',
+                    borderRight: "0.5px solid lightgrey",
+                },
+                columnsButton: true
+              }}
 			/>
 			</div>
                
