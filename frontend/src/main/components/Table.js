@@ -55,6 +55,8 @@ const Table = (props) => {
                 columns={props.table.columns}
                 data={props.table.data}
                 options={{
+                    pageSize: 10,
+                    pageSizeOptions: [10, 20, 50],
                     headerStyle: {
                         backgroundColor: '#1976d2',
                         color: '#FFF',
@@ -64,6 +66,7 @@ const Table = (props) => {
                     },
                     columnsButton: true,
                     maxBodyHeight: searching ? 'calc(100vh - 386px)' : 'calc(100vh - 340px)',
+                    minBodyHeight: searching ? 'calc(100vh - 386px)' : 'calc(100vh - 340px)',
                 }}
                 components={{
                     Toolbar: props => (
