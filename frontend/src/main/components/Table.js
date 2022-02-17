@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux"
 import { useEffect } from 'react'
 
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from 'material-table';
 
 import tableIcons from "./MaterialTableIcons";
 import Box from '@mui/material/Box';
@@ -50,7 +50,7 @@ const Table = (props) => {
     return (
         <div className={classes.tableContainer}>
 			<MaterialTable
-                title="Retrieved Tweets"
+                title="Tweet Data"
                 icons={tableIcons}
                 columns={props.table.columns}
                 data={props.table.data}
@@ -73,8 +73,9 @@ const Table = (props) => {
                 components={{
                     Toolbar: props => (
                         <div>
+                        <MTableToolbar {...props} />
                         <Box sx={{ height: 30 }}>
-                            {searching === false ? (<div><p style={{'margin-bottom':0}}>&ensp;Retrieved Tweets</p></div>) : (
+                            {searching === false ? (<div><p style={{'margin-bottom':0}}>&ensp;Finished Retrieval</p></div>) : (
                             <div>
                             <p style={{'margin-bottom':0}}>&ensp;Retrieving Tweets...</p>
                             <Fade
@@ -88,7 +89,7 @@ const Table = (props) => {
                             </Fade>
                             </div>
                             )}
-                        </Box>     
+                        </Box>  
                         </div>
                     ),
                 }}
