@@ -43,6 +43,7 @@ const FilesBar = (props) => {
                 index === selectedButton
                 ? <div className={classes.row}>
                     <Button
+                        className={classes.fileButton}
                         variant = "outlined"
                         size = "small"
                         onClick={(e) => {
@@ -50,18 +51,19 @@ const FilesBar = (props) => {
                             fileSelect();
                             setSelectedButton(index);
                         }}>
-                        <Typography style={{ textTransform: 'none' }}>{file}</Typography>
+                        <div className={classes.buttonTextSelected}>{file}</div>
                     </Button>
                 </div>
                 : <div className={classes.row}>
                     <Button
+                        className={classes.fileButton}
                         size = "small"
                         onClick={(e) => {
                             setFile(file);
                             fileSelect();
                             setSelectedButton(index);
                         }}>
-                        <Typography style={{ textTransform: 'none' }}>{file}</Typography>
+                        <div className={classes.buttonTextRegular}>{file}</div>
                     </Button>
                 </div>
             )))}
