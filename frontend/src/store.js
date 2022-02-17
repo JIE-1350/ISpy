@@ -9,6 +9,8 @@ function files(state = [], action) {
             return action.payload.data.files
         case 'SEARCH_COMPLETED':
             return action.payload.data.files
+        case 'FILE_SELECTED':
+            return action.payload.data.files
         default:
             return state
     }
@@ -26,6 +28,8 @@ function table(state = {}, action) {
             return action.payload.data.table
         case 'UPDATE_TABLE':
             return action.payload.data.table
+        case 'FILE_SELECTED':
+            return action.payload.data.table
         case 'SEARCHING':
             return {}
         default:
@@ -42,6 +46,8 @@ function filters(state = [], action) {
         case 'REMOVE_FILTER':
             return action.payload.data.filters
         case 'SEARCH_COMPLETED':
+            return action.payload.data.filters
+        case 'FILE_SELECTED':
             return action.payload.data.filters
         default:
             return state
