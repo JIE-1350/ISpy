@@ -97,9 +97,42 @@ const FilterForm = (props) => {
                             size={'small'}
                             className={classes.textField}
                         >
-                            {props.table.data === undefined ? '' : Object.keys(props.table.data).map((feature) => (
-                                <MenuItem value={feature}>{feature}</MenuItem>))
-                            }
+							 <MenuItem value="id">ID</MenuItem>
+							 <MenuItem value="conversation_id">Conversation ID</MenuItem>
+							 <MenuItem value="created_at">Created At</MenuItem>
+							 <MenuItem value="date">Date</MenuItem>
+							 <MenuItem value="time">Time</MenuItem>
+							 <MenuItem value="timezone">Timezone</MenuItem>
+							 <MenuItem value="user_id">User ID</MenuItem>
+							 <MenuItem value="username">Username</MenuItem>
+							 <MenuItem value="name">Name</MenuItem>
+							 <MenuItem value="replies_count">Replies Count</MenuItem>
+							 <MenuItem value="retweets_count">Retweets Count</MenuItem>
+							 <MenuItem value="likes_count">Likes Count</MenuItem>
+							 <MenuItem value="hashtags">Hashtags</MenuItem>
+							 <MenuItem value="place">Place</MenuItem>
+							 <MenuItem value="language">Language</MenuItem>
+							 <MenuItem value="mentions">Mentions</MenuItem>
+							 <MenuItem value="tweet">Tweet</MenuItem>
+							 <MenuItem value="urls">URLs</MenuItem>
+							 <MenuItem value="photos">Photos</MenuItem>
+							 <MenuItem value="cashtags">Cashtags</MenuItem>
+							 <MenuItem value="link">Link</MenuItem>
+							 <MenuItem value="retweet">Retweet</MenuItem>
+							 <MenuItem value="quote_url">Quote URL</MenuItem>
+							 <MenuItem value="video">Video</MenuItem>
+							 <MenuItem value="thumbnail">Thumbnail</MenuItem>
+							 <MenuItem value="near">Near</MenuItem>
+							 <MenuItem value="geo">Geo</MenuItem>
+							 <MenuItem value="source">Source</MenuItem>
+							 <MenuItem value="user_rt_id">User Retweet ID</MenuItem>
+							 <MenuItem value="user_rt">User Retweet</MenuItem>
+							 <MenuItem value="retweet_id">Retweet ID</MenuItem>
+							 <MenuItem value="reply_to">Reply To</MenuItem>
+							 <MenuItem value="retweet_date">Retweet Date</MenuItem>
+							 <MenuItem value="translate">Translated</MenuItem>
+							 <MenuItem value="trans_src">Translated (Source Lang)</MenuItem>
+							 <MenuItem value="trans_dest">Translated (Target Lang)</MenuItem>
                         </TextField>
                     </div>
                     <div className={classes.TextFieldContainer}>
