@@ -49,7 +49,7 @@ const Table = (props) => {
 	
     return (
         <div className={classes.tableContainer}>
-            <Box sx={{ height: 40 }}>
+            <Box sx={{ height: 0 }}>
                 <Fade
                 in={searching}
                   style={{
@@ -60,8 +60,6 @@ const Table = (props) => {
                  <CircularProgress />
                 </Fade>
             </Box>
-       
-			<div style={{ maxWidth: "100%" }}>
 			<MaterialTable
                 title="Retrieved Tweets"
                 icons={tableIcons}
@@ -80,11 +78,10 @@ const Table = (props) => {
                         textAlign: 'center',
                         borderRight: "0.5px solid lightgrey",
                     },
-                    columnsButton: true
+                    columnsButton: true,
+                    maxBodyHeight: 'calc(100vh - 340px)'
                 }}
             />
-			</div>
-               
         </div>
     );
 }

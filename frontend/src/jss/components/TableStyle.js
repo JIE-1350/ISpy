@@ -1,7 +1,8 @@
 const TableStyle = () => {
     return {
         tableContainer: {
-            overflowX: 'auto'
+            overflowX: 'auto',
+            height: "calc(100vh - 220px)",
         },
         options: {
             headerStyle: {
