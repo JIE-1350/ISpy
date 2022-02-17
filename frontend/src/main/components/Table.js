@@ -69,7 +69,7 @@ const Table = (props) => {
                     headerStyle: {
                         backgroundColor: '#1976d2',
                         color: '#FFF',
-                        padding: '10px',
+                        padding: '0px',
                         borderRight: "0.5px solid white",
                         textAlign: 'center'
                     },
@@ -77,6 +77,7 @@ const Table = (props) => {
                         padding: '10px',
                         textAlign: 'center',
                         borderRight: "0.5px solid lightgrey",
+                        minWidth: '145px'
                     },
                     columnsButton: true,
                     maxBodyHeight: 'calc(100vh - 340px)'
