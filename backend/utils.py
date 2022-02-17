@@ -12,13 +12,12 @@ def get_table(data_frame):
         min_length = len(column) + 5
         for sample_feature in samples[column]:
             min_length = max(min_length, len(str(sample_feature)))
-        num_pixel = (min_length * 10)
+        num_pixel = (min_length * 10) + 20
         num_pixel = min(num_pixel, 500)
         columns.append({
             'title': get_title(column),
             'field': column,
             'cellStyle': {
-                'padding': '10px',
                 'textAlign': 'center',
                 'borderRight': "0.5px solid lightgrey",
                 'minWidth': str(num_pixel) + 'px',
