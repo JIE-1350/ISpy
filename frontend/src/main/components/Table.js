@@ -69,28 +69,26 @@ const Table = (props) => {
                         minWidth: '145px'
                     },
                     columnsButton: true,
-                    maxBodyHeight: 'calc(100vh - 340px)',
+                    maxBodyHeight: searching ? 'calc(100vh - 386px)' : 'calc(100vh - 340px)',
                 }}
                 components={{
                     Toolbar: props => (
                         <div>
-                        <MTableToolbar {...props} />
-                        <Box sx={{ height: 30 }}>
-                            {searching === false ? (<div><p style={{'margin-bottom':0}}>&ensp;Finished Retrieval</p></div>) : (
-                            <div>
-                            <p style={{'margin-bottom':0}}>&ensp;Retrieving Tweets...</p>
-                            <Fade
-                            in={searching}
-                            style={{
-                            transitionDelay: searching ? '50ms' : '0ms',
-                            }}
-                            unmountOnExit
-                            >
-                                <LinearProgress disableShrink/>
-                            </Fade>
-                            </div>
+                            <MTableToolbar {...props} />
+                            {searching === false ? '' : (
+                                <Box sx={{height: 30}}>
+                                    <p style={{'margin-bottom': 0}}>&ensp;Retrieving Tweets...</p>
+                                    <Fade
+                                        in={searching}
+                                        style={{
+                                            transitionDelay: searching ? '50ms' : '0ms',
+                                        }}
+                                        unmountOnExit
+                                    >
+                                        <LinearProgress disableShrink/>
+                                    </Fade>
+                                </Box>
                             )}
-                        </Box>  
                         </div>
                     ),
                 }}
