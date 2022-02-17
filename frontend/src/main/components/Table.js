@@ -62,12 +62,6 @@ const Table = (props) => {
                         borderRight: "0.5px solid white",
                         textAlign: 'center'
                     },
-                    cellStyle: {
-                        padding: '10px',
-                        textAlign: 'center',
-                        borderRight: "0.5px solid lightgrey",
-                        minWidth: '145px'
-                    },
                     columnsButton: true,
                     maxBodyHeight: searching ? 'calc(100vh - 386px)' : 'calc(100vh - 340px)',
                 }}
