@@ -7,7 +7,7 @@ import MaterialTable from "material-table";
 import tableIcons from "./MaterialTableIcons";
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
-import { CircularProgress } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 
 import {createUseStyles} from 'react-jss';
 import TableStyle from './../../jss/components/TableStyle.js';
@@ -49,17 +49,6 @@ const Table = (props) => {
 	
     return (
         <div className={classes.tableContainer}>
-            <Box sx={{ height: 0 }}>
-                <Fade
-                in={searching}
-                  style={{
-                    transitionDelay: searching ? '800ms' : '0ms',
-                  }}
-                  unmountOnExit
-                >
-                 <CircularProgress />
-                </Fade>
-            </Box>
 			<MaterialTable
                 title="Retrieved Tweets"
                 icons={tableIcons}
@@ -79,7 +68,29 @@ const Table = (props) => {
                         borderRight: "0.5px solid lightgrey",
                     },
                     columnsButton: true,
-                    maxBodyHeight: 'calc(100vh - 340px)'
+                    maxBodyHeight: 'calc(100vh - 340px)',
+                }}
+                components={{
+                    Toolbar: props => (
+                        <div>
+                        <Box sx={{ height: 30 }}>
+                            {searching === false ? (<div><p style={{'margin-bottom':0}}>&ensp;Retrieved Tweets</p></div>) : (
+                            <div>
+                            <p style={{'margin-bottom':0}}>&ensp;Retrieving Tweets...</p>
+                            <Fade
+                            in={searching}
+                            style={{
+                            transitionDelay: searching ? '50ms' : '0ms',
+                            }}
+                            unmountOnExit
+                            >
+                                <LinearProgress disableShrink/>
+                            </Fade>
+                            </div>
+                            )}
+                        </Box>     
+                        </div>
+                    ),
                 }}
             />
         </div>
