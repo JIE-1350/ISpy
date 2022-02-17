@@ -1,11 +1,9 @@
 const FilesBarStyle = () => {
     return {
         filesBar: {
-            height: "auto",
-            padding: "0",
-            overflow: "hidden",
-            lineClamp: "1",
-            wordBreak: "break-all",
+            minHeight: "100%",
+            borderRight: "solid 1px gainsboro",
+            paddingRight: "4px"
         },
         fileButton: {
             '&.MuiButton-root': {
