@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux"
 import { useEffect } from 'react'
 
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from 'material-table';
 
 import tableIcons from "./MaterialTableIcons";
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
-import { CircularProgress } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 
 import {createUseStyles} from 'react-jss';
 import TableStyle from './../../jss/components/TableStyle.js';
@@ -49,19 +49,8 @@ const Table = (props) => {
 	
     return (
         <div className={classes.tableContainer}>
-            <Box sx={{ height: 0 }}>
-                <Fade
-                in={searching}
-                  style={{
-                    transitionDelay: searching ? '800ms' : '0ms',
-                  }}
-                  unmountOnExit
-                >
-                 <CircularProgress />
-                </Fade>
-            </Box>
 			<MaterialTable
-                title="Retrieved Tweets"
+                title="Tweet Data"
                 icons={tableIcons}
                 columns={props.table.columns}
                 data={props.table.data}
@@ -80,7 +69,30 @@ const Table = (props) => {
                         minWidth: '145px'
                     },
                     columnsButton: true,
-                    maxBodyHeight: 'calc(100vh - 340px)'
+                    maxBodyHeight: 'calc(100vh - 340px)',
+                }}
+                components={{
+                    Toolbar: props => (
+                        <div>
+                        <MTableToolbar {...props} />
+                        <Box sx={{ height: 30 }}>
+                            {searching === false ? (<div><p style={{'margin-bottom':0}}>&ensp;Finished Retrieval</p></div>) : (
+                            <div>
+                            <p style={{'margin-bottom':0}}>&ensp;Retrieving Tweets...</p>
+                            <Fade
+                            in={searching}
+                            style={{
+                            transitionDelay: searching ? '50ms' : '0ms',
+                            }}
+                            unmountOnExit
+                            >
+                                <LinearProgress disableShrink/>
+                            </Fade>
+                            </div>
+                            )}
+                        </Box>  
+                        </div>
+                    ),
                 }}
             />
         </div>
