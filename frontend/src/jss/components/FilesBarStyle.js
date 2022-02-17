@@ -1,9 +1,13 @@
 const FilesBarStyle = () => {
     return {
         filesBar: {
-            minHeight: "100%",
-            borderRight: "solid 1px gainsboro",
-        }
+            width: "250px",
+            height: "auto",
+            padding: "0",
+            overflow: "hidden",
+            lineClamp: "1",
+            wordBreak: "break-all",
+        },
     };
 };
 
