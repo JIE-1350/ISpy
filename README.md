@@ -26,6 +26,18 @@ The main goal of this project is to provide an easy user interface allowing for 
 #### Bug Fixes
 * N/A
 
+### Version 0.2.0:
+#### New Features
+* Visualize Data in a formatted Table organized by row for each tweet and column for tweet properties.
+* View previously saved data files or open them from directory sidebar.
+* Apply multiple filters or filter by keyword/number of likes.
+* Search table by keyword/value using table search bar.
+* Sort the table alphanumerically by clicking on column headers.
+* Save data (filtered or not) as .csv, .json, or .xlsx (Excel) on your local machine
+
+#### Bug Fixes
+* Fixed hashtag search not applying hashtag exactly
+* Fixed feature list for filters breaking after changing data format
 ---
 
 ## Installation
