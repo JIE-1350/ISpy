@@ -1,5 +1,5 @@
-import { createStore } from 'redux'
-import { combineReducers } from 'redux'
+import {createStore} from 'redux'
+import {combineReducers} from 'redux'
 
 function files(state = [], action) {
     switch (action.type) {
@@ -77,9 +77,9 @@ const store = createStore(reducers, {})
 // this needs to be moved somewhere relevant
 const getState = () => {
     fetch('http://127.0.0.1:8000/state')
-    .then((res)=>{
-        return res.json();
-    }).then((obj)=>{
+        .then((res) => {
+            return res.json();
+        }).then((obj) => {
         if (obj.status === 'success') {
             store.dispatch(
                 {
@@ -87,14 +87,13 @@ const getState = () => {
                     payload: obj
                 }
             )
-        }
-        else {
+        } else {
             throw(JSON.stringify(obj))
         }
-    }).catch(error=>{
+    }).catch(error => {
         if (error instanceof TypeError) {
-            setTimeout(function(){
-               getState()
+            setTimeout(function () {
+                getState()
             }, 1000);
         }
         console.log(error)

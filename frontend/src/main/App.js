@@ -22,14 +22,14 @@ const App = () => {
         <div className={classes.root}>
             <div className={classes.tabBarContainer}>
                 <Tabs className={classes.tabBar}
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="Tab Bar"
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="Tab Bar"
                 >
-                    <Tab value={0} label="Home" />
-                    <Tab value={1} label="Search" />
-                    <Tab value={2} label="Insights" />
-                    <Tab value={3} label="Help" />
+                    <Tab value={0} label="Home"/>
+                    <Tab value={1} label="Search"/>
+                    <Tab value={2} label="Insights"/>
+                    <Tab value={3} label="Help"/>
                 </Tabs>
             </div>
             <TabPanel value={value} index={0}> Home Page </TabPanel>

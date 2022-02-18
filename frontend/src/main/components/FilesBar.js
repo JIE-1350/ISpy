@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { connect } from "react-redux"
+import React, {useState} from "react";
+import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Fab from '@mui/material/Fab';
 
 
 import FilesBarStyle from './../../jss/components/FilesBarStyle.js';
+
 const useStyles = createUseStyles(FilesBarStyle)
 
 
@@ -17,9 +16,9 @@ const FilesBar = (props) => {
     const [fileName, setFile] = React.useState('');
     const fileSelect = () => {
         fetch('http://127.0.0.1:8000/select-file?filename=' + fileName)
-        .then((res)=>{
-            return res.json();
-        }).then((obj)=>{
+            .then((res) => {
+                return res.json();
+            }).then((obj) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
@@ -27,11 +26,10 @@ const FilesBar = (props) => {
                         payload: obj
                     }
                 )
-            }
-            else {
+            } else {
                 throw(JSON.stringify(obj))
             }
-        }).catch(e=>{
+        }).catch(e => {
             console.log(e);
         })
     }
@@ -41,31 +39,31 @@ const FilesBar = (props) => {
         <div className={classes.filesBar}>
             {(props.files === undefined ? '' : props.files.map((file, index) => (
                 index === selectedButton
-                ? <div className={classes.row}>
-                    <Button
-                        className={classes.fileButton}
-                        variant = "outlined"
-                        size = "small"
-                        onClick={(e) => {
-                            setFile(file);
-                            fileSelect();
-                            setSelectedButton(index);
-                        }}>
-                        <div className={classes.buttonTextSelected}>{file}</div>
-                    </Button>
-                </div>
-                : <div className={classes.row}>
-                    <Button
-                        className={classes.fileButton}
-                        size = "small"
-                        onClick={(e) => {
-                            setFile(file);
-                            fileSelect();
-                            setSelectedButton(index);
-                        }}>
-                        <div className={classes.buttonTextRegular}>{file}</div>
-                    </Button>
-                </div>
+                    ? <div className={classes.row}>
+                        <Button
+                            className={classes.fileButton}
+                            variant="outlined"
+                            size="small"
+                            onClick={(e) => {
+                                setFile(file);
+                                fileSelect();
+                                setSelectedButton(index);
+                            }}>
+                            <div className={classes.buttonTextSelected}>{file}</div>
+                        </Button>
+                    </div>
+                    : <div className={classes.row}>
+                        <Button
+                            className={classes.fileButton}
+                            size="small"
+                            onClick={(e) => {
+                                setFile(file);
+                                fileSelect();
+                                setSelectedButton(index);
+                            }}>
+                            <div className={classes.buttonTextRegular}>{file}</div>
+                        </Button>
+                    </div>
             )))}
         </div>
     );

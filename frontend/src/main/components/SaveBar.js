@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import TextField from '@mui/material/TextField';
@@ -7,8 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
 import SaveBarStyle from './../../jss/components/SaveBarStyle.js';
-const useStyles = createUseStyles(SaveBarStyle)
 
+const useStyles = createUseStyles(SaveBarStyle)
 
 
 const SaveBar = (props) => {
@@ -21,9 +21,9 @@ const SaveBar = (props) => {
 
     const saveAs = () => {
         fetch('http://127.0.0.1:8000/save?fileType=' + fileType)
-        .then((res)=>{
-            return res.json();
-        }).then((obj)=>{
+            .then((res) => {
+                return res.json();
+            }).then((obj) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
@@ -31,11 +31,10 @@ const SaveBar = (props) => {
                         payload: obj
                     }
                 )
-            }
-            else {
+            } else {
                 throw(JSON.stringify(obj))
             }
-        }).catch(e=>{
+        }).catch(e => {
             alert(e);
         })
     }
@@ -43,10 +42,10 @@ const SaveBar = (props) => {
     return (
         <div className={classes.saveBar}>
             <Button variant="contained" className={classes.saveAs} onClick={saveAs}>Save As</Button>
-            <TextField select label="Save File Type:" 
-            className={classes.textField} 
-            onChange={handlefileTypeChange} 
-            size={'small'}>
+            <TextField select label="Save File Type:"
+                       className={classes.textField}
+                       onChange={handlefileTypeChange}
+                       size={'small'}>
                 <MenuItem value={".csv"}>.csv</MenuItem>
                 <MenuItem value={".xlsx"}>.xlsx</MenuItem>
                 <MenuItem value={".json"}>.json</MenuItem>

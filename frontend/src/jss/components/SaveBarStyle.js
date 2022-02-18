@@ -1,4 +1,3 @@
-
 const SaveBarStyle = () => {
     return {
         saveBar: {
