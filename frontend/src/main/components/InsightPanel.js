@@ -49,9 +49,6 @@ const InsightPanel = (props) => {
                 <Typography variant="h5">{props.insights[index].type}</Typography>
                 <Button variant="text" onClick={removeInsight}>X</Button>
             </div>
-            <Button variant="outlined" size="small" onClick={removeInsight}>
-                X
-			</Button>
             {insightComponent}
         </div>
     );

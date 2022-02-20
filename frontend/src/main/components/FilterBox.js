@@ -14,19 +14,11 @@ const FilterBox = (props) => {
     const {index} = props
 
     const removeFilter = (event) => {
-<<<<<<< HEAD
         let indexInt = parseInt(event.currentTarget.id);
         fetch('http://127.0.0.1:8000/filter/remove?index=' + indexInt)
             .then((res) => {
                 return res.json();
             }).then((obj) => {
-=======
-		let indexInt = parseInt(event.currentTarget.id);
-        fetch('http://127.0.0.1:8000/insight/remove?index=' + indexInt)
-        .then((res)=>{
-            return res.json();
-        }).then((obj)=>{
->>>>>>> Add functional InsightPanel
             if (obj.status === 'success') {
                 props.dispatch(
                     {
