@@ -1,3 +1,5 @@
+from datetime import date, datetime
+
 
 def get_title(string):
     title = string.replace("_", " ")
@@ -25,3 +27,30 @@ def get_table(data_frame):
             }
         })
     return {'columns': columns, 'data': data_frame.to_dict('records')}
+
+
+def get_file_name(words=None, file_type='', files=None):
+    if files is None:
+        files = []
+
+    def get_default_name():
+        name = str(date.today())
+        now = datetime.now()
+        name += "_" + now.strftime("%H-%M-%S")
+        return name + file_type
+
+    if words:
+        words = [i for i in words if i]
+        if not words:
+            return get_default_name()
+        filename = ""
+        for i, word in enumerate(words):
+            filename += word + '_' if i < len(words) - 1 else word
+        new_filename = filename + file_type
+        count = 0
+        while new_filename in files:
+            count += 1
+            new_filename = filename + '(' + str(count) + ')' + file_type
+        filename = new_filename
+        return filename
+    return get_default_name()

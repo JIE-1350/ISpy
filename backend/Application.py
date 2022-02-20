@@ -1,27 +1,13 @@
 import os
-from datetime import date, datetime
 from DataFilter import DataFilter
 from InsightsGen import InsightsGen
 import pandas as pd
 import numpy as np
 
 from queries import twint_search
-from utils import get_table
+from utils import get_table, get_file_name
 
 DISPLAY = 5
-
-
-def get_file_name(file_type=".csv"):
-    filename = str(date.today())
-    now = datetime.now()
-    filename += "_" + now.strftime("%H-%M-%S")
-    if file_type == ".csv":
-        filename += ".csv"
-    elif file_type == ".xlsx":
-        filename += ".xlsx"
-    elif file_type == ".json":
-        filename += ".json"
-    return filename
 
 
 class Application:
@@ -42,6 +28,7 @@ class Application:
     def open_file(self, file):
         self.update_files()
         if file in self.files:
+            self.file = file
             self.data = pd.read_csv(self.data_path + file)
             self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
@@ -70,12 +57,13 @@ class Application:
         self.files = os.listdir(self.data_path)
 
     def save(self, file_type):
+        file_name = self.data_path + get_file_name([self.file.split('.')[0]], file_type, self.files)
         if file_type == ".csv":
-            self.data.to_csv(self.data_path + get_file_name(file_type))
+            self.data.to_csv(file_name)
         elif file_type == ".xlsx":
-            self.data.to_excel(self.data_path + get_file_name(file_type))
+            self.data.to_excel(file_name)
         elif file_type == ".json":
-            self.data.to_json(self.data_path + get_file_name(file_type))
+            self.data.to_json(file_name)
         self.update_files()
         return {'files': self.files}
 
@@ -86,7 +74,7 @@ class Application:
                 'insights': self.insights_gen.get_insights()}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
-        self.file = get_file_name(".csv")
+        self.file = get_file_name([userid, word], '.csv', self.files)
         try:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
             return self.open_file(self.file)
