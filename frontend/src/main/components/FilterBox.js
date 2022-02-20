@@ -1,10 +1,11 @@
 import React from "react";
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import Button from '@mui/material/Button';
 
 import FilterBoxStyle from './../../jss/components/FilterBoxStyle.js';
+
 const useStyles = createUseStyles(FilterBoxStyle)
 
 
@@ -13,43 +14,42 @@ const FilterBox = (props) => {
     const {index} = props
 
     const removeFilter = (event) => {
-		let indexInt = parseInt(event.currentTarget.id);
+        let indexInt = parseInt(event.currentTarget.id);
         fetch('http://127.0.0.1:8000/filter/remove?index=' + indexInt)
-        .then((res)=>{
-            return res.json();
-        }).then((obj)=>{
+            .then((res) => {
+                return res.json();
+            }).then((obj) => {
             if (obj.status === 'success') {
                 props.dispatch(
                     {
-                        type: "UPDATE_STATE",
+                        type: "REMOVE_FILTER",
                         payload: obj
                     }
                 )
-            }
-            else {
+            } else {
                 throw(JSON.stringify(obj))
             }
-			
-        }).catch(e=>{
+
+        }).catch(e => {
             alert(e);
         })
     };
-	
+
     return (
         <div className={classes.filterContainer} id={index}>
-			<Button
+            <Button
                 variant="outlined"
                 size="small"
                 id={index}
                 onClick={removeFilter}
-			>
-			    {props.state === undefined ? '' :
-                    props.state.filters[index].feature + ' ' +
-                    props.state.filters[index].type + ' ' +
-                    props.state.filters[index].value + ' x'
-			    }
-			</Button>
-		</div>
+            >
+                {props === undefined ? '' :
+                    props.filters[index].feature + ' ' +
+                    props.filters[index].type + ' ' +
+                    props.filters[index].value + ' x'
+                }
+            </Button>
+        </div>
     );
 }
 

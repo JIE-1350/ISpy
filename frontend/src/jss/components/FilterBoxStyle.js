@@ -8,11 +8,11 @@ const FilterBoxStyle = () => {
             display: 'inline-block',
             position: "relative"
         },
-        ".relative":{
+        ".relative": {
             "position": "relative",
             "backgroundColor": "#fff",
         },
-        ".addButton":{
+        ".addButton": {
             position: "relative",
             display: 'inline-block'
         }

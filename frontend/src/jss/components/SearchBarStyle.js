@@ -4,7 +4,9 @@ const SearchBarStyle = () => {
             display: "flex",
             width: "100%",
             paddingBottom: "10px",
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            paddingTop: "10px",
+            paddingLeft: "5px"
         },
         searchDay: {
             width: "28%",

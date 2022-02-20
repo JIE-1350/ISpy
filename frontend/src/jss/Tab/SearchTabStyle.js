@@ -2,8 +2,8 @@ const SearchTabStyle = () => {
     return {
         searchTab: {
             width: "100%",
-            display: "flex",
-            paddingTop: "10px"
+            height: "calc(100vh - 52px)",
+            display: "flex"
         },
         directoryWindow: {
             height: "100%",
@@ -18,8 +18,8 @@ const SearchTabStyle = () => {
         filterBar: {
             height: "50px",
             width: "100%",
-            borderTop: "solid 1px gray",
-            borderBottom: "solid 1px gray",
+            borderTop: "solid 1px gainsboro",
+            borderBottom: "solid 1px gainsboro",
             paddingTop: "10px"
         }
     };
