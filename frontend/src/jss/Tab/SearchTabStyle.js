@@ -7,11 +7,11 @@ const SearchTabStyle = () => {
         },
         directoryWindow: {
             height: "100%",
-            width: "20%",
+            width: "15%",
         },
         mainWindow: {
             height: "100%",
-            width: "80%",
+            width: "85%",
             justifyContent: 'flex-end',
             flexWrap: 'wrap'
         },
