@@ -80,12 +80,22 @@ function insights(state = [], action) {
     }
 }
 
+function fileIndex(state = 0, action) {
+    switch (action.type) {
+        case 'CHANGE_FILE_INDEX':
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
     searching,
-    insights
+    insights,
+    fileIndex
 })
 
 const store = createStore(reducers, {})
