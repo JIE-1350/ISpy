@@ -1,4 +1,5 @@
 from datetime import date, datetime
+import pandas as pd
 
 
 def get_title(string):
@@ -54,3 +55,13 @@ def get_file_name(words=None, file_type='', files=None):
         filename = new_filename
         return filename
     return get_default_name()
+
+
+def read_file(file):
+    _, file_type = file.split('.')
+    if file_type == 'csv':
+        return pd.read_csv(file)
+    if file_type == 'json':
+        return pd.read_json(file)
+    if file_type == 'xlsx':
+        return pd.read_excel(file, engine='openpyxl')

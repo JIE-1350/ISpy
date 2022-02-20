@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from queries import twint_search
-from utils import get_table, get_file_name
+from utils import get_table, get_file_name, read_file
 
 DISPLAY = 5
 
@@ -29,7 +29,7 @@ class Application:
         self.update_files()
         if file in self.files:
             self.file = file
-            self.data = pd.read_csv(self.data_path + file)
+            self.data = read_file(self.data_path + file)
             self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
