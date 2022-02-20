@@ -43,7 +43,6 @@ class Application:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             self.data_filter = self.data_filters[file]
-            self.data_filter.reset_sort()
             return {'files': self.files,
                     'filters': self.data_filter.filters,
                     'table': get_table(self.data)}
