@@ -65,11 +65,27 @@ function searching(state = false, action) {
     }
 }
 
+function insights(state = [], action) {
+    switch (action.type) {
+        case 'LOAD_SEARCH_TAB':
+            return action.payload.data.insights
+        case 'INSIGHT_GENERATED':
+            return action.payload.data.insights
+        case 'REMOVE_INSIGHT':
+            return action.payload.data.insights
+        case 'FILE_SELECTED':
+            return action.payload.data.insights
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
-    searching
+    searching,
+    insights
 })
 
 const store = createStore(reducers, {})

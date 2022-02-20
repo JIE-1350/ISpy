@@ -9,7 +9,7 @@ application = Application()
 
 @app.route("/search")
 def search():
-    try:             
+    try:
         word = request.args.get('word')
         user = request.args.get('user')
         days = request.args.get('days')
@@ -19,7 +19,7 @@ def search():
 
         if search_type == "Hashtag" and word:
             word = "#" + word
-        
+
         data = application.twitter_search(word, user, since, until, days)
 
         return {'status': 'success',
@@ -107,6 +107,33 @@ def select_file():
                 'status_msg': str(exception)}
 
 
+@app.route("/generate-insight")
+def generate_insight():
+    try:
+        insight_type = request.args.get('type')
+        feature = request.args.get('feature')
+        feature = feature if feature and insight_type == "stats" else None
+        data = application.generate_insight(insight_type, feature)
+        return {'status': 'success',
+                'status_msg': "Successfully generated insight",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/insight/remove")
+def remove_insight():
+    try:
+        remove_index = int(request.args.get('index'))
+        data = application.remove_insight(remove_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed insight",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
-
