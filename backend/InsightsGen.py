@@ -39,6 +39,7 @@ class InsightsGen:
                           {'name': 'Positive', 'Positive Count': round(analysis_count[2])}]}
         self.insights.append(data)\
 
+
     def get_influence_score(self, data: pd.DataFrame):
         self.insights.append("get_influence_score()")
 

@@ -50,9 +50,7 @@ class Application:
                 self.insights_gens[file] = InsightsGen()
             self.data_filter = self.data_filters[file]
             self.insights_gen = self.insights_gens[file]
-            return {'files': self.files,
-                    'filters': self.data_filter.filters,
-                    'table': get_table(self.data)}
+            return self.state()
         else:
             raise FileNotFoundError("File not found:" + file)
 
