@@ -13,9 +13,8 @@ const useStyles = createUseStyles(FilesBarStyle)
 const FilesBar = (props) => {
     const classes = useStyles()
 
-    const [fileName, setFile] = React.useState('');
-    const fileSelect = () => {
-        fetch('http://127.0.0.1:8000/select-file?filename=' + fileName)
+    const fileSelect = (file) => {
+        fetch('http://127.0.0.1:8000/select-file?filename=' + file)
             .then((res) => {
                 return res.json();
             }).then((obj) => {
@@ -45,8 +44,7 @@ const FilesBar = (props) => {
                             variant="outlined"
                             size="small"
                             onClick={(e) => {
-                                setFile(file);
-                                fileSelect();
+                                fileSelect(file);
                                 setSelectedButton(index);
                             }}>
                             <div className={classes.buttonTextSelected}>{file}</div>
@@ -57,8 +55,7 @@ const FilesBar = (props) => {
                             className={classes.fileButton}
                             size="small"
                             onClick={(e) => {
-                                setFile(file);
-                                fileSelect();
+                                fileSelect(file);
                                 setSelectedButton(index);
                             }}>
                             <div className={classes.buttonTextRegular}>{file}</div>
