@@ -144,7 +144,7 @@ const SearchBar = (props) => {
             }
             <Button
                 variant="contained"
-                disabled={!word && !user}
+                disabled={!word && !user && !props.searching}
                 onClick={search}
             >
                 { props.searching ? 'Cancel' : 'Search'}
