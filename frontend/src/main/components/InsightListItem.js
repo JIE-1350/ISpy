@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import InsightListItemStyle from './../../jss/components/InsightListItemStyle.js';
@@ -12,13 +11,13 @@ const InsightListItem = (props) => {
 
     let circle
     if (item.color === "red") {
-        circle = <div className={classes.redCircle}></div>
+        circle = <div className={classes.redCircle}/>
     } else if (item.color === "green") {
-        circle = <div className={classes.greenCircle}></div>
+        circle = <div className={classes.greenCircle}/>
     } else if (item.color === "gray") {
-        circle = <div className={classes.grayCircle}></div>
+        circle = <div className={classes.grayCircle}/>
     } else if (item.color === "yellow") {
-        circle = <div className={classes.yellowCircle}></div>
+        circle = <div className={classes.yellowCircle}/>
     }
     return (
         <div className={classes.item}>

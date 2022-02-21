@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux"
 import {createUseStyles} from 'react-jss';
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 import InsightListItem from "./../components/InsightListItem";
 
