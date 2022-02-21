@@ -79,9 +79,7 @@ class Application:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
             return self.open_file(self.file)
         except FileNotFoundError as error:
-            return {'files': self.files,
-                    'filters': [],
-                    'table': {'cols': 0, 'rows': 0, 'data': {}}}
+            return self.state()
 
     def get_table_searching(self):
         num_lines = sum(1 for _ in open(self.data_path + self.file, encoding='utf-8'))

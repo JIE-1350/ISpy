@@ -271,6 +271,9 @@ class Twint:
         else:
             logme.debug(__name__ + ':Twint:main:not-search+since+until')
             while True:
+                search = os.environ['TWINT_RUN_SEARCH'] == "1"
+                if not search:
+                    quit()
                 if len(self.feed) > 0:
                     if self.config.Followers or self.config.Following:
                         logme.debug(__name__ + ':Twint:main:follow')

@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 from flask_cors import CORS
 from Application import Application
@@ -10,6 +11,7 @@ application = Application()
 @app.route("/search")
 def search():
     try:
+        os.environ["TWINT_RUN_SEARCH"] = "1"
         word = request.args.get('word')
         user = request.args.get('user')
         days = request.args.get('days')
@@ -22,9 +24,24 @@ def search():
 
         data = application.twitter_search(word, user, since, until, days)
 
+        os.environ["TWINT_RUN_SEARCH"] = "0"
+        print(os.environ['TWINT_RUN_SEARCH'])
         return {'status': 'success',
                 'status_msg': "Search successfully",
                 'data': data}
+    except Exception as exception:
+        os.environ["TWINT_RUN_SEARCH"] = "0"
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/cancel-search")
+def cancel_search():
+    try:
+        os.environ["TWINT_RUN_SEARCH"] = "0"
+        return {'status': 'success',
+                'status_msg': "Canceled search successfully",
+                'data': application.state()}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
