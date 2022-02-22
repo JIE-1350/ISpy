@@ -23,6 +23,7 @@ const InsightSelectBar = (props) => {
         {value: 'influence', label: 'Influence Score'},
         {value: 'frequency', label: 'Tweets Frequency'},
         {value: 'topHashtags', label: 'Top Hashtags'},
+        {value: 'time', label: 'Time of Tweets'},
         {value: 'stats', label: 'Feature Stats'},
     ]
 

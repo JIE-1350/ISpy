@@ -92,17 +92,7 @@ class Application:
         return {'files': self.files, 'table': get_table(data_frame)}
 
     def generate_insight(self, insight_type: str, feature: str = None):
-        if insight_type == "sentiment":
-            self.insights_gen.get_sentiment_analysis(self.data)
-        elif insight_type == "influence":
-            self.insights_gen.get_influence_score(self.data)
-        elif insight_type == "frequency":
-            self.insights_gen.get_tweet_frequency(self.data)
-        elif insight_type == "topHashtags":
-            self.insights_gen.get_top_hashtags(self.data)
-        elif insight_type == "stats":
-            self.insights_gen.get_feature_stats(self.data, feature)
-        data = self.insights_gen.get_insights()
+        data = self.insights_gen.get_insights(insight_type, self.data, feature)
         return {'insights': data}
 
     def remove_insight(self, index: int):

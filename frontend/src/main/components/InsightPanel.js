@@ -6,6 +6,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import InsightSentiment from "./../components/InsightSentiment";
+import InsightInfluence from "./../components/InsightInfluence";
+import InsightFrequency from "./../components/InsightFrequency";
+import InsightTopHashtags from "./../components/InsightTopHashtags";
+import InsightTweetsTime from "./../components/InsightTweetsTime";
 
 import InsightPanelStyle from './../../jss/components/InsightPanelStyle.js';
 const useStyles = createUseStyles(InsightPanelStyle)
@@ -36,11 +40,17 @@ const InsightPanel = (props) => {
             alert(e);
         })
     };
-    let insightComponent
+    let insightComponent = ''
     if (props.insights[index].type === 'Sentiment Analysis') {
         insightComponent = <InsightSentiment data={props.insights[index]}/>
-    } else if (props.insights[index].type === 'other insight name') {
-        insightComponent = 'other insight component'
+    } else if (props.insights[index].type === 'Influence Score') {
+        insightComponent = <InsightInfluence data={props.insights[index]}/>
+    } else if (props.insights[index].type === 'Tweets Frequency') {
+        insightComponent = <InsightFrequency data={props.insights[index]}/>
+    } else if (props.insights[index].type === 'Top Hashtags') {
+        insightComponent = <InsightTopHashtags data={props.insights[index]}/>
+    } else if (props.insights[index].type === 'Time of Tweets') {
+        insightComponent = <InsightTweetsTime data={props.insights[index]}/>
     }
 
     return (

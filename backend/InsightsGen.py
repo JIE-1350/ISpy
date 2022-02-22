@@ -37,25 +37,44 @@ class InsightsGen:
                 'graph': [{'name': 'Negative', 'Negative Count': round(analysis_count[0])},
                           {'name': 'Neutral', 'Neutral Count': round(analysis_count[1])},
                           {'name': 'Positive', 'Positive Count': round(analysis_count[2])}]}
-        self.insights.append(data)\
-
+        self.insights.append(data)
 
     def get_influence_score(self, data: pd.DataFrame):
-        self.insights.append("get_influence_score()")
+        data = {'type': 'Influence Score'}
+        self.insights.append(data)
 
     def get_tweet_frequency(self, data: pd.DataFrame):
-        self.insights.append("get_tweet_frequency()")
+        data = {'type': 'Tweets Frequency'}
+        self.insights.append(data)
 
     def get_top_hashtags(self, data: pd.DataFrame):
-        self.insights.append("get_top_hashtags()")
+        data = {'type': 'Top Hashtags'}
+        self.insights.append(data)
+
+    def get_time_of_tweets(self, data: pd.DataFrame):
+        data = {'type': 'Time of Tweets'}
+        self.insights.append(data)
 
     def get_feature_stats(self, data: pd.DataFrame, feature: str):
-        self.insights.append("get_feature_stats()")
+        data = {'type': 'Stats'}
+        self.insights.append(data)
 
     def remove(self, index: int):
         self.insights.pop(index)
 
-    def get_insights(self):
+    def get_insights(self, insight_type=None, data=None, feature=None):
+        if insight_type == "sentiment":
+            self.get_sentiment_analysis(data)
+        elif insight_type == "influence":
+            self.get_influence_score(data)
+        elif insight_type == "frequency":
+            self.get_tweet_frequency(data)
+        elif insight_type == "topHashtags":
+            self.get_top_hashtags(data)
+        elif insight_type == "time":
+            self.get_time_of_tweets(data)
+        elif insight_type == "stats":
+            self.get_feature_stats(data, feature)
         return self.insights
 
     def save_insights(self):
