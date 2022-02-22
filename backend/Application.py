@@ -87,7 +87,8 @@ class Application:
         to_exclude = [i for i in range(num_lines) if i not in index_list]
         data_frame = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
         data_frame = data_frame.where((pd.notnull(data_frame)), None)
-        return {'table': get_table(data_frame)}
+        self.update_files()
+        return {'files': self.files, 'table': get_table(data_frame)}
 
     def generate_insight(self, insight_type: str, feature: str = None):
         if insight_type == "sentiment":

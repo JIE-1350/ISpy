@@ -21,7 +21,7 @@ const SearchBar = (props) => {
     const [word, setWord] = React.useState('')
     const [days, setDays] = React.useState('')
 
-    const abortControllerRef = React.useRef()
+    const abortControllerRef = useRef()
     const getAbortController = React.useCallback(() => {
         if (!abortControllerRef.current) {
             abortControllerRef.current = new AbortController()

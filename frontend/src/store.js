@@ -11,6 +11,8 @@ function files(state = [], action) {
             return action.payload.data.files
         case 'FILE_SELECTED':
             return action.payload.data.files
+        case 'UPDATE_TABLE':
+            return action.payload.data.files
         default:
             return state
     }
