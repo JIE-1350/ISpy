@@ -68,6 +68,7 @@ class Application:
         return {'files': self.files}
 
     def state(self):
+        self.update_files()
         return {'files': self.files,
                 'filters': self.data_filter.filters,
                 'table': get_table(self.data),
