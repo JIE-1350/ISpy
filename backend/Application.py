@@ -34,7 +34,7 @@ class Application:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             if file not in self.insights_gens:
-                self.insights_gens[file] = InsightsGen()
+                self.insights_gens[file] = InsightsGen(file)
             self.data_filter = self.data_filters[file]
             self.insights_gen = self.insights_gens[file]
             return self.state()

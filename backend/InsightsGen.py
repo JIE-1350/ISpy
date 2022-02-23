@@ -1,3 +1,5 @@
+import os
+import pickle
 import nltk
 import pandas as pd
 import numpy as np
@@ -15,8 +17,11 @@ def get_sentiment_color(value, threshold1, threshold2):
 
 
 class InsightsGen:
-    def __init__(self):
+    def __init__(self, file: str):
+        self.insights_path = os.getcwd() + '/insights/'
+        self.file = file
         self.insights = []
+        self.load_insights()
 
     def get_sentiment_analysis(self, data: pd.DataFrame):
         sia = SentimentIntensityAnalyzer()
@@ -59,9 +64,6 @@ class InsightsGen:
         data = {'type': 'Stats'}
         self.insights.append(data)
 
-    def remove(self, index: int):
-        self.insights.pop(index)
-
     def get_insights(self, insight_type=None, data=None, feature=None):
         if insight_type == "sentiment":
             self.get_sentiment_analysis(data)
@@ -75,7 +77,18 @@ class InsightsGen:
             self.get_time_of_tweets(data)
         elif insight_type == "stats":
             self.get_feature_stats(data, feature)
+        self.save_insights()
         return self.insights
 
+    def remove(self, index: int):
+        self.insights.pop(index)
+        self.save_insights()
+
     def save_insights(self):
-        pass
+        pickle.dump(self.insights, open(self.insights_path + self.file + '.pkl', 'wb'))
+
+    def load_insights(self):
+        try:
+            self.insights = pickle.load(open(self.insights_path + self.file + '.pkl', 'rb'))
+        except FileNotFoundError as error:
+            self.insights = []
