@@ -86,6 +86,8 @@ function fileIndex(state = 0, action) {
     switch (action.type) {
         case 'CHANGE_FILE_INDEX':
             return action.payload
+        case 'UPDATE_TABLE':
+            return action.payload.data.selectedIndex
         default:
             return state
     }

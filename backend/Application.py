@@ -76,6 +76,7 @@ class Application:
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
+        self.files.append(self.file)
         try:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
             return self.open_file(self.file)
@@ -89,7 +90,7 @@ class Application:
         data_frame = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
         data_frame = data_frame.where((pd.notnull(data_frame)), None)
         self.update_files()
-        return {'files': self.files, 'table': get_table(data_frame)}
+        return {'files': self.files, 'table': get_table(data_frame), 'selectedIndex': self.files.index(self.file)}
 
     def generate_insight(self, insight_type: str, feature: str = None):
         data = self.insights_gen.get_insights(insight_type, self.data, feature)

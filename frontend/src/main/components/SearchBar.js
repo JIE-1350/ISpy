@@ -74,25 +74,13 @@ const SearchBar = (props) => {
 
 
     const searchType = [
-        {
-            value: 'Keyword',
-            label: 'Keyword'
-        },
-        {
-            value: 'Hashtag',
-            label: 'Hashtag'
-        }
+        {value: 'Keyword', label: 'Keyword'},
+        {value: 'Hashtag', label: 'Hashtag'}
     ]
 
     const timeRange = [
-        {
-            value: 'date_range',
-            label: 'Range'
-        },
-        {
-            value: 'days',
-            label: 'Days'
-        }
+        {value: 'date_range', label: 'Range'},
+        {value: 'days', label: 'Days'}
     ]
 
     const [search_type, setSearchType] = React.useState('Keyword');

@@ -25,7 +25,6 @@ def search():
         data = application.twitter_search(word, user, since, until, days)
 
         os.environ["TWINT_RUN_SEARCH"] = "0"
-        print(os.environ['TWINT_RUN_SEARCH'])
         return {'status': 'success',
                 'status_msg': "Search successfully",
                 'data': data}
@@ -39,6 +38,7 @@ def search():
 def cancel_search():
     try:
         os.environ["TWINT_RUN_SEARCH"] = "0"
+        application.open_file(application.file)
         return {'status': 'success',
                 'status_msg': "Canceled search successfully",
                 'data': application.state()}
