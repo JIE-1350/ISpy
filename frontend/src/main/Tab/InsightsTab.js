@@ -11,7 +11,7 @@ import InsightsTabStyle from './../../jss/Tab/InsightsTabStyle.js';
 const useStyles = createUseStyles(InsightsTabStyle)
 
 
-const SearchTab = (props) => {
+const InsightsTab = (props) => {
     const classes = useStyles()
 
     return (
@@ -19,7 +19,7 @@ const SearchTab = (props) => {
             <div className={classes.directoryWindow}><FilesBar/></div>
             <div className={classes.mainWindow}>
                 <InsightSelectBar/>
-                <div>
+                <div className={classes.insightsWindow}>
                     {props.insights === undefined ? '' : props.insights.map((insight, index) => (
                         <InsightPanel index={index}/>))
                     }
@@ -33,4 +33,4 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps)(SearchTab)
+export default connect(mapStateToProps)(InsightsTab)

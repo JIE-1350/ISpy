@@ -9,6 +9,10 @@ const InsightsTabStyle = () => {
             height: "100%",
             width: "15%",
         },
+        insightsWindow: {
+            height: "calc(100% - 70px)",
+            overflow: 'auto',
+        },
         mainWindow: {
             height: "100%",
             width: "85%",
