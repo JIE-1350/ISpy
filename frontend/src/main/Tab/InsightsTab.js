@@ -6,10 +6,15 @@ import FilesBar from "./../components/FilesBar";
 import InsightSelectBar from "./../components/InsightSelectBar";
 import InsightPanel from "./../components/InsightPanel";
 
+import RGL, { WidthProvider } from "react-grid-layout";
+import './../../../node_modules/react-grid-layout/css/styles.css';
+
+
 import InsightsTabStyle from './../../jss/Tab/InsightsTabStyle.js';
 
 const useStyles = createUseStyles(InsightsTabStyle)
 
+const ReactGridLayout = WidthProvider(RGL);
 
 const InsightsTab = (props) => {
     const classes = useStyles()
@@ -18,11 +23,23 @@ const InsightsTab = (props) => {
         <div className={classes.insightsTab}>
             <div className={classes.directoryWindow}><FilesBar/></div>
             <div className={classes.mainWindow}>
+
                 <InsightSelectBar/>
                 <div className={classes.insightsWindow}>
-                    {props.insights === undefined ? '' : props.insights.map((insight, index) => (
-                        <InsightPanel index={index}/>))
-                    }
+                    <ReactGridLayout
+                        isDraggable
+                        isResizable
+                        items={5}
+                        rowHeight={100}
+                        preventCollision={false}
+                        cols={12}
+                    >
+                        {props.insights === undefined ? '' : props.insights.map((insight, index) => (
+                            <div key={index} data-grid={{ x: 0, y: 0, w: 6, h: 3, i:index}}>
+                                <InsightPanel index={index}/>
+                            </div>))
+                        }
+                    </ReactGridLayout>
                 </div>
             </div>
         </div>
