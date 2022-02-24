@@ -137,6 +137,6 @@ class InsightsGen:
     def get_layout(self):
         index = len(self.insights)
         if index % 2 == 0:
-            return {'x': 0, 'y': 0, 'w': 6, 'h': 3, 'i': index}
+            return {'x': 0, 'y': 99, 'w': 6, 'h': 3, 'i': index}
         else:
-            return {'x': 6, 'y': 0, 'w': 6, 'h': 3, 'i': index}
+            return {'x': 6, 'y': 99, 'w': 6, 'h': 3, 'i': index}
