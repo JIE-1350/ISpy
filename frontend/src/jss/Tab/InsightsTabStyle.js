@@ -11,7 +11,8 @@ const InsightsTabStyle = () => {
         },
         insightsWindow: {
             height: "calc(100% - 70px)",
-            overflow: 'auto',
+            overflowX: 'hidden',
+            overflowY: 'auto',
         },
         mainWindow: {
             height: "100%",
@@ -19,6 +20,9 @@ const InsightsTabStyle = () => {
             justifyContent: 'flex-end',
             flexWrap: 'wrap'
         },
+        LayoutWindow: {
+            paddingRight: "15px"
+        }
     };
 };
 

@@ -26,20 +26,22 @@ const InsightsTab = (props) => {
 
                 <InsightSelectBar/>
                 <div className={classes.insightsWindow}>
-                    <ReactGridLayout
-                        isDraggable
-                        isResizable
-                        items={5}
-                        rowHeight={100}
-                        preventCollision={false}
-                        cols={12}
-                    >
-                        {props.insights === undefined ? '' : props.insights.map((insight, index) => (
-                            <div key={index} data-grid={{ x: 0, y: 0, w: 6, h: 3, i:index}}>
-                                <InsightPanel index={index}/>
-                            </div>))
-                        }
-                    </ReactGridLayout>
+                    <div className={classes.LayoutWindow}>
+                        <ReactGridLayout
+                            isDraggable
+                            isResizable
+                            items={5}
+                            rowHeight={100}
+                            preventCollision={false}
+                            cols={12}
+                        >
+                            {props.insights === undefined ? '' : props.insights.map((insight, index) => (
+                                <div key={index} data-grid={{ x: 0, y: 0, w: 6, h: 3, i:index}}>
+                                    <InsightPanel index={index}/>
+                                </div>))
+                            }
+                        </ReactGridLayout>
+                    </div>
                 </div>
             </div>
         </div>
