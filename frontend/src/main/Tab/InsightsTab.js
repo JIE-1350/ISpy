@@ -36,7 +36,7 @@ const InsightsTab = (props) => {
                             cols={12}
                         >
                             {props.insights === undefined ? '' : props.insights.map((insight, index) => (
-                                <div key={index} data-grid={{ x: 0, y: 0, w: 6, h: 3, i:index}}>
+                                <div key={index} data-grid={insight.layout}>
                                     <InsightPanel index={index}/>
                                 </div>))
                             }

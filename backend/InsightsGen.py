@@ -44,7 +44,8 @@ class InsightsGen:
                          {'color': 'red', 'string': str(round(analysis_mean[0] * 100)) + '% negative tweets'}],
                 'graph': [{'name': 'Negative', 'Negative Count': round(analysis_count[0])},
                           {'name': 'Neutral', 'Neutral Count': round(analysis_count[1])},
-                          {'name': 'Positive', 'Positive Count': round(analysis_count[2])}]}
+                          {'name': 'Positive', 'Positive Count': round(analysis_count[2])}],
+                'layout': self.get_layout()}
         self.insights.append(data)
 
     def get_influence_score(self, df: pd.DataFrame):
@@ -62,7 +63,9 @@ class InsightsGen:
                 'list': [{'color': 'green', 'string': str(round(influence_score)) + ' influence score'},
                          {'color': 'green', 'string': str(round(replies_mean)) + ' average replies'},
                          {'color': 'green', 'string': str(round(retweets_mean)) + ' average retweets'},
-                         {'color': 'green', 'string': str(round(likes_mean)) + ' average likes'}]}
+                         {'color': 'green', 'string': str(round(likes_mean)) + ' average likes'}],
+                'layout': self.get_layout()}
+
         self.insights.append(data)
 
     def get_tweet_frequency(self, df: pd.DataFrame):
@@ -81,19 +84,25 @@ class InsightsGen:
             graph.append({'time': unix_time, 'value': date_counts[date]})
 
         data = {'type': 'Tweets Frequency',
-                'graph': graph}
+                'graph': graph,
+                'layout': self.get_layout()}
+
         self.insights.append(data)
 
     def get_top_hashtags(self, df: pd.DataFrame):
-        data = {'type': 'Top Hashtags'}
+        data = {'type': 'Top Hashtags',
+                'layout': self.get_layout()}
+
         self.insights.append(data)
 
     def get_time_of_tweets(self, df: pd.DataFrame):
-        data = {'type': 'Time of Tweets'}
+        data = {'type': 'Time of Tweets',
+                'layout': self.get_layout()}
         self.insights.append(data)
 
     def get_feature_stats(self, df: pd.DataFrame, feature: str):
-        data = {'type': 'Stats'}
+        data = {'type': 'Stats',
+                'layout': self.get_layout()}
         self.insights.append(data)
 
     def get_insights(self, insight_type=None, data=None, feature=None):
@@ -124,3 +133,6 @@ class InsightsGen:
             self.insights = pickle.load(open(self.insights_path + self.file + '.pkl', 'rb'))
         except FileNotFoundError as error:
             self.insights = []
+
+    def get_layout(self):
+        return {'x': 0, 'y': 0, 'w': 6, 'h': 3, 'i': len(self.insights)}
