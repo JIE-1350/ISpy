@@ -135,4 +135,8 @@ class InsightsGen:
             self.insights = []
 
     def get_layout(self):
-        return {'x': 0, 'y': 0, 'w': 6, 'h': 3, 'i': len(self.insights)}
+        index = len(self.insights)
+        if index % 2 == 0:
+            return {'x': 0, 'y': 0, 'w': 6, 'h': 3, 'i': index}
+        else:
+            return {'x': 6, 'y': 0, 'w': 6, 'h': 3, 'i': index}
