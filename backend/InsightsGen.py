@@ -23,10 +23,10 @@ class InsightsGen:
         self.insights = []
         self.load_insights()
 
-    def get_sentiment_analysis(self, data: pd.DataFrame):
+    def get_sentiment_analysis(self, df: pd.DataFrame):
         sia = SentimentIntensityAnalyzer()
         sentiments = []
-        for tweet in data['tweet'].to_numpy():
+        for tweet in df['tweet'].to_numpy():
             analysis = sia.polarity_scores(tweet)
             sentiments.append([analysis['neg'], analysis['neu'], analysis['pos'], analysis['compound']])
 
@@ -44,10 +44,10 @@ class InsightsGen:
                           {'name': 'Positive', 'Positive Count': round(analysis_count[2])}]}
         self.insights.append(data)
 
-    def get_influence_score(self, data: pd.DataFrame):
-        replies = data['replies_count'].to_numpy()
-        retweets = data['retweets_count'].to_numpy()
-        likes = data['likes_count'].to_numpy()
+    def get_influence_score(self, df: pd.DataFrame):
+        replies = df['replies_count'].to_numpy()
+        retweets = df['retweets_count'].to_numpy()
+        likes = df['likes_count'].to_numpy()
 
         replies_mean = int(np.mean(replies))
         retweets_mean = int(np.mean(retweets))
@@ -62,19 +62,21 @@ class InsightsGen:
                          {'color': 'green', 'string': str(round(likes_mean)) + ' average likes'}]}
         self.insights.append(data)
 
-    def get_tweet_frequency(self, data: pd.DataFrame):
+    def get_tweet_frequency(self, df: pd.DataFrame):
+
+
         data = {'type': 'Tweets Frequency'}
         self.insights.append(data)
 
-    def get_top_hashtags(self, data: pd.DataFrame):
+    def get_top_hashtags(self, df: pd.DataFrame):
         data = {'type': 'Top Hashtags'}
         self.insights.append(data)
 
-    def get_time_of_tweets(self, data: pd.DataFrame):
+    def get_time_of_tweets(self, df: pd.DataFrame):
         data = {'type': 'Time of Tweets'}
         self.insights.append(data)
 
-    def get_feature_stats(self, data: pd.DataFrame, feature: str):
+    def get_feature_stats(self, df: pd.DataFrame, feature: str):
         data = {'type': 'Stats'}
         self.insights.append(data)
 
