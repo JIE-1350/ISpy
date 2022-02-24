@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import InsightInfluenceStyle from './../../jss/components/InsightInfluenceStyle.js';
+import InsightListItem from "./InsightListItem";
 
 const useStyles = createUseStyles(InsightInfluenceStyle)
 
@@ -12,8 +13,14 @@ const InsightInfluence = (props) => {
     const {data} = props
 
     return (
-        <div>
-            {JSON.stringify(data)}
+        <div className={classes.insightContainer}>
+            <div className={classes.listContainer}>
+                <div className={classes.list}>
+                    {data.list.map((item) => (
+                        <InsightListItem item={item}/>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

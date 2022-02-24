@@ -45,7 +45,21 @@ class InsightsGen:
         self.insights.append(data)
 
     def get_influence_score(self, data: pd.DataFrame):
-        data = {'type': 'Influence Score'}
+        replies = data['replies_count'].to_numpy()
+        retweets = data['retweets_count'].to_numpy()
+        likes = data['likes_count'].to_numpy()
+
+        replies_mean = int(np.mean(replies))
+        retweets_mean = int(np.mean(retweets))
+        likes_mean = int(np.mean(likes))
+
+        influence_score = int(np.mean([replies_mean, retweets_mean, likes_mean]))
+
+        data = {'type': 'Influence Score',
+                'list': [{'color': 'green', 'string': str(round(influence_score)) + ' influence score'},
+                         {'color': 'green', 'string': str(round(replies_mean)) + ' average replies'},
+                         {'color': 'green', 'string': str(round(retweets_mean)) + ' average retweets'},
+                         {'color': 'green', 'string': str(round(likes_mean)) + ' average likes'}]}
         self.insights.append(data)
 
     def get_tweet_frequency(self, data: pd.DataFrame):
