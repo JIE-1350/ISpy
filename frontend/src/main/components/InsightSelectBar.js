@@ -16,7 +16,6 @@ const InsightSelectBar = (props) => {
     const classes = useStyles()
 
     const [insightType, setInsightType] = React.useState('Sentiment Analysis');
-    const [feature, setFeature] = React.useState('replies_count');
 
     const insightList = [
         {value: 'Sentiment Analysis', label: 'Sentiment Analysis'},
@@ -43,17 +42,13 @@ const InsightSelectBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e=>{
-            alert(e);
+            console.log(e);
         })
         console.log('Generating Insight')
     }
 
     const handleInsightChange = (event) => {
         setInsightType(event.target.value);
-    };
-
-    const handleFeatureChange = (event) => {
-        setFeature(event.target.value);
     };
 
     return (
