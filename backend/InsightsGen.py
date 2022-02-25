@@ -4,7 +4,7 @@ import nltk
 import pandas as pd
 import numpy as np
 from nltk.sentiment import SentimentIntensityAnalyzer
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import mktime
 
 nltk.download('vader_lexicon')
@@ -70,8 +70,12 @@ class InsightsGen:
 
     def get_tweet_frequency(self, df: pd.DataFrame):
         dates = df['date'].to_numpy()
-        date_counts = {}
+        dates = [datetime.strptime(date, "%Y-%m-%d") for date in dates]
 
+        oldest_date = min(dates)
+        newest_date = max(dates)
+        delta = newest_date - oldest_date
+        date_counts = {oldest_date + timedelta(days=i): 0 for i in range(delta.days + 1)}
         for date in dates:
             if date in date_counts:
                 date_counts[date] += 1
@@ -80,7 +84,7 @@ class InsightsGen:
 
         graph = []
         for date in date_counts:
-            unix_time = mktime(datetime.strptime(date, "%Y-%m-%d").timetuple())
+            unix_time = mktime(date.timetuple())
             graph.append({'time': unix_time, 'value': date_counts[date]})
 
         data = {'type': 'Tweets Frequency',
