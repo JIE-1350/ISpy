@@ -15,27 +15,19 @@ const TextFieldStyle = {paddingRight: '5px'}
 const InsightSelectBar = (props) => {
     const classes = useStyles()
 
-    const [insightType, setInsightType] = React.useState('sentiment');
+    const [insightType, setInsightType] = React.useState('Sentiment Analysis');
     const [feature, setFeature] = React.useState('replies_count');
 
     const insightList = [
-        {value: 'sentiment', label: 'Sentiment Analysis'},
-        {value: 'influence', label: 'Influence Score'},
-        {value: 'frequency', label: 'Tweets Frequency'},
-        {value: 'topHashtags', label: 'Top Hashtags'},
-        {value: 'time', label: 'Time of Tweets'},
-        {value: 'stats', label: 'Feature Stats'},
-    ]
-
-    const featureList = [
-        {value: 'replies_count', label: 'Replies Count'},
-        {value: 'retweets_count', label: 'Retweets Count'},
-        {value: 'likes_count', label: 'Likes Count'},
-        {value: 'video', label: 'Videos Count'}
+        {value: 'Sentiment Analysis', label: 'Sentiment Analysis'},
+        {value: 'Influence Score', label: 'Influence Score'},
+        {value: 'Tweets Frequency', label: 'Tweets Frequency'},
+        {value: 'Top Hashtags', label: 'Top Hashtags'},
+        {value: 'Top Hashtags', label: 'Time of Tweets'}
     ]
 
     const generate = () => {
-        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType + "&feature=" + feature)
+        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{
@@ -68,26 +60,12 @@ const InsightSelectBar = (props) => {
         <div className={classes.InsightSelectBar}>
             <TextField select
                 className={classes.textField}
-                defaultValue="sentiment"
+                defaultValue="Sentiment Analysis"
                 label="Insight Type:"
                 onChange={handleInsightChange}
                 size={'small'}
                 sx={TextFieldStyle}>
                 {insightList.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField select
-                className={classes.textField}
-                defaultValue="replies_count"
-                label="Feature:"
-                onChange={handleFeatureChange}
-                size={'small'}
-                disabled={insightType!=='stats'}
-                sx={TextFieldStyle}>
-                {featureList.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                     {option.label}
                     </MenuItem>

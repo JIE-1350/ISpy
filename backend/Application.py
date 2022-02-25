@@ -92,8 +92,8 @@ class Application:
         self.update_files()
         return {'files': self.files, 'table': get_table(data_frame), 'selectedIndex': self.files.index(self.file)}
 
-    def generate_insight(self, insight_type: str, feature: str = None):
-        data = self.insights_gen.get_insights(insight_type, self.data, feature)
+    def generate_insight(self, insight_type: str):
+        data = self.insights_gen.get_insights(insight_type, self.data)
         return {'insights': data}
 
     def remove_insight(self, index: int):

@@ -128,9 +128,7 @@ def select_file():
 def generate_insight():
     try:
         insight_type = request.args.get('type')
-        feature = request.args.get('feature')
-        feature = feature if feature and insight_type == "stats" else None
-        data = application.generate_insight(insight_type, feature)
+        data = application.generate_insight(insight_type)
         return {'status': 'success',
                 'status_msg': "Successfully generated insight",
                 'data': data}

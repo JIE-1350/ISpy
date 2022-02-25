@@ -25,6 +25,7 @@ class InsightsGen:
         self.file = file
         self.insights = []
         self.load_insights()
+        self.generated_insights = set()
 
     def get_sentiment_analysis(self, df: pd.DataFrame):
         sia = SentimentIntensityAnalyzer()
@@ -104,29 +105,26 @@ class InsightsGen:
                 'layout': self.get_layout()}
         self.insights.append(data)
 
-    def get_feature_stats(self, df: pd.DataFrame, feature: str):
-        data = {'type': 'Stats',
-                'layout': self.get_layout()}
-        self.insights.append(data)
-
-    def get_insights(self, insight_type=None, data=None, feature=None):
-        if insight_type == "sentiment":
+    def get_insights(self, insight_type=None, data=None):
+        if insight_type and insight_type in self.generated_insights:
+            raise Exception(insight_type + " already generated")
+        if insight_type == "Sentiment Analysis":
             self.get_sentiment_analysis(data)
-        elif insight_type == "influence":
+        elif insight_type == "Influence Score":
             self.get_influence_score(data)
-        elif insight_type == "frequency":
+        elif insight_type == "Tweets Frequency":
             self.get_tweet_frequency(data)
-        elif insight_type == "topHashtags":
+        elif insight_type == "Top Hashtags":
             self.get_top_hashtags(data)
-        elif insight_type == "time":
+        elif insight_type == "Top Hashtags":
             self.get_time_of_tweets(data)
-        elif insight_type == "stats":
-            self.get_feature_stats(data, feature)
+        self.generated_insights.add(insight_type)
         self.save_insights()
         return self.insights
 
     def remove(self, index: int):
-        self.insights.pop(index)
+        insight = self.insights.pop(index)
+        self.generated_insights.remove(insight["type"])
         self.save_insights()
 
     def save_insights(self):
