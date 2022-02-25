@@ -15,6 +15,8 @@ const InsightFrequency = (props) => {
     const classes = useStyles()
     const {data} = props
 
+    const timeFormatter = (time) => moment(time * 1000).format('l')
+
     return (
         <div className={classes.insightContainer}>
             <ResponsiveContainer width="95%" height="95%">
@@ -25,11 +27,11 @@ const InsightFrequency = (props) => {
                     <XAxis
                         dataKey="time"
                         domain = {['auto', 'auto']}
-                        tickFormatter = {(time) => moment(time * 1000).format('l')}
+                        tickFormatter = {timeFormatter}
                         type = 'number'
                     />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip labelFormatter={timeFormatter} />
                     <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
                 </AreaChart>
             </ResponsiveContainer>
