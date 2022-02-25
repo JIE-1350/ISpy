@@ -24,8 +24,8 @@ class InsightsGen:
         self.insights_path = os.getcwd() + '/insights/'
         self.file = file
         self.insights = []
-        self.load_insights()
         self.generated_insights = set()
+        self.load_insights()
 
     def get_sentiment_analysis(self, df: pd.DataFrame):
         sia = SentimentIntensityAnalyzer()
@@ -133,6 +133,8 @@ class InsightsGen:
     def load_insights(self):
         try:
             self.insights = pickle.load(open(self.insights_path + self.file + '.pkl', 'rb'))
+            for insight in self.insights:
+                self.generated_insights.add(insight['type'])
         except FileNotFoundError as error:
             self.insights = []
 
