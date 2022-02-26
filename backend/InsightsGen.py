@@ -116,7 +116,7 @@ class InsightsGen:
             self.get_tweet_frequency(data)
         elif insight_type == "Top Hashtags":
             self.get_top_hashtags(data)
-        elif insight_type == "Top Hashtags":
+        elif insight_type == "Time of Tweets":
             self.get_time_of_tweets(data)
         self.generated_insights.add(insight_type)
         self.save_insights()
@@ -144,3 +144,11 @@ class InsightsGen:
             return {'x': 0, 'y': 99, 'w': 6, 'h': 3, 'i': index}
         else:
             return {'x': 6, 'y': 99, 'w': 6, 'h': 3, 'i': index}
+
+    def update_layout(self, layouts):
+        for layout in layouts:
+            _, insight_type = layout['i'].split(':')
+            for i in range(len(self.insights)):
+                if self.insights[i]['type'] == insight_type:
+                    self.insights[i]['layout'] = layout
+        self.save_insights()

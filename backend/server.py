@@ -150,5 +150,17 @@ def remove_insight():
                 'status_msg': str(exception)}
 
 
+@app.route("/insight/update-layout", methods=['POST'])
+def update_layout():
+    try:
+        data = request.get_json()
+        application.update_layout(data)
+        return {'status': 'success',
+                'status_msg': "Successfully update layout"}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)

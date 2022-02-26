@@ -101,6 +101,9 @@ class Application:
         data = self.insights_gen.get_insights()
         return {'insights': data}
 
+    def update_layout(self, data):
+        self.insights_gen.update_layout(data)
+
 
 if __name__ == '__main__':
     application = Application()

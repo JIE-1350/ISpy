@@ -6,7 +6,7 @@ import FilesBar from "./../components/FilesBar";
 import InsightSelectBar from "./../components/InsightSelectBar";
 import InsightPanel from "./../components/InsightPanel";
 
-import RGL, { WidthProvider } from "react-grid-layout";
+import RGL, {WidthProvider} from "react-grid-layout";
 import './../../../node_modules/react-grid-layout/css/styles.css';
 
 
@@ -18,6 +18,26 @@ const ReactGridLayout = WidthProvider(RGL);
 
 const InsightsTab = (props) => {
     const classes = useStyles()
+
+    const onLayoutChange = (layout) => {
+
+        fetch('http://127.0.0.1:8000/insight/update-layout', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(layout),
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+
+    }
 
     return (
         <div className={classes.insightsTab}>
@@ -34,9 +54,10 @@ const InsightsTab = (props) => {
                             rowHeight={100}
                             preventCollision={false}
                             cols={12}
+                            onLayoutChange={onLayoutChange}
                         >
                             {props.insights === undefined ? '' : props.insights.map((insight, index) => (
-                                <div key={insight.type} data-grid={insight.layout}>
+                                <div key={props.fileIndex + ':' + insight.type} data-grid={insight.layout}>
                                     <InsightPanel index={index}/>
                                 </div>))
                             }
