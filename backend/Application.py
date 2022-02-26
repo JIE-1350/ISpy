@@ -20,6 +20,7 @@ class Application:
         self.file = ''
         self.data = None
         self.data_path = os.getcwd() + '/data/'
+        self.insights_path = os.getcwd() + '/insights/'
         self.update_files()
         if self.files:
             self.file = self.files[0]
@@ -34,7 +35,7 @@ class Application:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             if file not in self.insights_gens:
-                self.insights_gens[file] = InsightsGen(file)
+                self.insights_gens[file] = InsightsGen(self.insights_path, file)
             self.data_filter = self.data_filters[file]
             self.insights_gen = self.insights_gens[file]
             return self.state()
@@ -55,6 +56,12 @@ class Application:
 
     def update_files(self):
         self.files = os.listdir(self.data_path)
+        insight_files_remove = os.listdir(self.insights_path)
+        for file in self.files:
+            insight_file = file + ".pkl"
+            insight_files_remove.remove(insight_file)
+        for file in insight_files_remove:
+            os.remove(self.insights_path + file)
 
     def save(self, file_type):
         file_name = self.data_path + get_file_name([self.file.split('.')[0]], file_type, self.files)

@@ -20,8 +20,8 @@ def get_sentiment_color(value, threshold1, threshold2):
 
 
 class InsightsGen:
-    def __init__(self, file: str):
-        self.insights_path = os.getcwd() + '/insights/'
+    def __init__(self, path: str, file: str):
+        self.insights_path = path
         self.file = file
         self.insights = []
         self.generated_insights = set()
