@@ -9,6 +9,9 @@ const SaveBarStyle = () => {
         textField: {
             float: "right",
             width: "15%"
+        },
+        deleteButtonContainer: {
+            paddingLeft: '5px'
         }
     };
 };

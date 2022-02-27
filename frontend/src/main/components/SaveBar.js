@@ -39,6 +39,26 @@ const SaveBar = (props) => {
         })
     }
 
+    const removeFile = () => {
+        fetch('http://127.0.0.1:8000/remove-file?index=' + props.fileIndex)
+            .then((res) => {
+                return res.json();
+            }).then((obj) => {
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "REMOVE_FILE",
+                        payload: obj
+                    }
+                )
+            } else {
+                throw(JSON.stringify(obj))
+            }
+        }).catch(e => {
+            alert(e);
+        })
+    }
+
     return (
         <div className={classes.saveBar}>
             <Button variant="contained" className={classes.saveAs} onClick={saveAs}>Save As</Button>
@@ -50,6 +70,9 @@ const SaveBar = (props) => {
                 <MenuItem value={".xlsx"}>.xlsx</MenuItem>
                 <MenuItem value={".json"}>.json</MenuItem>
             </TextField>
+            <div className={classes.deleteButtonContainer}>
+                <Button variant="contained" onClick={removeFile}>DELETE</Button>
+            </div>
         </div>
 
     );

@@ -13,6 +13,8 @@ function files(state = [], action) {
             return action.payload.data.files
         case 'UPDATE_TABLE':
             return action.payload.data.files
+        case 'REMOVE_FILE':
+            return action.payload.data.files
         default:
             return state
     }
@@ -32,6 +34,8 @@ function table(state = {}, action) {
             return action.payload.data.table
         case 'FILE_SELECTED':
             return action.payload.data.table
+        case 'REMOVE_FILE':
+            return action.payload.data.table
         case 'SEARCHING':
             return {}
         default:
@@ -50,6 +54,8 @@ function filters(state = [], action) {
         case 'SEARCH_COMPLETED':
             return action.payload.data.filters
         case 'FILE_SELECTED':
+            return action.payload.data.filters
+        case 'REMOVE_FILE':
             return action.payload.data.filters
         default:
             return state
@@ -77,6 +83,8 @@ function insights(state = [], action) {
             return action.payload.data.insights
         case 'FILE_SELECTED':
             return action.payload.data.insights
+        case 'REMOVE_FILE':
+            return action.payload.data.insights
         default:
             return state
     }
@@ -88,6 +96,8 @@ function fileIndex(state = 0, action) {
             return action.payload
         case 'UPDATE_TABLE':
             return action.payload.data.selectedIndex
+        case 'REMOVE_FILE':
+            return 0
         default:
             return state
     }

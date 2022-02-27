@@ -59,7 +59,11 @@ class Application:
         insight_files_remove = os.listdir(self.insights_path)
         for file in self.files:
             insight_file = file + ".pkl"
-            insight_files_remove.remove(insight_file)
+            print(insight_files_remove, insight_file)
+            try:
+                insight_files_remove.remove(insight_file)
+            except ValueError:
+                pass
         for file in insight_files_remove:
             os.remove(self.insights_path + file)
 
@@ -110,6 +114,14 @@ class Application:
 
     def update_layout(self, data):
         self.insights_gen.update_layout(data)
+
+    def remove_file(self, index):
+        try:
+            os.remove(self.data_path + self.files[index])
+            self.files.pop(index)
+            return self.open_file(self.files[0])
+        except Exception as error:
+            raise error
 
 
 if __name__ == '__main__':
