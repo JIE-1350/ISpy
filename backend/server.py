@@ -152,5 +152,18 @@ def remove_insight():
                 'status_msg': str(exception)}
 
 
+@app.route("/remove-file")
+def remove_file():
+    try:
+        file_index = int(request.args.get('index'))
+        data = application.remove_file(file_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)

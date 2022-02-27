@@ -101,6 +101,14 @@ class Application:
         data = self.insights_gen.get_insights()
         return {'insights': data}
 
+    def remove_file(self, index):
+        try:
+            os.remove(self.data_path + self.files[index])
+            self.files.pop(index)
+            return self.open_file(self.files[0])
+        except Exception as error:
+            raise error
+
 
 if __name__ == '__main__':
     application = Application()
