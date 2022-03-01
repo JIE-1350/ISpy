@@ -92,12 +92,16 @@ class InsightsGen:
                 'graph': graph,
                 'layout': self.get_layout()}
 
-        self.insights.append(data)
-
-    def get_top_hashtags(self, df: pd.DataFrame):
+    def get_top_hashtags(self, data: pd.DataFrame):
+        n = 10
+        hashtags_col = data['hashtags'].apply(eval)
+        hashtags = pd.Series([x for _list in hashtags_col for x in _list])
+        top_hashtags = hashtags.value_counts()[:n].index.tolist()
         data = {'type': 'Top Hashtags',
-                'layout': self.get_layout()}
-
+                'list': [{'color': 'green', 'string': str(top_hashtags[0])},
+                         {'color': 'green', 'string': top_hashtags[1]},
+                         {'color': 'green', 'string': top_hashtags[2]},
+                         {'color': 'green', 'string': top_hashtags[3]}]}
         self.insights.append(data)
 
     def get_time_of_tweets(self, df: pd.DataFrame):
