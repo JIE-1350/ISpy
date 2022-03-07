@@ -1,31 +1,21 @@
 import os
-from datetime import date, datetime
 from DataFilter import DataFilter
+from InsightsGen import InsightsGen
 import pandas as pd
 import numpy as np
+
 from queries import twint_search
-from utils import get_table
+from utils import get_table, get_file_name, read_file
 
 DISPLAY = 5
-
-
-def get_file_name(file_type=".csv"):
-    filename = str(date.today())
-    now = datetime.now()
-    filename += "_" + now.strftime("%H-%M-%S")
-    if file_type == ".csv":
-        filename += ".csv"
-    elif file_type == ".xlsx":
-        filename += ".xlsx"
-    elif file_type == ".json":
-        filename += ".json"
-    return filename
 
 
 class Application:
     def __init__(self):
         self.data_filters = {}
         self.data_filter = None
+        self.insights_gens = {}
+        self.insights_gen = None
         self.files = []
         self.file = ''
         self.data = None
@@ -38,15 +28,16 @@ class Application:
     def open_file(self, file):
         self.update_files()
         if file in self.files:
-            self.data = pd.read_csv(self.data_path + file)
+            self.file = file
+            self.data = read_file(self.data_path + file)
             self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
+            if file not in self.insights_gens:
+                self.insights_gens[file] = InsightsGen(file)
             self.data_filter = self.data_filters[file]
-            self.data_filter.reset_sort()
-            return {'files': self.files,
-                    'filters': self.data_filter.filters,
-                    'table': get_table(self.data)}
+            self.insights_gen = self.insights_gens[file]
+            return self.state()
         else:
             raise FileNotFoundError("File not found:" + file)
 
@@ -66,29 +57,31 @@ class Application:
         self.files = os.listdir(self.data_path)
 
     def save(self, file_type):
+        file_name = self.data_path + get_file_name([self.file.split('.')[0]], file_type, self.files)
         if file_type == ".csv":
-            self.data.to_csv(self.data_path + get_file_name(file_type))
+            self.data.to_csv(file_name)
         elif file_type == ".xlsx":
-            self.data.to_excel(self.data_path + get_file_name(file_type))
+            self.data.to_excel(file_name)
         elif file_type == ".json":
-            self.data.to_json(self.data_path + get_file_name(file_type))
+            self.data.to_json(file_name)
         self.update_files()
         return {'files': self.files}
 
     def state(self):
+        self.update_files()
         return {'files': self.files,
                 'filters': self.data_filter.filters,
-                'table': get_table(self.data)}
+                'table': get_table(self.data),
+                'insights': self.insights_gen.get_insights()}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
-        self.file = get_file_name(".csv")
+        self.file = get_file_name([userid, word], '.csv', self.files)
+        self.files.append(self.file)
         try:
             twint_search(self.file, userid, word, since, until, days, path=self.data_path)
             return self.open_file(self.file)
         except FileNotFoundError as error:
-            return {'files': self.files,
-                    'filters': [],
-                    'table': {'cols': 0, 'rows': 0, 'data': {}}}
+            return self.state()
 
     def get_table_searching(self):
         num_lines = sum(1 for _ in open(self.data_path + self.file, encoding='utf-8'))
@@ -96,7 +89,25 @@ class Application:
         to_exclude = [i for i in range(num_lines) if i not in index_list]
         data_frame = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
         data_frame = data_frame.where((pd.notnull(data_frame)), None)
-        return {'table': get_table(data_frame)}
+        self.update_files()
+        return {'files': self.files, 'table': get_table(data_frame), 'selectedIndex': self.files.index(self.file)}
+
+    def generate_insight(self, insight_type: str, feature: str = None):
+        data = self.insights_gen.get_insights(insight_type, self.data, feature)
+        return {'insights': data}
+
+    def remove_insight(self, index: int):
+        self.insights_gen.remove(index)
+        data = self.insights_gen.get_insights()
+        return {'insights': data}
+
+    def remove_file(self, index):
+        try:
+            os.remove(self.data_path + self.files[index])
+            self.files.pop(index)
+            return self.open_file(self.files[0])
+        except Exception as error:
+            raise error
 
 
 if __name__ == '__main__':

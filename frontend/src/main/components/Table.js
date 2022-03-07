@@ -50,7 +50,7 @@ const Table = (props) => {
     return (
         <div className={classes.tableContainer}>
             <MaterialTable
-                title="Tweet Data"
+                title={props.files[props.fileIndex]}
                 icons={tableIcons}
                 columns={props.table.columns}
                 data={props.table.data}

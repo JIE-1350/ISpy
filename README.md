@@ -3,20 +3,6 @@
 The main goal of this project is to provide an easy user interface allowing for a decreased time in searching the web and more time studying and analyzing trends. The collection of information will enable various users (such as social scientists and academics) to view top trends, identify solutions, and perform insight analysis. Looking at the significant impact social media has had on the 21st-century global society, we can see how easily and quickly misinformation can spread through platforms such as Twitter. This misinformation can lead to a significant amount of divisive and harmful opinions. For example, this past year of the global pandemic has shown how misinformation such as conspiracy theories about COVID-19 vaccines can quickly spread and lead to harmful effects like preventing many people from getting vaccinated. Using our python scraper, users will be provided with accurate and unbiased data; as a result, allowing for the common benefit of society. Some of the key features within our application will be collecting data from Twitter, applying filters to sort and organize data, providing various insights on collected data, and saving collected information for later use.
 
 ## Release Notes
-
-[//]: # (### Version 0.2.0)
-
-[//]: # (#### New Features)
-[//]: # (* Feature 1 for this release)
-[//]: # (* feature 2 for this release)
-
-[//]: # ()
-[//]: # (#### Bug Fixes)
-[//]: # (* Fixed hashtag search not applying hashtag)
-[//]: # (* bug fixed 2)
-
-[//]: # (---)
-
 ### Version 0.1.0:
 #### New Features
 * Scrape data from Twitter by keyword, hashtag, userid, or recent tweets.
@@ -25,6 +11,7 @@ The main goal of this project is to provide an easy user interface allowing for 
 
 #### Bug Fixes
 * N/A
+---
 
 ### Version 0.2.0:
 #### New Features
@@ -38,6 +25,25 @@ The main goal of this project is to provide an easy user interface allowing for 
 #### Bug Fixes
 * Fixed hashtag search not applying hashtag exactly
 * Fixed feature list for filters breaking after changing data format
+---
+
+### Version 0.3.0
+
+#### New Features
+* Add customizable insights dashboard to insight tab
+* Add sentiment analysis insight
+* Add influence score insight
+* Add cancel button during search
+* Add delete button to remove current file
+* Add support for reading other file types
+* Generate more readable file name
+* Change table name to file name
+
+
+#### Bug Fixes
+* Fixed file selecting delay
+* Fixed wrong file selected after search
+
 ---
 
 ## Installation

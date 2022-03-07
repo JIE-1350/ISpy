@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
@@ -21,50 +21,66 @@ const SearchBar = (props) => {
     const [word, setWord] = React.useState('')
     const [days, setDays] = React.useState('')
 
+    const abortControllerRef = useRef()
+    const getAbortController = React.useCallback(() => {
+        if (!abortControllerRef.current) {
+            abortControllerRef.current = new AbortController()
+        }
+        return abortControllerRef
+    }, [])
+
     const search = () => {
-        fetch('http://127.0.0.1:8000/search?user=' + user + '&word=' + word + '&days=' + days + '&since=' + since + '&until=' + until + '&type=' + search_type)
-            .then((res) => {
-                return res.json();
-            }).then((obj) => {
-            if (obj.status === 'success') {
-                props.dispatch(
-                    {
-                        type: "SEARCH_COMPLETED",
-                        payload: obj
-                    }
-                )
-            } else {
-                throw(JSON.stringify(obj))
-            }
-        }).catch(e => {
-            props.dispatch({type: "SEARCHING", payload: false})
-            alert(e);
-        })
-        console.log('searching')
-        props.dispatch({type: "SEARCHING", payload: true})
+        if (props.searching === true) {
+            getAbortController().current.abort()
+            getAbortController().current = null
+            fetch('http://127.0.0.1:8000/cancel-search')
+                .then((res) => {
+                    return res.json();
+                }).then((obj) => {
+                if (obj.status === 'success') {
+                    props.dispatch({type: "SEARCH_COMPLETED", payload: obj})
+                } else {
+                    throw(JSON.stringify(obj))
+                }
+            }).catch(e => {
+                alert(e);
+            })
+        } else {
+            fetch('http://127.0.0.1:8000/search?' +
+                'user=' + user +
+                '&word=' + word +
+                '&days=' + days +
+                '&since=' + since +
+                '&until=' + until +
+                '&type=' + search_type,
+                { signal: getAbortController().current.signal })
+                .then((res) => {
+                    return res.json();
+                }).then((obj) => {
+                if (obj.status === 'success') {
+                    props.dispatch({type: "SEARCH_COMPLETED", payload: obj})
+                } else {
+                    throw(JSON.stringify(obj))
+                }
+            }).catch(e => {
+                props.dispatch({type: "SEARCHING", payload: false})
+                if (e.name !== 'AbortError') {
+                    alert(e);
+                }
+            })
+            props.dispatch({type: "SEARCHING", payload: true})
+        }
     }
 
 
     const searchType = [
-        {
-            value: 'Keyword',
-            label: 'Keyword'
-        },
-        {
-            value: 'Hashtag',
-            label: 'Hashtag'
-        }
+        {value: 'Keyword', label: 'Keyword'},
+        {value: 'Hashtag', label: 'Hashtag'}
     ]
 
     const timeRange = [
-        {
-            value: 'date_range',
-            label: 'Range'
-        },
-        {
-            value: 'days',
-            label: 'Days'
-        }
+        {value: 'date_range', label: 'Range'},
+        {value: 'days', label: 'Days'}
     ]
 
     const [search_type, setSearchType] = React.useState('Keyword');
@@ -114,7 +130,13 @@ const SearchBar = (props) => {
                                onChange={e => setUntil(e.target.value)} size={'small'} sx={TextFieldStyle}/>
                 </div>
             }
-            <Button variant="contained" disabled={!word && !user} onClick={search}>Search</Button>
+            <Button
+                variant="contained"
+                disabled={!word && !user && !props.searching}
+                onClick={search}
+            >
+                { props.searching ? 'Cancel' : 'Search'}
+            </Button>
         </div>
     );
 }

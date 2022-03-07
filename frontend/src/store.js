@@ -11,6 +11,10 @@ function files(state = [], action) {
             return action.payload.data.files
         case 'FILE_SELECTED':
             return action.payload.data.files
+        case 'UPDATE_TABLE':
+            return action.payload.data.files
+        case 'REMOVE_FILE':
+            return action.payload.data.files
         default:
             return state
     }
@@ -29,6 +33,8 @@ function table(state = {}, action) {
         case 'UPDATE_TABLE':
             return action.payload.data.table
         case 'FILE_SELECTED':
+            return action.payload.data.table
+        case 'REMOVE_FILE':
             return action.payload.data.table
         case 'SEARCHING':
             return {}
@@ -49,6 +55,8 @@ function filters(state = [], action) {
             return action.payload.data.filters
         case 'FILE_SELECTED':
             return action.payload.data.filters
+        case 'REMOVE_FILE':
+            return action.payload.data.filters
         default:
             return state
     }
@@ -65,11 +73,43 @@ function searching(state = false, action) {
     }
 }
 
+function insights(state = [], action) {
+    switch (action.type) {
+        case 'LOAD_SEARCH_TAB':
+            return action.payload.data.insights
+        case 'INSIGHT_GENERATED':
+            return action.payload.data.insights
+        case 'REMOVE_INSIGHT':
+            return action.payload.data.insights
+        case 'FILE_SELECTED':
+            return action.payload.data.insights
+        case 'REMOVE_FILE':
+            return action.payload.data.insights
+        default:
+            return state
+    }
+}
+
+function fileIndex(state = 0, action) {
+    switch (action.type) {
+        case 'CHANGE_FILE_INDEX':
+            return action.payload
+        case 'UPDATE_TABLE':
+            return action.payload.data.selectedIndex
+        case 'REMOVE_FILE':
+            return 0
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
-    searching
+    searching,
+    insights,
+    fileIndex
 })
 
 const store = createStore(reducers, {})

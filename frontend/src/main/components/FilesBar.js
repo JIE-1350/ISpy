@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
@@ -13,19 +13,14 @@ const useStyles = createUseStyles(FilesBarStyle)
 const FilesBar = (props) => {
     const classes = useStyles()
 
-    const [fileName, setFile] = React.useState('');
-    const fileSelect = () => {
-        fetch('http://127.0.0.1:8000/select-file?filename=' + fileName)
+    const fileSelect = (file, index) => {
+        fetch('http://127.0.0.1:8000/select-file?filename=' + file)
             .then((res) => {
                 return res.json();
             }).then((obj) => {
             if (obj.status === 'success') {
-                props.dispatch(
-                    {
-                        type: "FILE_SELECTED",
-                        payload: obj
-                    }
-                )
+                props.dispatch({type: "FILE_SELECTED", payload: obj})
+                props.dispatch({type: "CHANGE_FILE_INDEX", payload: index})
             } else {
                 throw(JSON.stringify(obj))
             }
@@ -33,22 +28,17 @@ const FilesBar = (props) => {
             console.log(e);
         })
     }
-    const [selectedButton, setSelectedButton] = useState(0);
 
     return (
         <div className={classes.filesBar}>
             {(props.files === undefined ? '' : props.files.map((file, index) => (
-                index === selectedButton
+                index === props.fileIndex
                     ? <div className={classes.row}>
                         <Button
                             className={classes.fileButton}
                             variant="outlined"
                             size="small"
-                            onClick={(e) => {
-                                setFile(file);
-                                fileSelect();
-                                setSelectedButton(index);
-                            }}>
+                            onClick={(e) => {fileSelect(file, index)}}>
                             <div className={classes.buttonTextSelected}>{file}</div>
                         </Button>
                     </div>
@@ -56,11 +46,7 @@ const FilesBar = (props) => {
                         <Button
                             className={classes.fileButton}
                             size="small"
-                            onClick={(e) => {
-                                setFile(file);
-                                fileSelect();
-                                setSelectedButton(index);
-                            }}>
+                            onClick={(e) => {fileSelect(file, index)}}>
                             <div className={classes.buttonTextRegular}>{file}</div>
                         </Button>
                     </div>

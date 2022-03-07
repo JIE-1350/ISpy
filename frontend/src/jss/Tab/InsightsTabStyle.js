@@ -1,6 +1,6 @@
-const SearchTabStyle = () => {
+const InsightsTabStyle = () => {
     return {
-        searchTab: {
+        insightsTab: {
             width: "100%",
             height: "calc(100vh - 52px)",
             display: "flex"
@@ -9,20 +9,21 @@ const SearchTabStyle = () => {
             height: "100%",
             width: "15%",
         },
+        insightsWindow: {
+            height: "calc(100% - 70px)",
+            overflowX: 'hidden',
+            overflowY: 'auto',
+        },
         mainWindow: {
             height: "100%",
             width: "85%",
             justifyContent: 'flex-end',
             flexWrap: 'wrap'
         },
-        filterBar: {
-            height: "50px",
-            width: "100%",
-            borderTop: "solid 1px gainsboro",
-            borderBottom: "solid 1px gainsboro",
-            paddingTop: "10px"
+        LayoutWindow: {
+            paddingRight: "15px"
         }
     };
 };
 
-export default SearchTabStyle;
+export default InsightsTabStyle;

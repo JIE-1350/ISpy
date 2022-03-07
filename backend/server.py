@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 from flask_cors import CORS
 from Application import Application
@@ -9,7 +10,8 @@ application = Application()
 
 @app.route("/search")
 def search():
-    try:             
+    try:
+        os.environ["TWINT_RUN_SEARCH"] = "1"
         word = request.args.get('word')
         user = request.args.get('user')
         days = request.args.get('days')
@@ -19,12 +21,27 @@ def search():
 
         if search_type == "Hashtag" and word:
             word = "#" + word
-        
+
         data = application.twitter_search(word, user, since, until, days)
 
+        os.environ["TWINT_RUN_SEARCH"] = "0"
         return {'status': 'success',
                 'status_msg': "Search successfully",
                 'data': data}
+    except Exception as exception:
+        os.environ["TWINT_RUN_SEARCH"] = "0"
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/cancel-search")
+def cancel_search():
+    try:
+        os.environ["TWINT_RUN_SEARCH"] = "0"
+        application.open_file(application.file)
+        return {'status': 'success',
+                'status_msg': "Canceled search successfully",
+                'data': application.state()}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}
@@ -107,6 +124,46 @@ def select_file():
                 'status_msg': str(exception)}
 
 
+@app.route("/generate-insight")
+def generate_insight():
+    try:
+        insight_type = request.args.get('type')
+        feature = request.args.get('feature')
+        feature = feature if feature and insight_type == "stats" else None
+        data = application.generate_insight(insight_type, feature)
+        return {'status': 'success',
+                'status_msg': "Successfully generated insight",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/insight/remove")
+def remove_insight():
+    try:
+        remove_index = int(request.args.get('index'))
+        data = application.remove_insight(remove_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed insight",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/remove-file")
+def remove_file():
+    try:
+        file_index = int(request.args.get('index'))
+        data = application.remove_file(file_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8000)
-

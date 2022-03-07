@@ -40,25 +40,8 @@ class DataFilter:
         })
 
     def remove(self, index):
-        indexInt = int(index)
-        self.filters.pop(indexInt)
-
-    def sort(self, data, feature):
-        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html
-        # perform the sort INPLACE using pandas
-        if not self.sorts:
-            for feature in list(data.columns):
-                self.sorts[feature] = None
-        if self.sorts[feature]:
-            # perform non-default sort here
-            self.sorts[feature] = False
-        else:
-            # perform default sort here
-            self.sorts[feature] = True
-        # no need to return because of inplace operation
-
-    def reset_sort(self):
-        self.sorts = {}
+        index_int = int(index)
+        self.filters.pop(index_int)
 
     def __str__(self):
         return self.filters.__str__()
