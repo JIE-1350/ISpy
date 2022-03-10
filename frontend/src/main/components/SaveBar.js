@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
 import SaveBarStyle from './../../jss/components/SaveBarStyle.js';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const useStyles = createUseStyles(SaveBarStyle)
 
@@ -71,7 +72,13 @@ const SaveBar = (props) => {
                 <MenuItem value={".json"}>.json</MenuItem>
             </TextField>
             <div className={classes.deleteButtonContainer}>
-                <Button variant="contained" onClick={removeFile}>DELETE</Button>
+                <Button
+                    startIcon={<DeleteIcon />}
+                    variant="contained"
+                    onClick={removeFile}
+                >
+                    DELETE
+                </Button>
             </div>
         </div>
 
