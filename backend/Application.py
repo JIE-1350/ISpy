@@ -59,7 +59,6 @@ class Application:
         insight_files_remove = mk_list_dir(self.insights_path)
         for file in self.files:
             insight_file = file + ".pkl"
-            print(insight_files_remove, insight_file)
             try:
                 insight_files_remove.remove(insight_file)
             except ValueError:
