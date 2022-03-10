@@ -8,22 +8,26 @@ const SearchBarStyle = () => {
             paddingTop: "10px",
             paddingLeft: "5px"
         },
+        textFieldBar: {
+            display: "flex",
+            width: "calc(100% - 156.75px)",
+        },
         searchDay: {
-            width: "28%",
+            width: "calc(33.3%)",
 
         },
         searchRange: {
-            width: "28%",
+            width: "calc(33.3%)",
             display: 'inherit'
         },
         textField: {
-            width: "14%",
+            width: "calc(16.6% - 5px)",
         },
         textFieldDay: {
-            width: "50%",
+            width: "calc(50% - 5px)",
         },
         textFieldRange: {
-            width: "50%",
+            width: "calc(50% - 5px)",
         },
     };
 };
