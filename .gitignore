@@ -6,4 +6,5 @@ backend/insights/
 .DS_Store
 *.pyc
 backend/myenv/
+package-lock.json
 
