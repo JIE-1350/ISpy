@@ -5,6 +5,8 @@ import {createUseStyles} from 'react-jss';
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
+import {IconButton} from "@mui/material";
+
 import SettingButtonStyle from './../../jss/components/SettingButtonStyle.js';
 
 const useStyles = createUseStyles(SettingButtonStyle)
@@ -25,13 +27,14 @@ const SettingButton = (props) => {
 
     return (
         <div>
-            <Button
-                variant="outlined"
+            <IconButton
                 startIcon={<SettingsIcon />}
                 onClick={handleClick}
+                aria-label="setting"
             >
+                <SettingsIcon/>
+            </IconButton>
 
-            </Button>
             <Popover
                 id={id}
                 open={open}
