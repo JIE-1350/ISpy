@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from queries import twint_search
-from utils import get_table, get_file_name, read_file
+from utils import get_table, get_file_name, read_file, mk_list_dir
 
 DISPLAY = 5
 
@@ -55,8 +55,8 @@ class Application:
                 'table': get_table(filtered_data)}
 
     def update_files(self):
-        self.files = os.listdir(self.data_path)
-        insight_files_remove = os.listdir(self.insights_path)
+        self.files = mk_list_dir(self.data_path)
+        insight_files_remove = mk_list_dir(self.insights_path)
         for file in self.files:
             insight_file = file + ".pkl"
             print(insight_files_remove, insight_file)
