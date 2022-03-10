@@ -5,6 +5,11 @@ import {createUseStyles} from 'react-jss';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
+
+import SettingButton from "./../components/SettingButton";
+
 
 import SearchBarStyle from './../../jss/components/SearchBarStyle.js';
 
@@ -131,12 +136,15 @@ const SearchBar = (props) => {
                 </div>
             }
             <Button
+                startIcon={props.searching ?<SearchOffIcon/> : <SearchIcon/>}
                 variant="contained"
                 disabled={!word && !user && !props.searching}
                 onClick={search}
             >
-                { props.searching ? 'Cancel' : 'Search'}
+                { props.searching ? 'Stop' : 'Search'}
             </Button>
+
+            <SettingButton/>
         </div>
     );
 }
