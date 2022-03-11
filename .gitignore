@@ -3,6 +3,7 @@ venv/
 __pycache__/
 backend/data/
 backend/insights/
+backend/settings.json
 .DS_Store
 *.pyc
 backend/myenv/
