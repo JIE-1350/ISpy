@@ -116,9 +116,16 @@ class Application:
 
     def remove_file(self, index):
         try:
+            print(index)
             os.remove(self.data_path + self.files[index])
             self.files.pop(index)
-            return self.open_file(self.files[0])
+            if len(self.files):
+                return self.open_file(self.files[0])
+            else:
+                return {'files': [],
+                        'filters': [],
+                        'table': {},
+                        'insights': []}
         except Exception as error:
             raise error
 
