@@ -40,7 +40,7 @@ class Application:
             self.insights_gen = self.insights_gens[file]
             return self.state()
         else:
-            raise FileNotFoundError("File not found:" + file)
+            return self.state()
 
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
@@ -79,10 +79,13 @@ class Application:
 
     def state(self):
         self.update_files()
+        filters = self.data_filter.filters if self.data_filter is not None else []
+        table = get_table(self.data) if self.data is not None else {}
+        insights = self.insights_gen.get_insights() if self.insights_gen is not None else []
         return {'files': self.files,
-                'filters': self.data_filter.filters,
-                'table': get_table(self.data),
-                'insights': self.insights_gen.get_insights()}
+                'filters': filters,
+                'table': table,
+                'insights': insights}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
