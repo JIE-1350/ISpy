@@ -91,7 +91,8 @@ class Application:
         return {'files': self.files,
                 'filters': filters,
                 'table': table,
-                'insights': insights}
+                'insights': insights,
+                'settings': self.setting.settings}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
