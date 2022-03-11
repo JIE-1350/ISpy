@@ -6,8 +6,13 @@ import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {IconButton} from "@mui/material";
+import Typography from "@mui/material/Typography";
+
+import SettingEntry from "./../components/SettingEntry";
 
 import SettingButtonStyle from './../../jss/components/SettingButtonStyle.js';
+import TextField from "@mui/material/TextField";
+import SaveIcon from "@mui/icons-material/Save";
 
 const useStyles = createUseStyles(SettingButtonStyle)
 
@@ -24,6 +29,10 @@ const SettingButton = (props) => {
     };
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+
+    function save() {
+        console.log(props.settings)
+    }
 
     return (
         <div>
@@ -46,7 +55,16 @@ const SettingButton = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    {JSON.stringify(props.settings)}
+                    <Typography sx={{ fontWeight: 'bold', textAlign: 'center'}}>Settings</Typography>
+                    {Object.entries(props.settings).map(([key, value]) => (
+                        <SettingEntry setting={key}/>
+                    ))}
+                    <Button
+                        variant="contained"
+                        onClick={save}
+                    >
+                        Save
+                    </Button>
                 </div>
             </Popover>
 
