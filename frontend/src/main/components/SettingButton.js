@@ -40,12 +40,40 @@ const SettingButton = (props) => {
             body: JSON.stringify(props.settings),
         })
             .then(response => response.json())
-            .then(result => {
-                console.log('Success:', result);
-            })
-            .catch(error => {
+            .then(obj => {
+                if (obj.status === 'success') {
+                    props.dispatch(
+                        {
+                            type: "LOAD_SEARCH_TAB",
+                            payload: obj
+                        }
+                    )
+                } else {
+                    throw(JSON.stringify(obj))
+                }
+            }).catch(error => {
                 console.error('Error:', error);
             })
+    }
+
+    function reset() {
+        fetch('http://127.0.0.1:8000/reset-settings')
+            .then((res) => {
+                return res.json();
+            }).then((obj) => {
+            if (obj.status === 'success') {
+                props.dispatch(
+                    {
+                        type: "LOAD_SEARCH_TAB",
+                        payload: obj
+                    }
+                )
+            } else {
+                throw(JSON.stringify(obj))
+            }
+        }).catch(e => {
+            alert(e);
+        })
     }
 
     return (
@@ -78,6 +106,12 @@ const SettingButton = (props) => {
                         onClick={save}
                     >
                         Save
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={reset}
+                    >
+                        Reset
                     </Button>
                 </div>
             </Popover>
