@@ -142,11 +142,13 @@ class Application:
 
     def update_settings(self, settings):
         self.setting.update_setting(settings)
-        return self.state()
+        self.update_files()
+        return self.open_file(self.files[0])
 
     def reset_settings(self):
         self.setting.set_default()
-        return self.state()
+        self.update_files()
+        return self.open_file(self.files[0])
 
 
 if __name__ == '__main__':
