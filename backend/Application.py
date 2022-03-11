@@ -130,6 +130,9 @@ class Application:
         except Exception as error:
             raise error
 
+    def update_settings(self, data):
+        print(data)
+
 
 if __name__ == '__main__':
     application = Application()

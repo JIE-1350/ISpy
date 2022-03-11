@@ -31,13 +31,27 @@ const SettingButton = (props) => {
     const id = open ? 'simple-popover' : undefined;
 
     function save() {
-        console.log(props.settings)
+        fetch('http://127.0.0.1:8000/insight/update-settings', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(props.settings),
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
     }
 
     return (
         <div>
             <IconButton
-                startIcon={<SettingsIcon />}
+                startIcon={<SettingsIcon/>}
                 onClick={handleClick}
                 aria-label="setting"
             >
@@ -55,7 +69,7 @@ const SettingButton = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-                    <Typography sx={{ fontWeight: 'bold', textAlign: 'center'}}>Settings</Typography>
+                    <Typography sx={{fontWeight: 'bold', textAlign: 'center'}}>Settings</Typography>
                     {Object.entries(props.settings).map(([key, value]) => (
                         <SettingEntry setting={key}/>
                     ))}

@@ -26,7 +26,6 @@ const SettingEntry = (props) => {
                 value={value}
                 variant="outlined"
                 onChange={e => {
-                    // setValue(e.target.value);
                     props.settings[setting] = e.target.value;
                 }}
                 size={'small'}
