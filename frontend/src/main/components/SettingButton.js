@@ -46,7 +46,7 @@ const SettingButton = (props) => {
                 }}
             >
                 <div className={classes.popover}>
-
+                    {JSON.stringify(props.settings)}
                 </div>
             </Popover>
 
