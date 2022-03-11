@@ -52,7 +52,16 @@ class Application:
                 'table': get_table(filtered_data)}
 
     def update_files(self):
-        self.files = mk_list_dir(self.setting('Data Path'))
+        files = mk_list_dir(self.setting('Data Path'))
+        self.files = []
+        for file in files:
+            try:
+                _, file_type = file.split('.')
+                if 'csv' == file_type or 'json' == file_type or 'xlsx' == file_type:
+                    self.files.append(file)
+            except ValueError as error:
+                pass
+
         insight_files_remove = mk_list_dir(self.setting('Insights Path'))
         for file in self.files:
             insight_file = file + ".pkl"
