@@ -40,3 +40,7 @@ class Setting(Singleton):
         }
         self.save_settings()
 
+    def update_setting(self, new_settings):
+        self.settings = new_settings
+        self.save_settings()
+

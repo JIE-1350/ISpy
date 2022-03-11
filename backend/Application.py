@@ -130,8 +130,9 @@ class Application:
         except Exception as error:
             raise error
 
-    def update_settings(self, data):
-        print(data)
+    def update_settings(self, settings):
+        self.setting.update_setting(settings)
+        self.update_files()
 
 
 if __name__ == '__main__':
