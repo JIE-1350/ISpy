@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from queries import twint_search
-from utils import get_table, get_file_name, read_file
+from utils import get_table, get_file_name, read_file, mk_list_dir
 
 DISPLAY = 5
 
@@ -40,7 +40,7 @@ class Application:
             self.insights_gen = self.insights_gens[file]
             return self.state()
         else:
-            raise FileNotFoundError("File not found:" + file)
+            return self.state()
 
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
@@ -55,11 +55,10 @@ class Application:
                 'table': get_table(filtered_data)}
 
     def update_files(self):
-        self.files = os.listdir(self.data_path)
-        insight_files_remove = os.listdir(self.insights_path)
+        self.files = mk_list_dir(self.data_path)
+        insight_files_remove = mk_list_dir(self.insights_path)
         for file in self.files:
             insight_file = file + ".pkl"
-            print(insight_files_remove, insight_file)
             try:
                 insight_files_remove.remove(insight_file)
             except ValueError:
@@ -80,10 +79,13 @@ class Application:
 
     def state(self):
         self.update_files()
+        filters = self.data_filter.filters if self.data_filter is not None else []
+        table = get_table(self.data) if self.data is not None else {}
+        insights = self.insights_gen.get_insights() if self.insights_gen is not None else []
         return {'files': self.files,
-                'filters': self.data_filter.filters,
-                'table': get_table(self.data),
-                'insights': self.insights_gen.get_insights()}
+                'filters': filters,
+                'table': table,
+                'insights': insights}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
@@ -117,9 +119,16 @@ class Application:
 
     def remove_file(self, index):
         try:
+            print(index)
             os.remove(self.data_path + self.files[index])
             self.files.pop(index)
-            return self.open_file(self.files[0])
+            if len(self.files):
+                return self.open_file(self.files[0])
+            else:
+                return {'files': [],
+                        'filters': [],
+                        'table': {},
+                        'insights': []}
         except Exception as error:
             raise error
 

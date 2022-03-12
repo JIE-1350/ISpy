@@ -1,3 +1,4 @@
+import os
 from datetime import date, datetime
 import pandas as pd
 
@@ -65,3 +66,12 @@ def read_file(file):
         return pd.read_json(file)
     if file_type == 'xlsx':
         return pd.read_excel(file, engine='openpyxl')
+
+
+def mk_list_dir(path):
+    try:
+        return os.listdir(path)
+    except FileNotFoundError as error:
+        os.mkdir(path)
+        return os.listdir(path)
+

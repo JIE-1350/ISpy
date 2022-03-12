@@ -1,4 +1,3 @@
-import os
 import pickle
 import nltk
 import pandas as pd
