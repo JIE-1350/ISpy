@@ -91,12 +91,26 @@ class InsightsGen:
                 'graph': graph,
                 'layout': self.get_layout()}
 
-        self.insights.append(data)
-
-    def get_top_hashtags(self, df: pd.DataFrame):
+    def get_top_hashtags(self, data: pd.DataFrame):
+        n = 10
+        hashtags_col = data['hashtags'].apply(eval)
+        hashtags = pd.Series([x for _list in hashtags_col for x in _list])
+        top_hashtags = hashtags.value_counts()[:n].index.tolist()
+        top_hashtags_count = hashtags.value_counts()[:n].tolist()
         data = {'type': 'Top Hashtags',
+                'list': [{'color': 'green', 'string': top_hashtags[0]},
+                         {'color': 'green', 'string': top_hashtags[1]},
+                         {'color': 'green', 'string': top_hashtags[2]},
+                         {'color': 'green', 'string': top_hashtags[3]},
+                         {'color': 'green', 'string': top_hashtags[4]},
+                         {'color': 'green', 'string': top_hashtags[5]}],
+                'graph': [{'name': top_hashtags[0], 'CountA': top_hashtags_count[0]},
+                          {'name': top_hashtags[1], 'CountB': top_hashtags_count[1]},
+                          {'name': top_hashtags[2], 'CountC': top_hashtags_count[2]},
+                          {'name': top_hashtags[3], 'CountD': top_hashtags_count[3]},
+                          {'name': top_hashtags[4], 'CountE': top_hashtags_count[4]},
+                          {'name': top_hashtags[5], 'CountF': top_hashtags_count[5]}],                         
                 'layout': self.get_layout()}
-
         self.insights.append(data)
 
     def get_time_of_tweets(self, df: pd.DataFrame):
