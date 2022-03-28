@@ -42,5 +42,7 @@ class Setting(Singleton):
 
     def update_setting(self, new_settings):
         self.settings = new_settings
+        self.settings['Searching number of old rows'] = int(self.settings['Searching number of old rows'])
+        self.settings['Searching number of new rows'] = int(self.settings['Searching number of new rows'])
         self.save_settings()
 
