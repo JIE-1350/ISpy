@@ -133,6 +133,7 @@ class Application:
             if len(self.files):
                 return self.open_file(self.files[0])
             else:
+                self.__init__()
                 return {'files': [],
                         'filters': [],
                         'table': {},
