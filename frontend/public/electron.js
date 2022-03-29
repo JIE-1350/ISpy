@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-console.log(isDev);
+
 let mainWindow;
 
 function createWindow() {
@@ -15,9 +15,7 @@ function createWindow() {
     mainWindow.loadURL(startURL);
 
     mainWindow.once('ready-to-show', () => mainWindow.show());
-    mainWindow.on('closed', () => {
-        mainWindow = null;
-    });
+    mainWindow.on('closed', () => mainWindow = null);
 }
 app.on('ready', createWindow);
 
@@ -50,8 +48,7 @@ function startPython() {
         });
     } else {
         console.log('Running in production');
-        process.chdir('../backend/');
-        require('child_process').execFile('server');
+        require('child_process').execFile('server.exe');
     }
 
 }
