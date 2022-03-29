@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-
+console.log(isDev);
 let mainWindow;
 
 function createWindow() {
@@ -34,18 +34,26 @@ app.on('activate', () => {
 })
 
 function startPython() {
-    var { PythonShell } = require('python-shell');
+    if (isDev) {
+        console.log('Running in development');
+        var { PythonShell } = require('python-shell');
 
-    let options = {
+        let options = {
         mode: 'text'
-    };
+        };
 
-    process.chdir('../backend/');
-    PythonShell.run('server.py', options, function (err, result) {
-    if (err) throw err;
-    // results is an array consisting of messages collected during execution
-        console.log('response: ', result);
-    });
+        process.chdir('../backend/');
+        PythonShell.run('server.py', options, function (err, result) {
+        if (err) throw err;
+            // results is an array consisting of messages collected during execution
+            console.log('response: ', result);
+        });
+    } else {
+        console.log('Running in production');
+        process.chdir('../backend/');
+        require('child_process').execFile('server');
+    }
+
 }
 
 startPython();
