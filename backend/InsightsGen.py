@@ -90,6 +90,7 @@ class InsightsGen:
         data = {'type': 'Tweets Frequency',
                 'graph': graph,
                 'layout': self.get_layout()}
+        self.insights.append(data)
 
     def get_top_hashtags(self, data: pd.DataFrame):
         n = 10

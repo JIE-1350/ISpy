@@ -15,7 +15,7 @@ const InsightFrequency = (props) => {
     const classes = useStyles()
     const {data} = props
 
-    const timeFormatter = (time) => moment(time * 1000).format('l')
+    const timeFormatter = (time) => ' ' + moment(time * 1000).format('l') + ''
 
     return (
         <div className={classes.insightContainer}>
@@ -26,9 +26,7 @@ const InsightFrequency = (props) => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                         dataKey="time"
-                        domain = {['auto', 'auto']}
                         tickFormatter = {timeFormatter}
-                        type = 'number'
                     />
                     <YAxis />
                     <Tooltip labelFormatter={timeFormatter} />
