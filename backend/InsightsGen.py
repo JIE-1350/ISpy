@@ -113,7 +113,7 @@ class InsightsGen:
         graph = []
 
         for key, value in time_dict.items():
-            time_str = str(key)
+            time_str = str(key) + ":00"
             entry = {'time': time_str, 'value': value}
             graph.append(entry)
 

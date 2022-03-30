@@ -20,11 +20,7 @@ const InsightTweetsTime = (props) => {
                            margin={{top: 10, right: 35, left: 0, bottom: 0}}
                 >
                     <CartesianGrid strokeDasharray="3 3"/>
-                    <XAxis
-                        dataKey="time"
-                        domain={[0, 23]}
-                        type='string'
-                    />
+                    <XAxis dataKey="time"/>
                     <YAxis/>
                     <Tooltip/>
                     <Area type="monotone" dataKey="value" fill="#ADD8E6"/>
