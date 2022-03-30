@@ -22,8 +22,8 @@ const InsightTweetsTime = (props) => {
                     <CartesianGrid strokeDasharray="3 3"/>
                     <XAxis
                         dataKey="time"
-                        domain={['auto', 'auto']}
-                        type='number'
+                        domain={[0, 23]}
+                        type='string'
                     />
                     <YAxis/>
                     <Tooltip/>
