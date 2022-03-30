@@ -102,30 +102,20 @@ class InsightsGen:
     def get_time_of_tweets(self, df: pd.DataFrame):
         dates = df['time'].to_numpy()
         dates = [datetime.strptime(date, '%H:%M:%S').time() for date in dates]
-        timeDict = {}
+        time_dict = {}
+
+        for hour in range(24):
+            time_dict[hour] = 0
 
         for time in dates:
-            if  time.hour not in timeDict.keys():
-                timeDict[time.hour] = 1
-            elif time.hour in timeDict.keys():
-                timeDict[time.hour] += 1
+            time_dict[time.hour] += 1
 
         graph = []
 
-        for key in timeDict.keys():
-            entry = {}
-            entry['time'] = str(key)
-            entry['value'] = timeDict[key]
+        for key, value in time_dict.items():
+            time_str = str(key)
+            entry = {'time': time_str, 'value': value}
             graph.append(entry)
-
-
-        """ gfraph = [
-            {'time': '1', 'value': 2},
-            {'time': '2', 'value': 3},
-            {'time': '3', 'value': 4},
-            {'time': '4', 'value': 5},
-            {'time': '5', 'value': 8}
-        ] """
 
         data = {'type': 'Time of Tweets',
                 'graph': graph,
