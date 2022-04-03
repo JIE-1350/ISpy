@@ -1,16 +1,18 @@
 const InsightPanelStyle = () => {
     return {
         insightPanel: {
-            paddingLeft: "10px",
-            borderBottom: "solid 1px gainsboro",
+            // borderBottom: "solid 1px gainsboro",
+            border: "solid 1px gainsboro",
+            borderRadius: "5px",
             width: '100%',
             height: '100%',
         },
         insightPanelHeader: {
             display: "flex",
             justifyContent: "space-between",
-            width: '100%',
+            width: 'calc(100% - 10px)',
             height: '10%',
+            paddingLeft: '10px'
         },
         insightPanelBody: {
             width: '100%',

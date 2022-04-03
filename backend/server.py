@@ -128,9 +128,7 @@ def select_file():
 def generate_insight():
     try:
         insight_type = request.args.get('type')
-        feature = request.args.get('feature')
-        feature = feature if feature and insight_type == "stats" else None
-        data = application.generate_insight(insight_type, feature)
+        data = application.generate_insight(insight_type)
         return {'status': 'success',
                 'status_msg': "Successfully generated insight",
                 'data': data}
@@ -147,6 +145,18 @@ def remove_insight():
         return {'status': 'success',
                 'status_msg': "Successfully removed insight",
                 'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/insight/update-layout", methods=['POST'])
+def update_layout():
+    try:
+        data = request.get_json()
+        application.update_layout(data)
+        return {'status': 'success',
+                'status_msg': "Successfully update layout"}
     except Exception as exception:
         return {'status': 'fail',
                 'status_msg': str(exception)}

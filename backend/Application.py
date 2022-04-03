@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from queries import twint_search
-from utils import get_table, get_file_name, read_file
+from utils import get_table, get_file_name, read_file, mk_list_dir
 
 DISPLAY = 5
 
@@ -20,6 +20,7 @@ class Application:
         self.file = ''
         self.data = None
         self.data_path = os.getcwd() + '/data/'
+        self.insights_path = os.getcwd() + '/insights/'
         self.update_files()
         if self.files:
             self.file = self.files[0]
@@ -34,12 +35,12 @@ class Application:
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             if file not in self.insights_gens:
-                self.insights_gens[file] = InsightsGen(file)
+                self.insights_gens[file] = InsightsGen(self.insights_path, file)
             self.data_filter = self.data_filters[file]
             self.insights_gen = self.insights_gens[file]
             return self.state()
         else:
-            raise FileNotFoundError("File not found:" + file)
+            return self.state()
 
     def add_filter(self, type, feature, value):
         self.data_filter.add(type, feature, value)
@@ -54,7 +55,16 @@ class Application:
                 'table': get_table(filtered_data)}
 
     def update_files(self):
-        self.files = os.listdir(self.data_path)
+        self.files = mk_list_dir(self.data_path)
+        insight_files_remove = mk_list_dir(self.insights_path)
+        for file in self.files:
+            insight_file = file + ".pkl"
+            try:
+                insight_files_remove.remove(insight_file)
+            except ValueError:
+                pass
+        for file in insight_files_remove:
+            os.remove(self.insights_path + file)
 
     def save(self, file_type):
         file_name = self.data_path + get_file_name([self.file.split('.')[0]], file_type, self.files)
@@ -69,10 +79,13 @@ class Application:
 
     def state(self):
         self.update_files()
+        filters = self.data_filter.filters if self.data_filter is not None else []
+        table = get_table(self.data) if self.data is not None else {}
+        insights = self.insights_gen.get_insights() if self.insights_gen is not None else []
         return {'files': self.files,
-                'filters': self.data_filter.filters,
-                'table': get_table(self.data),
-                'insights': self.insights_gen.get_insights()}
+                'filters': filters,
+                'table': table,
+                'insights': insights}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
@@ -92,8 +105,8 @@ class Application:
         self.update_files()
         return {'files': self.files, 'table': get_table(data_frame), 'selectedIndex': self.files.index(self.file)}
 
-    def generate_insight(self, insight_type: str, feature: str = None):
-        data = self.insights_gen.get_insights(insight_type, self.data, feature)
+    def generate_insight(self, insight_type: str):
+        data = self.insights_gen.get_insights(insight_type, self.data)
         return {'insights': data}
 
     def remove_insight(self, index: int):
@@ -101,16 +114,27 @@ class Application:
         data = self.insights_gen.get_insights()
         return {'insights': data}
 
+    def update_layout(self, data):
+        self.insights_gen.update_layout(data)
+
     def remove_file(self, index):
         try:
+            print(index)
             os.remove(self.data_path + self.files[index])
             self.files.pop(index)
-            return self.open_file(self.files[0])
+            if len(self.files):
+                return self.open_file(self.files[0])
+            else:
+                return {'files': [],
+                        'filters': [],
+                        'table': {},
+                        'insights': []}
         except Exception as error:
             raise error
 
 
 if __name__ == '__main__':
     application = Application()
+    application.generate_insight("frequency")
 
 
