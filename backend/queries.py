@@ -1,5 +1,8 @@
 import twint
 from datetime import date, timedelta
+from Setting import Setting
+
+setting = Setting()
 
 
 def twint_search(file_name, word=None, userid=None, since=None, until=None, days=None, path=None):

@@ -103,13 +103,23 @@ function fileIndex(state = 0, action) {
     }
 }
 
+function settings(state = {}, action) {
+    switch (action.type) {
+        case 'LOAD_SEARCH_TAB':
+            return action.payload.data.settings
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
     searching,
     insights,
-    fileIndex
+    fileIndex,
+    settings
 })
 
 const store = createStore(reducers, {})

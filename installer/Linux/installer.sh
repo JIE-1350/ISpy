@@ -1,0 +1,1 @@
+pyinstaller --onefile ../backend/server.py
