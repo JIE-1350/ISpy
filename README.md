@@ -46,6 +46,24 @@ The main goal of this project is to provide an easy user interface allowing for 
 
 ---
 
+### Version 0.4.0
+
+#### New Features
+* Add top hashtags list insight
+* Add top hashtags graph insight
+* Add time of tweets insight
+* Add frequency over time insight
+
+
+#### Bug Fixes
+* Clean up of insight panel (backend)
+* Misaligned or aesthetically buggy UI elements of insight panel resolved
+
+#### Known Issues
+* Some datasets generate graphs with text that are cutoff at default size but are easily resized; minor
+
+---
+
 ## Installation
 ### Frontend
 #### Requirements
