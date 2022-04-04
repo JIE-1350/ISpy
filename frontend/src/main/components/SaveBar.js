@@ -5,6 +5,8 @@ import {createUseStyles} from 'react-jss';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import DeleteIcon from "@mui/icons-material/Delete";
+import SaveIcon from '@mui/icons-material/Save';
 
 import SaveBarStyle from './../../jss/components/SaveBarStyle.js';
 
@@ -13,7 +15,7 @@ const useStyles = createUseStyles(SaveBarStyle)
 
 const SaveBar = (props) => {
     const classes = useStyles()
-    const [fileType, setFileType] = React.useState('');
+    const [fileType, setFileType] = React.useState('.csv');
 
     const handlefileTypeChange = (event) => {
         setFileType(event.target.value);
@@ -61,17 +63,33 @@ const SaveBar = (props) => {
 
     return (
         <div className={classes.saveBar}>
-            <Button variant="contained" className={classes.saveAs} onClick={saveAs}>Save As</Button>
-            <TextField select label="Save File Type:"
-                       className={classes.textField}
-                       onChange={handlefileTypeChange}
-                       size={'small'}>
+            <Button
+                startIcon={<SaveIcon />}
+                variant="contained"
+                className={classes.saveAs}
+                onClick={saveAs}
+            >
+                Save
+            </Button>
+            <TextField
+                select label="Save File Type:"
+                className={classes.textField}
+                onChange={handlefileTypeChange}
+                size={'small'}
+                value={'.csv'}
+            >
                 <MenuItem value={".csv"}>.csv</MenuItem>
                 <MenuItem value={".xlsx"}>.xlsx</MenuItem>
                 <MenuItem value={".json"}>.json</MenuItem>
             </TextField>
             <div className={classes.deleteButtonContainer}>
-                <Button variant="contained" onClick={removeFile}>DELETE</Button>
+                <Button
+                    startIcon={<DeleteIcon />}
+                    variant="contained"
+                    onClick={removeFile}
+                >
+                    DELETE
+                </Button>
             </div>
         </div>
 

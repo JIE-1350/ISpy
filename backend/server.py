@@ -162,6 +162,31 @@ def update_layout():
                 'status_msg': str(exception)}
 
 
+@app.route("/insight/update-settings", methods=['POST'])
+def update_settings():
+    try:
+        settings = request.get_json()
+        data = application.update_settings(settings)
+        return {'status': 'success',
+                'status_msg': "Successfully update settings",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/reset-settings")
+def reset_settings():
+    try:
+        data = application.reset_settings()
+        return {'status': 'success',
+                'status_msg': "Successfully reset settings",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
 @app.route("/remove-file")
 def remove_file():
     try:

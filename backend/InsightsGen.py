@@ -36,7 +36,7 @@ class InsightsGen:
         sentiments = np.array(sentiments)
         analysis_count = np.sum(sentiments, axis=0)
         analysis_mean = np.mean(sentiments, axis=0)
-        sentiment_color = get_sentiment_color(analysis_mean[3], -1.0/3.0, 1.0/3.0)
+        sentiment_color = get_sentiment_color(analysis_mean[3], -1.0 / 3.0, 1.0 / 3.0)
         data = {'type': 'Sentiment Analysis',
                 'list': [{'color': sentiment_color, 'string': str(round(analysis_mean[3], 3)) + ' sentiment score'},
                          {'color': 'green', 'string': str(round(analysis_mean[2] * 100)) + '% positive tweets'},
@@ -90,21 +90,50 @@ class InsightsGen:
         data = {'type': 'Tweets Frequency',
                 'graph': graph,
                 'layout': self.get_layout()}
+        self.insights.append(data)
 
     def get_top_hashtags(self, data: pd.DataFrame):
         n = 10
         hashtags_col = data['hashtags'].apply(eval)
         hashtags = pd.Series([x for _list in hashtags_col for x in _list])
         top_hashtags = hashtags.value_counts()[:n].index.tolist()
+        top_hashtags_count = hashtags.value_counts()[:n].tolist()
         data = {'type': 'Top Hashtags',
-                'list': [{'color': 'green', 'string': str(top_hashtags[0])},
+                'list': [{'color': 'green', 'string': top_hashtags[0]},
                          {'color': 'green', 'string': top_hashtags[1]},
                          {'color': 'green', 'string': top_hashtags[2]},
-                         {'color': 'green', 'string': top_hashtags[3]}]}
+                         {'color': 'green', 'string': top_hashtags[3]},
+                         {'color': 'green', 'string': top_hashtags[4]},
+                         {'color': 'green', 'string': top_hashtags[5]}],
+                'graph': [{'name': top_hashtags[0], 'CountA': top_hashtags_count[0]},
+                          {'name': top_hashtags[1], 'CountB': top_hashtags_count[1]},
+                          {'name': top_hashtags[2], 'CountC': top_hashtags_count[2]},
+                          {'name': top_hashtags[3], 'CountD': top_hashtags_count[3]},
+                          {'name': top_hashtags[4], 'CountE': top_hashtags_count[4]},
+                          {'name': top_hashtags[5], 'CountF': top_hashtags_count[5]}],                         
+                'layout': self.get_layout()}
         self.insights.append(data)
 
     def get_time_of_tweets(self, df: pd.DataFrame):
+        dates = df['time'].to_numpy()
+        dates = [datetime.strptime(date, '%H:%M:%S').time() for date in dates]
+        time_dict = {}
+
+        for hour in range(24):
+            time_dict[hour] = 0
+
+        for time in dates:
+            time_dict[time.hour] += 1
+
+        graph = []
+
+        for key, value in time_dict.items():
+            time_str = str(key) + ":00"
+            entry = {'time': time_str, 'value': value}
+            graph.append(entry)
+
         data = {'type': 'Time of Tweets',
+                'graph': graph,
                 'layout': self.get_layout()}
         self.insights.append(data)
 

@@ -3,11 +3,9 @@ from DataFilter import DataFilter
 from InsightsGen import InsightsGen
 import pandas as pd
 import numpy as np
-
+from Setting import Setting
 from queries import twint_search
 from utils import get_table, get_file_name, read_file, mk_list_dir
-
-DISPLAY = 5
 
 
 class Application:
@@ -19,8 +17,7 @@ class Application:
         self.files = []
         self.file = ''
         self.data = None
-        self.data_path = os.getcwd() + '/data/'
-        self.insights_path = os.getcwd() + '/insights/'
+        self.setting = Setting()
         self.update_files()
         if self.files:
             self.file = self.files[0]
@@ -30,12 +27,12 @@ class Application:
         self.update_files()
         if file in self.files:
             self.file = file
-            self.data = read_file(self.data_path + file)
+            self.data = read_file(self.setting('Data Path') + file)
             self.data = self.data.where((pd.notnull(self.data)), None)
             if file not in self.data_filters:
                 self.data_filters[file] = DataFilter()
             if file not in self.insights_gens:
-                self.insights_gens[file] = InsightsGen(self.insights_path, file)
+                self.insights_gens[file] = InsightsGen(self.setting('Insights Path'), file)
             self.data_filter = self.data_filters[file]
             self.insights_gen = self.insights_gens[file]
             return self.state()
@@ -55,8 +52,17 @@ class Application:
                 'table': get_table(filtered_data)}
 
     def update_files(self):
-        self.files = mk_list_dir(self.data_path)
-        insight_files_remove = mk_list_dir(self.insights_path)
+        files = mk_list_dir(self.setting('Data Path'))
+        self.files = []
+        for file in files:
+            try:
+                _, file_type = file.split('.')
+                if 'csv' == file_type or 'json' == file_type or 'xlsx' == file_type:
+                    self.files.append(file)
+            except ValueError as error:
+                pass
+
+        insight_files_remove = mk_list_dir(self.setting('Insights Path'))
         for file in self.files:
             insight_file = file + ".pkl"
             try:
@@ -64,10 +70,10 @@ class Application:
             except ValueError:
                 pass
         for file in insight_files_remove:
-            os.remove(self.insights_path + file)
+            os.remove(self.setting('Insights Path') + file)
 
     def save(self, file_type):
-        file_name = self.data_path + get_file_name([self.file.split('.')[0]], file_type, self.files)
+        file_name = self.setting('Data Path') + get_file_name([self.file.split('.')[0]], file_type, self.files)
         if file_type == ".csv":
             self.data.to_csv(file_name)
         elif file_type == ".xlsx":
@@ -85,22 +91,25 @@ class Application:
         return {'files': self.files,
                 'filters': filters,
                 'table': table,
-                'insights': insights}
+                'insights': insights,
+                'settings': self.setting.settings}
 
     def twitter_search(self, userid=None, word=None, since=None, until=None, days=None):
         self.file = get_file_name([userid, word], '.csv', self.files)
         self.files.append(self.file)
         try:
-            twint_search(self.file, userid, word, since, until, days, path=self.data_path)
+            twint_search(self.file, userid, word, since, until, days, path=self.setting('Data Path'))
             return self.open_file(self.file)
         except FileNotFoundError as error:
             return self.state()
 
     def get_table_searching(self):
-        num_lines = sum(1 for _ in open(self.data_path + self.file, encoding='utf-8'))
-        index_list = np.append(np.arange(num_lines - DISPLAY, num_lines), np.arange(DISPLAY + 1)).tolist()
+        num_lines = sum(1 for _ in open(self.setting('Data Path') + self.file, encoding='utf-8'))
+        old = np.arange(self.setting("Searching number of old rows") + 1)
+        new = np.arange(num_lines - self.setting("Searching number of new rows"), num_lines)
+        index_list = np.append(old, new).tolist()
         to_exclude = [i for i in range(num_lines) if i not in index_list]
-        data_frame = pd.read_csv(self.data_path + self.file, skiprows=to_exclude)
+        data_frame = pd.read_csv(self.setting('Data Path') + self.file, skiprows=to_exclude)
         data_frame = data_frame.where((pd.notnull(data_frame)), None)
         self.update_files()
         return {'files': self.files, 'table': get_table(data_frame), 'selectedIndex': self.files.index(self.file)}
@@ -119,18 +128,28 @@ class Application:
 
     def remove_file(self, index):
         try:
-            print(index)
-            os.remove(self.data_path + self.files[index])
+            os.remove(self.setting('Data Path') + self.files[index])
             self.files.pop(index)
             if len(self.files):
                 return self.open_file(self.files[0])
             else:
+                self.__init__()
                 return {'files': [],
                         'filters': [],
                         'table': {},
                         'insights': []}
         except Exception as error:
             raise error
+
+    def update_settings(self, settings):
+        self.setting.update_setting(settings)
+        self.update_files()
+        return self.open_file(self.files[0])
+
+    def reset_settings(self):
+        self.setting.set_default()
+        self.update_files()
+        return self.open_file(self.files[0])
 
 
 if __name__ == '__main__':
