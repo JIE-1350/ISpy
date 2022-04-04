@@ -16,7 +16,7 @@ const SettingEntry = (props) => {
 
     useEffect(() => {
         setValue(props.settings[key]);
-    }, [props.settings[key]]);
+    }, [props.settings]);
 
     return (
         <div className={classes.TextFieldContainer}>

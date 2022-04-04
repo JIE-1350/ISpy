@@ -3,7 +3,6 @@ import {connect} from "react-redux"
 import {createUseStyles} from 'react-jss';
 
 import InsightTweetsTimeStyle from './../../jss/components/InsightTweetsTimeStyle.js';
-import moment from "moment";
 import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 const useStyles = createUseStyles(InsightTweetsTimeStyle)
