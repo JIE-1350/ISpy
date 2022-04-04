@@ -11,8 +11,6 @@ import Typography from "@mui/material/Typography";
 import SettingEntry from "./../components/SettingEntry";
 
 import SettingButtonStyle from './../../jss/components/SettingButtonStyle.js';
-import TextField from "@mui/material/TextField";
-import SaveIcon from "@mui/icons-material/Save";
 
 const useStyles = createUseStyles(SettingButtonStyle)
 
