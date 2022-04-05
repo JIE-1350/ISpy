@@ -76,7 +76,7 @@ const SaveBar = (props) => {
                 className={classes.textField}
                 onChange={handlefileTypeChange}
                 size={'small'}
-                value={'.csv'}
+                defaultValue={'.csv'}
             >
                 <MenuItem value={".csv"}>.csv</MenuItem>
                 <MenuItem value={".xlsx"}>.xlsx</MenuItem>
