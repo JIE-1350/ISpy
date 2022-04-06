@@ -86,7 +86,7 @@ def get_state():
                 'status_msg': str(exception)}
 
 
-@app.route("/save")
+@app.route("file/save")
 def save():
     try:
         file_type = request.args.get('fileType')
@@ -111,7 +111,7 @@ def update_table():
                 'status_msg': str(exception)}
 
 
-@app.route("/select-file")
+@app.route("/file/select")
 def select_file():
     try:
         file_name = request.args.get('filename')
@@ -187,7 +187,7 @@ def reset_settings():
                 'status_msg': str(exception)}
 
 
-@app.route("/remove-file")
+@app.route("/file/remove")
 def remove_file():
     try:
         file_index = int(request.args.get('index'))

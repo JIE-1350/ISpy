@@ -22,7 +22,7 @@ const SaveBar = (props) => {
     };
 
     const saveAs = () => {
-        fetch('http://127.0.0.1:8000/save?fileType=' + fileType)
+        fetch('http://127.0.0.1:8000/file/save?fileType=' + fileType)
             .then((res) => {
                 return res.json();
             }).then((obj) => {
@@ -42,7 +42,7 @@ const SaveBar = (props) => {
     }
 
     const removeFile = () => {
-        fetch('http://127.0.0.1:8000/remove-file?index=' + props.fileIndex)
+        fetch('http://127.0.0.1:8000/file/remove?index=' + props.fileIndex)
             .then((res) => {
                 return res.json();
             }).then((obj) => {
