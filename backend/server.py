@@ -8,7 +8,7 @@ CORS(app)
 application = Application()
 
 
-@app.route("/search")
+@app.route("/search/start")
 def search():
     try:
         os.environ["TWINT_RUN_SEARCH"] = "1"
@@ -34,7 +34,7 @@ def search():
                 'status_msg': str(exception)}
 
 
-@app.route("/cancel-search")
+@app.route("/search/cancel")
 def cancel_search():
     try:
         os.environ["TWINT_RUN_SEARCH"] = "0"
@@ -137,7 +137,7 @@ def update_table():
                 'status_msg': str(exception)}
 
 
-@app.route("/generate-insight")
+@app.route("/insight/generate")
 def generate_insight():
     try:
         insight_type = request.args.get('type')
@@ -175,7 +175,7 @@ def update_layout():
                 'status_msg': str(exception)}
 
 
-@app.route("/insight/update-settings", methods=['POST'])
+@app.route("/insight/settings/update", methods=['POST'])
 def update_settings():
     try:
         settings = request.get_json()
@@ -188,7 +188,7 @@ def update_settings():
                 'status_msg': str(exception)}
 
 
-@app.route("/reset-settings")
+@app.route("/settings/reset")
 def reset_settings():
     try:
         data = application.reset_settings()

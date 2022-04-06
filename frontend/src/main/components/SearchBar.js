@@ -38,7 +38,7 @@ const SearchBar = (props) => {
         if (props.searching === true) {
             getAbortController().current.abort()
             getAbortController().current = null
-            fetch('http://127.0.0.1:8000/cancel-search')
+            fetch('http://127.0.0.1:8000/search/cancel')
                 .then((res) => {
                     return res.json();
                 }).then((obj) => {
@@ -51,7 +51,7 @@ const SearchBar = (props) => {
                 alert(e);
             })
         } else {
-            fetch('http://127.0.0.1:8000/search?' +
+            fetch('http://127.0.0.1:8000/search/start?' +
                 'user=' + user +
                 '&word=' + word +
                 '&days=' + days +

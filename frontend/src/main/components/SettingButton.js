@@ -29,7 +29,7 @@ const SettingButton = (props) => {
     const id = open ? 'simple-popover' : undefined;
 
     function save() {
-        fetch('http://127.0.0.1:8000/insight/update-settings', {
+        fetch('http://127.0.0.1:8000/settings/update', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const SettingButton = (props) => {
     }
 
     function reset() {
-        fetch('http://127.0.0.1:8000/reset-settings')
+        fetch('http://127.0.0.1:8000/settings/reset')
             .then((res) => {
                 return res.json();
             }).then((obj) => {
