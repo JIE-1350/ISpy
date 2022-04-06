@@ -99,12 +99,13 @@ def save():
                 'status_msg': str(exception)}
 
 
-@app.route("/update-table")
-def update_table():
+@app.route("/file/remove")
+def remove_file():
     try:
-        data = application.get_table_searching()
+        file_index = int(request.args.get('index'))
+        data = application.remove_file(file_index)
         return {'status': 'success',
-                'status_msg': "Successfully updated table",
+                'status_msg': "Successfully removed file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
@@ -118,6 +119,18 @@ def select_file():
         data = application.open_file(file_name)
         return {'status': 'success',
                 'status_msg': "Successfully selected file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/update-table")
+def update_table():
+    try:
+        data = application.get_table_searching()
+        return {'status': 'success',
+                'status_msg': "Successfully updated table",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
@@ -181,19 +194,6 @@ def reset_settings():
         data = application.reset_settings()
         return {'status': 'success',
                 'status_msg': "Successfully reset settings",
-                'data': data}
-    except Exception as exception:
-        return {'status': 'fail',
-                'status_msg': str(exception)}
-
-
-@app.route("/file/remove")
-def remove_file():
-    try:
-        file_index = int(request.args.get('index'))
-        data = application.remove_file(file_index)
-        return {'status': 'success',
-                'status_msg': "Successfully removed file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
