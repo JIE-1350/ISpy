@@ -175,7 +175,7 @@ def update_layout():
                 'status_msg': str(exception)}
 
 
-@app.route("/insight/settings/update", methods=['POST'])
+@app.route("/settings/update", methods=['POST'])
 def update_settings():
     try:
         settings = request.get_json()
