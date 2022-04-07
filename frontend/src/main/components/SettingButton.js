@@ -49,6 +49,7 @@ const SettingButton = (props) => {
                 } else {
                     throw(JSON.stringify(obj))
                 }
+                handleClose()
             }).catch(error => {
                 console.error('Error:', error);
             })
