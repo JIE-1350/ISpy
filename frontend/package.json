@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^11.6.0",
