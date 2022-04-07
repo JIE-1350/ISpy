@@ -4,6 +4,9 @@ __pycache__/
 backend/data/
 backend/insights/
 backend/settings.json
+backend/pyinstaller/build
+backend/pyinstaller/dist
+backend/pyinstaller/server.spec
 .DS_Store
 *.pyc
 backend/myenv/
