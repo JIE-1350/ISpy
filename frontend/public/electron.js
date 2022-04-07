@@ -48,7 +48,8 @@ function startPython() {
         });
     } else {
         console.log('Running in production');
-        require('child_process').execFile('server.exe');
+        const exePath = path.join(__dirname, '../server.exe')
+        require('child_process').execFile(exePath);
     }
 
 }

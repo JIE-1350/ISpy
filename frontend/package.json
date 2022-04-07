@@ -48,13 +48,15 @@
     "electron:start": "wait-on http://localhost:3000 && electron ."
   },
   "build": {
+    "extends" : null,
     "appId": "com.electron.ISpy",
     "files": [
       "build/**/*",
       "node_modules/**/*",
       "package.json",
       "server.exe"
-    ]
+    ],
+    "asar" : false
   },
   "eslintConfig": {
     "extends": [
