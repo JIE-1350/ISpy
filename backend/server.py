@@ -86,7 +86,7 @@ def get_state():
                 'status_msg': str(exception)}
 
 
-@app.route("file/save")
+@app.route("/file/save")
 def save():
     try:
         file_type = request.args.get('fileType')
