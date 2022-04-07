@@ -85,6 +85,8 @@ function insights(state = [], action) {
             return action.payload.data.insights
         case 'REMOVE_FILE':
             return action.payload.data.insights
+        case 'SEARCH_COMPLETED':
+            return action.payload.data.insights
         default:
             return state
     }

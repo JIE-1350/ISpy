@@ -8,7 +8,7 @@ CORS(app)
 application = Application()
 
 
-@app.route("/search")
+@app.route("/search/start")
 def search():
     try:
         os.environ["TWINT_RUN_SEARCH"] = "1"
@@ -34,7 +34,7 @@ def search():
                 'status_msg': str(exception)}
 
 
-@app.route("/cancel-search")
+@app.route("/search/cancel")
 def cancel_search():
     try:
         os.environ["TWINT_RUN_SEARCH"] = "0"
@@ -86,13 +86,39 @@ def get_state():
                 'status_msg': str(exception)}
 
 
-@app.route("/save")
+@app.route("/file/save")
 def save():
     try:
         file_type = request.args.get('fileType')
         data = application.save(file_type)
         return {'status': 'success',
                 'status_msg': "Successfully saved csv file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/file/remove")
+def remove_file():
+    try:
+        file_index = int(request.args.get('index'))
+        data = application.remove_file(file_index)
+        return {'status': 'success',
+                'status_msg': "Successfully removed file",
+                'data': data}
+    except Exception as exception:
+        return {'status': 'fail',
+                'status_msg': str(exception)}
+
+
+@app.route("/file/select")
+def select_file():
+    try:
+        file_name = request.args.get('filename')
+        data = application.open_file(file_name)
+        return {'status': 'success',
+                'status_msg': "Successfully selected file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
@@ -111,20 +137,7 @@ def update_table():
                 'status_msg': str(exception)}
 
 
-@app.route("/select-file")
-def select_file():
-    try:
-        file_name = request.args.get('filename')
-        data = application.open_file(file_name)
-        return {'status': 'success',
-                'status_msg': "Successfully selected file",
-                'data': data}
-    except Exception as exception:
-        return {'status': 'fail',
-                'status_msg': str(exception)}
-
-
-@app.route("/generate-insight")
+@app.route("/insight/generate")
 def generate_insight():
     try:
         insight_type = request.args.get('type')
@@ -162,7 +175,7 @@ def update_layout():
                 'status_msg': str(exception)}
 
 
-@app.route("/insight/update-settings", methods=['POST'])
+@app.route("/settings/update", methods=['POST'])
 def update_settings():
     try:
         settings = request.get_json()
@@ -175,25 +188,12 @@ def update_settings():
                 'status_msg': str(exception)}
 
 
-@app.route("/reset-settings")
+@app.route("/settings/reset")
 def reset_settings():
     try:
         data = application.reset_settings()
         return {'status': 'success',
                 'status_msg': "Successfully reset settings",
-                'data': data}
-    except Exception as exception:
-        return {'status': 'fail',
-                'status_msg': str(exception)}
-
-
-@app.route("/remove-file")
-def remove_file():
-    try:
-        file_index = int(request.args.get('index'))
-        data = application.remove_file(file_index)
-        return {'status': 'success',
-                'status_msg': "Successfully removed file",
                 'data': data}
     except Exception as exception:
         return {'status': 'fail',
