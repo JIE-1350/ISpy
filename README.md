@@ -69,6 +69,24 @@ The main goal of this project is to provide an easy user interface allowing for 
 * Some datasets generate graphs with text that are cutoff at default size but are easily resized; minor
 
 ---
+### Version 0.5.0
+
+#### New Features
+* Add capability to install using installer
+* Add advanced user settings
+* Add tooltip to insight
+* Add icons to buttons
+
+
+#### Bug Fixes
+* Fix React build script fail to load files
+* Fix insight tab not updating when search is completed
+* Fix save as drop box not updating
+* Fix chart domain and type
+
+#### Known Issues
+* Sometime switching to search tab takes a long time; moderate
+* Some datasets generate graphs with text that are cutoff at default size but are easily resized; minor
 
 ## Installation
 ### Frontend
