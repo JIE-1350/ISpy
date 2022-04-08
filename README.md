@@ -100,3 +100,32 @@ Create a virtual environment and install the dependencies:
 #### Run manually for testing:
 
 ```python server.py```
+
+## Build Installer
+Before you start building the installer, make sure that you can run the application in development setting.
+
+Make sure that your virtual environment is activated, and **pyinstaller** is installed.
+
+Create an executable for the python server.
+
+To start, change directory to `backend/pyinstaller/`
+
+`cd backend/pyinstaller/`
+
+Run the sh script to create the executable. 
+
+`sh create_exe.sh`
+
+The executable should be in `backend/pyinstaller/dist/` folder with the name `server.exe`
+
+There should also be a copy of `server.exe` in `frontend/`.
+
+Change directory to `frontend/`
+
+`cd ../../frontend`
+
+Run the script to build the electron application installer
+
+`npm run electron:build`
+
+The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
