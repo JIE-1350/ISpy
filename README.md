@@ -112,7 +112,7 @@ To start, change directory to `backend/pyinstaller/`
 
 `cd backend/pyinstaller/`
 
-Run the sh script to create the executable. 
+Run the sh script to create the executable for the flask server. 
 
 `sh create_exe.sh`
 
