@@ -77,6 +77,8 @@ The main goal of this project is to provide an easy user interface allowing for 
 ---
 
 ### Backend
+#### Requirements
+* Python 3.8
 #### Setup
 Create a virtual environment and install the dependencies:
 
@@ -89,7 +91,7 @@ Create a virtual environment and install the dependencies:
 ```pip install -r requirements.txt```
 
 
-#### Run manually for testing:
+#### Run manually for developing:
 
 ```python server.py```
 
