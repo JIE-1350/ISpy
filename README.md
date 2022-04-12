@@ -59,8 +59,8 @@ The main goal of this project is to provide an easy user interface allowing for 
 ## Installation
 ### Frontend
 #### Requirements
-* nodeJS 16.13.0 or newer (LTS)
-* npm 8.5.0 or newer (Stable)
+* [nodeJS 16.13.0 or newer (LTS)](https://nodejs.org/en/)
+* [npm 8.5.0 or newer (comes bundled with node)](https://www.npmjs.com/package/npm/v/8.5.0)
 
 #### Setup
 
@@ -76,7 +76,7 @@ The main goal of this project is to provide an easy user interface allowing for 
 
 ### Backend
 #### Requirements
-* Python 3.8
+* [Python 3.8](https://www.python.org/downloads/release/python-380/)
 #### Setup
 Create a virtual environment and install the dependencies:
 
