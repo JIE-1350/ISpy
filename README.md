@@ -16,73 +16,33 @@ The main goal of this project is to provide an easy user interface allowing for 
 ![](Images/insights.png)
 
 ## Release Notes
-### Version 0.1.0:
+### Version 1.0.0:
 #### New Features
 * Scrape data from Twitter by keyword, hashtag, userid, or recent tweets.
 * Filter data using interactive user interface
 * Save data as a CSV file
-
-#### Bug Fixes
-* N/A
----
-
-### Version 0.2.0:
-#### New Features
 * Visualize Data in a formatted Table organized by row for each tweet and column for tweet properties.
 * View previously saved data files or open them from directory sidebar.
 * Apply multiple filters or filter by keyword/number of likes.
 * Search table by keyword/value using table search bar.
 * Sort the table alphanumerically by clicking on column headers.
 * Save data (filtered or not) as .csv, .json, or .xlsx (Excel) on your local machine
-
-#### Bug Fixes
-* Fixed hashtag search not applying hashtag exactly
-* Fixed feature list for filters breaking after changing data format
----
-
-### Version 0.3.0
-
-#### New Features
-* Add customizable insights dashboard to insight tab
-* Add sentiment analysis insight
-* Add influence score insight
-* Add cancel button during search
-* Add delete button to remove current file
-* Add support for reading other file types
-* Generate more readable file name
-* Change table name to file name
-
-
-#### Bug Fixes
-* Fixed file selecting delay
-* Fixed wrong file selected after search
-
----
-
-### Version 0.4.0
-
-#### New Features
-* Add top hashtags list insight
-* Add top hashtags graph insight
-* Add time of tweets insight
-* Add frequency over time insight
-
-
-#### Bug Fixes
-* Clean up of insight panel (backend)
-* Misaligned or aesthetically buggy UI elements of insight panel resolved
-
-#### Known Issues
-* Some datasets generate graphs with text that are cutoff at default size but are easily resized; minor
-
----
-### Version 0.5.0
-
-#### New Features
-* Add capability to install using installer
-* Add advanced user settings
-* Add tooltip to insight
-* Add icons to buttons
+* Ability to customizable insights dashboard in insight tab
+* Perform sentiment analysis insight
+* Provide influence score insight for a user
+* Ability to cancel a search
+* Ability to remove the current file
+* Add support for reading other file types such as CVS, JSON, or XLSX
+* Auto generate readable file name
+* View table name as name of file
+* View top hashtags list insight
+* View top hashtags graph insight
+* View time of tweets insight
+* View frequency over time insight
+* Capability to install using installer
+* Ability to adjust advanced user settings
+* View insight documentation in tooltip
+* Make application intuitive and easy to understand by adding icons to buttons
 
 
 #### Bug Fixes
@@ -93,6 +53,7 @@ The main goal of this project is to provide an easy user interface allowing for 
 
 #### Known Issues
 * Sometime switching to search tab takes a long time; moderate
+* Potential problem with filter value data type; moderate
 * Some datasets generate graphs with text that are cutoff at default size but are easily resized; minor
 
 ## Installation
