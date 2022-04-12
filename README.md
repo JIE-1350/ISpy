@@ -77,6 +77,8 @@ The main goal of this project is to provide an easy user interface allowing for 
 ### Backend
 #### Requirements
 * [Python 3.8](https://www.python.org/downloads/release/python-380/)
+* [pip 22.0.0 or newer](https://pip.pypa.io/en/stable/cli/pip_install/)
+
 #### Setup
 Create a virtual environment and install the dependencies:
 
