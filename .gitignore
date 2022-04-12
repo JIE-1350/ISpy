@@ -13,3 +13,4 @@ backend/myenv/
 package-lock.json
 frontend/dist/
 server.exe
+server
