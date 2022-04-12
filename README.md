@@ -60,7 +60,7 @@ The main goal of this project is to provide an easy user interface allowing for 
 ### Frontend
 #### Requirements
 * nodeJS 16.13.0 or newer (LTS)
-* npm
+* npm 8.5.0 or newer (Stable)
 
 #### Setup
 
@@ -73,8 +73,6 @@ The main goal of this project is to provide an easy user interface allowing for 
 
 #### Run frontend and backend
 ```npm run dev```
-
----
 
 ### Backend
 #### Requirements
