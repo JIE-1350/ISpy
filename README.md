@@ -125,4 +125,9 @@ Run the script to build the electron application installer
 The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 
 ## Troubleshooting
-### Issue #1: <Description>
+### Problem #1
+  <Description>
+#### Cause:
+  <Description>
+#### Solution:
+  <Description> 
