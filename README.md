@@ -127,7 +127,11 @@ The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 ## Troubleshooting
 ### Problem #1
   <Description>
-#### Cause:
-  <Description>
-#### Solution:
-  <Description> 
+
+Cause: 
+  + Cause 1
+  + Cause 2
+  
+Solution:
+  + <Solution 1>
+  + <Solution 2>
