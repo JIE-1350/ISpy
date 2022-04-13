@@ -1,8 +1,9 @@
 {
-  "name": "frontend",
+  "name": "ISpy",
   "version": "0.1.0",
   "private": true,
-  "main": "electron/main.js",
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^11.6.0",
@@ -14,8 +15,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "concurrently": "^6.4.0",
-    "electron": "^16.0.1",
-    "electron-builder": "^22.14.5",
+    "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
     "material-table": "^1.69.3",
     "moment": "^2.29.1",
@@ -32,13 +32,31 @@
     "wait-on": "^6.0.0",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "electron": "^16.0.1",
+    "electron-builder": "^22.14.5"
+  },
   "scripts": {
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ebuild": "npm run build && node_modules/.bin/build"
+    "ebuild": "npm run build && node_modules/.bin/build",
+    "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
+    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js",
+    "electron:start": "wait-on http://localhost:3000 && electron ."
+  },
+  "build": {
+    "extends" : null,
+    "appId": "com.electron.ISpy",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "server.exe"
+    ],
+    "asar" : false
   },
   "eslintConfig": {
     "extends": [
