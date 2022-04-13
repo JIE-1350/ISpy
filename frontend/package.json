@@ -1,6 +1,7 @@
 {
   "name": "ISpy",
   "version": "1.0.0",
+  "description": "An intuitive data scraping & analysis tool for Twitter. Powered by Python.",  
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
@@ -54,12 +55,17 @@
   "build": {
     "extends" : null,
     "appId": "com.electron.ISpy",
+    "directories" : {
+        "buildResources": "resources",
+        "icon": "icon.ico"
+    }
     "files": [
       "build/**/*",
       "node_modules/**/*",
       "package.json",
       "server.exe",
       "server"
+      "resources/**/*"
     ],
     "asar" : false,
     "dmg": {
@@ -88,6 +94,11 @@
     },
     "win": {
       "target": "nsis"
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "installerHeaderIcon": "icon.ico",
+      "deleteAppDataOnUninstall": true
     },
     "linux": {
       "target": "Appimage",
