@@ -48,7 +48,7 @@ const SearchBar = (props) => {
                     throw(JSON.stringify(obj))
                 }
             }).catch(e => {
-                alert(e);
+                console.log(e);
             })
         } else {
             fetch('http://127.0.0.1:8000/search/start?' +
@@ -70,7 +70,7 @@ const SearchBar = (props) => {
             }).catch(e => {
                 props.dispatch({type: "SEARCHING", payload: false})
                 if (e.name !== 'AbortError') {
-                    alert(e);
+                    console.log(e);
                 }
             })
             props.dispatch({type: "SEARCHING", payload: true})

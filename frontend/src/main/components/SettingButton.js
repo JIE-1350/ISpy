@@ -72,7 +72,7 @@ const SettingButton = (props) => {
             }
             handleClose()
         }).catch(e => {
-            alert(e);
+            console.log(e);
         })
     }
 

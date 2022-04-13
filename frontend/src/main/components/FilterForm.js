@@ -44,7 +44,7 @@ const FilterForm = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e => {
-            alert(e);
+            console.log(e);
         })
     };
 

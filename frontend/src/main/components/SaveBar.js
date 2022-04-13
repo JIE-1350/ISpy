@@ -37,7 +37,7 @@ const SaveBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e => {
-            alert(e);
+            console.log(e);
         })
     }
 
@@ -57,7 +57,7 @@ const SaveBar = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e => {
-            alert(e);
+            console.log(e);
         })
     }
 

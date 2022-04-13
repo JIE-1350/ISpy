@@ -38,7 +38,7 @@ const InsightPanel = (props) => {
             }
 
         }).catch(e=>{
-            alert(e);
+            console.log(e);
         })
     };
     let insightComponent = ''
