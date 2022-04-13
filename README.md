@@ -163,13 +163,3 @@ Solution:
   + Delete the current insight.
   + Generate it again.
   
-### Problem #4
-  <Description>
-
-Cause: 
-  + Cause 1
-  + Cause 2
-  
-Solution:
-  + <Solution 1>
-  + <Solution 2>
