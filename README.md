@@ -126,15 +126,15 @@ The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 
 ## Troubleshooting
 ### Problem #1
-  <Description>
+  The application fails to load data file and table.
 
 Cause: 
-  + Cause 1
-  + Cause 2
+  + The settings file is corrupted or wrong.
   
 Solution:
-  + <Solution 1>
-  + <Solution 2>
+  + Go to backend\
+  + Delete settings.json
+  + Reload the app.
 
 ### Problem #2
   <Description>
