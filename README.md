@@ -130,8 +130,12 @@ The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 
 Cause: 
   + The settings file is corrupted or wrong.
+
+Solution 1:
+  + Go to settings.
+  + Click reset button.
   
-Solution:
+Solution 2:
   + Go to backend folder.
   + Delete settings.json.
   + Reload the app.
