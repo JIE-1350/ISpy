@@ -58,7 +58,7 @@
     "directories" : {
         "buildResources": "resources",
         "icon": "icon.ico"
-    }
+    },
     "files": [
       "build/**/*",
       "node_modules/**/*",
