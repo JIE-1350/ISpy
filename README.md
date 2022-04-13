@@ -9,6 +9,8 @@ The main goal of this project is to provide an easy user interface to decrease t
 
 [Linux Installer download](url)
 
+There files can also be found in the `installer/` folder.
+
 ### Search Tab
 ![](Images/search.png)
 
