@@ -68,6 +68,7 @@ const SaveBar = (props) => {
                 variant="contained"
                 className={classes.saveAs}
                 onClick={saveAs}
+                disabled={props.files.length == 0}
             >
                 Save
             </Button>
