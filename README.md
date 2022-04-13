@@ -123,3 +123,6 @@ Run the script to build the electron application installer
 `npm run electron:build`
 
 The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
+
+## Troubleshooting
+### Issue #1: <Description>
