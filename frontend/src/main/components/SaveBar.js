@@ -87,6 +87,7 @@ const SaveBar = (props) => {
                     startIcon={<DeleteIcon />}
                     variant="contained"
                     onClick={removeFile}
+                    disabled={props.files.length == 0}
                 >
                     DELETE
                 </Button>
