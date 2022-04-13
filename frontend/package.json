@@ -45,7 +45,10 @@
     "eject": "react-scripts eject",
     "ebuild": "npm run build && node_modules/.bin/build",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
-    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js",
+    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -m",
+    "electron:build-win": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -w",
+    "electron:build-linux": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -l",
+    "electron:build-mac": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -m",
     "electron:start": "wait-on http://localhost:3000 && electron ."
   },
   "build": {
