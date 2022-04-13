@@ -148,6 +148,16 @@ Solution:
   + Restart the app.
   
 ### Problem #3
+  Cannot generate an analysis for a data file.
+
+Cause: 
+  + The analysis is already existed for this data file.
+  
+Solution:
+  + Delete the current analysis.
+  + Generate it again.
+  
+### Problem #4
   <Description>
 
 Cause: 
