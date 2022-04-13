@@ -70,9 +70,8 @@ const InsightSelectBar = (props) => {
             <Button
                 startIcon={<AddIcon />}
                 variant="contained"
-                disabled = {false}
                 onClick={generate}
-                disabled={props.files.length == 0}
+                disabled={props.files.length === 0}
             >
                 Generate
             </Button>

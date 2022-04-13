@@ -61,7 +61,7 @@ const FilterForm = (props) => {
                 className={classes.addButton}
                 variant="contained"
                 onClick={handleClick}
-                disabled={props.files.length == 0}
+                disabled={props.files.length === 0}
             > + </Button>
 
             <Popover
