@@ -132,11 +132,22 @@ Cause:
   + The settings file is corrupted or wrong.
   
 Solution:
-  + Go to backend\
-  + Delete settings.json
+  + Go to backend folder.
+  + Delete settings.json.
   + Reload the app.
 
 ### Problem #2
+  The application fails to load the search tab.
+
+Cause: 
+  + There may be corruption or wrong format in a data file.
+  
+Solution:
+  + Go to backend\data folder.
+  + Delete the corrupted/wrong format data files.
+  + Restart the app.
+  
+### Problem #3
   <Description>
 
 Cause: 
