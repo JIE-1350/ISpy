@@ -85,9 +85,9 @@ Create a virtual environment and install the dependencies:
 
 ```python3 -m venv venv```
 
-If on windows:
+* If on Windows:
 ```source venv/scripts/activate```
-If on Linux/Mac
+* If on Linux/Mac:
 ```source venv/bin/activate```
 
 ```pip install -r requirements.txt```
