@@ -33,7 +33,6 @@ app.on('activate', () => {
 
 function startPython() {
     if (isDev) {
-        console.log('Running in development');
         var { PythonShell } = require('python-shell');
 
         let options = {
@@ -47,8 +46,15 @@ function startPython() {
             console.log('response: ', result);
         });
     } else {
-        console.log('Running in production');
-        const exePath = path.join(__dirname, '../server.exe')
+        const opsys = process.platform;
+        let exePath;
+        if (opsys === "darwin") {
+            exePath = path.join(__dirname, '../server')
+        } else if (opsys === "win32" || opsys === "win64") {
+            exePath = path.join(__dirname, '../server.exe')
+        } else if (opsys === "linux") {
+            exePath = path.join(__dirname, '../server')
+        }
         require('child_process').execFile(exePath);
     }
 

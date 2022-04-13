@@ -1,9 +1,10 @@
 {
   "name": "ISpy",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
+  "author": "JIE 1350 <phuong8@gatech.edu> (https://github.com/JIE-1350/ISpy)",
   "dependencies": {
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^11.6.0",
@@ -44,7 +45,10 @@
     "eject": "react-scripts eject",
     "ebuild": "npm run build && node_modules/.bin/build",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm run electron:start\"",
-    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js",
+    "electron:build": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -m",
+    "electron:build-win": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -w",
+    "electron:build-linux": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -l",
+    "electron:build-mac": "npm run build && electron-builder -c.extraMetadata.main=build/electron.js -m",
     "electron:start": "wait-on http://localhost:3000 && electron ."
   },
   "build": {
@@ -54,9 +58,41 @@
       "build/**/*",
       "node_modules/**/*",
       "package.json",
-      "server.exe"
+      "server.exe",
+      "server"
     ],
-    "asar" : false
+    "asar" : false,
+    "dmg": {
+      "background": null,
+      "backgroundColor": "#ffffff",
+      "window": {
+        "width": "400",
+        "height": "300"
+      },
+      "contents": [
+        {
+          "x": 100,
+          "y": 100
+        },
+        {
+          "x": 300,
+          "y": 100,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "Appimage",
+      "category": "Utility"
+    }
   },
   "eslintConfig": {
     "extends": [

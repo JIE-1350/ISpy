@@ -130,13 +130,38 @@ The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 
 Cause: 
   + The settings file is corrupted or wrong.
+
+Solution 1:
+  + Go to settings.
+  + Click reset button.
   
-Solution:
-  + Go to backend\
-  + Delete settings.json
+Solution 2:
+  + Go to backend folder.
+  + Delete settings.json.
   + Reload the app.
 
 ### Problem #2
+  The application fails to load the search tab.
+
+Cause: 
+  + There may be corruption or wrong format in a data file.
+  
+Solution:
+  + Go to backend\data folder.
+  + Delete the corrupted/wrong format data files.
+  + Restart the app.
+  
+### Problem #3
+  Cannot generate an insight for a data file.
+
+Cause: 
+  + The insight is already existed for this data file.
+  
+Solution:
+  + Delete the current insight.
+  + Generate it again.
+  
+### Problem #4
   <Description>
 
 Cause: 
