@@ -56,8 +56,7 @@
     "extends" : null,
     "appId": "com.electron.ISpy",
     "directories" : {
-        "buildResources": "resources",
-        "icon": "icon.ico"
+        "buildResources": "resources"
     },
     "files": [
       "build/**/*",
