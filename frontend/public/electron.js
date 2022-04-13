@@ -49,7 +49,7 @@ function startPython() {
         const opsys = process.platform;
         let exePath;
         if (opsys === "darwin") {
-            exePath = path.join(__dirname, '../??????')
+            exePath = path.join(__dirname, '../server')
         } else if (opsys === "win32" || opsys === "win64") {
             exePath = path.join(__dirname, '../server.exe')
         } else if (opsys === "linux") {
