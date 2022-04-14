@@ -141,7 +141,7 @@ Solution 1:
   + Click reset button.
   
 Solution 2:
-  + Go to backend folder.
+  + Go to `backend/` folder.
   + Delete settings.json.
   + Reload the app.
 
@@ -152,7 +152,7 @@ Cause:
   + There may be corruption or wrong format in a data file.
   
 Solution:
-  + Go to backend\data folder.
+  + Go to `backend/data` folder.
   + Delete the corrupted/wrong format data files.
   + Restart the app.
   
