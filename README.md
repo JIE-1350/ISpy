@@ -3,9 +3,9 @@
 The main goal of this project is to provide an easy user interface to decrease time spent searching the web or building out custom scraping tools, and increase time spent studying and analyzing trends. The collection of information will enable various users (such as social scientists and academics) to view top trends, identify solutions, and perform insight analysis. Looking at the significant impact social media has had on the 21st-century global society, we can see how easily and quickly misinformation can spread through platforms such as Twitter. This misinformation can lead to a significant amount of divisive and harmful opinions. For example, this past year of the global pandemic has shown how misinformation such as conspiracy theories about COVID-19 vaccines can quickly spread and lead to harmful effects like preventing many people from getting vaccinated. Using our Python-powered Scraper, users will be provided with accurate and unbiased data; as a result, allowing for the common benefit of society. Some of the key features within our application will be collecting data from Twitter, applying filters to sort and organize data, providing various insights on collected data, and saving collected information for later use.
 
 ## Download Installer
-[Windows Installer download](https://github.com/JIE-1350/ISpy/raw/development/installer/Windows/ISpy%20Setup%200.1.0.exe)
+[Windows Installer download](https://github.com/JIE-1350/ISpy/raw/development/installer/Windows/ISpy%20Setup%201.0.0.exe)
 
-[IOS Installer download](url)
+[//]: # ([IOS Installer download]&#40;url&#41;)
 
 [Linux Installer download](url)
 
