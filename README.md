@@ -53,6 +53,7 @@ There files can also be found in the `installer/` folder.
 * Fixed chart domain and type for Insights
 
 #### Known Issues
+* Problem associated with compiling installer for IOS: moderate
 * Sometimes switching to the Search Tab takes a long time; moderate
 * Potential problem with incorrect filter value data type; moderate
 * Some datasets generate graphs with text that are cutoff at default size, but are easily resized; minor
