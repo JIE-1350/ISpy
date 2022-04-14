@@ -7,7 +7,7 @@ The main goal of this project is to provide an easy user interface to decrease t
 
 [//]: # ([IOS Installer download]&#40;url&#41;)
 
-[Linux Installer download](url)
+[Linux Installer download](https://github.com/JIE-1350/ISpy/raw/development/installer/Linux/ISpy-1.0.0.AppImage)
 
 There files can also be found in the `installer/` folder.
 
