@@ -129,11 +129,9 @@ Run the script to build the electron application installer
 The installer should be in `frontend/dist/` folder as `ISpy Setup 0.1.0.exe`
 
 ## Troubleshooting
-### Problem #1
-  The application fails to load data file and table.
+### The application fails to load data file and table.
 
-Cause: 
-  + The settings file is corrupted or wrong.
+Cause: The settings file is corrupted or wrong.
 
 Solution 1:
   + Go to settings.
@@ -144,24 +142,23 @@ Solution 2:
   + Delete settings.json.
   + Reload the app.
 
-### Problem #2
-  The application fails to load the search tab.
+### The application fails to load the search tab.
 
-Cause: 
-  + There may be corruption or wrong format in a data file.
+Cause: There may be corruption or wrong format in a data file.
   
 Solution:
   + Go to backend\data folder.
   + Delete the corrupted/wrong format data files.
   + Restart the app.
   
-### Problem #3
-  Cannot generate an insight for a data file.
+### Cannot generate an insight for a data file.
 
-Cause: 
-  + The insight already exists for this data file.
+Cause: The insight already exists for this data file.
   
 Solution:
   + Delete the current insight.
   + Generate it again.
   
+### How to check for the error message?
+* To check the error message click on `view`, `Toggle Developer Tools`, `console`
+
