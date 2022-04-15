@@ -9,7 +9,7 @@ The main goal of this project is to provide an easy user interface to decrease t
 
 [Linux Installer download](https://github.com/JIE-1350/ISpy/raw/development/installer/Linux/ISpy-1.0.0.AppImage)
 
-Click [here](https://github.com/JIE-1350/ISpy/blob/development/InstallationREADME.md) for installation guide
+Click [here](https://github.com/JIE-1350/ISpy/blob/development/InstallationREADME.md) for user installation guide
 
 ### Search Tab
 ![](Images/search.png)

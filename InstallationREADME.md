@@ -1,4 +1,4 @@
-# Intelligent Scraping with Python (ISpy) Installation Guide
+# Intelligent Scraping with Python (ISpy) User Installation Guide
 
 
 ## 1. Download Installer
