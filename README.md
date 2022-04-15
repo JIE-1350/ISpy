@@ -59,6 +59,11 @@ Click [here](https://github.com/JIE-1350/ISpy/blob/development/InstallationREADM
 * Some datasets generate graphs with text that are cutoff at default size, but are easily resized; minor
 
 ## Installation
+Installation instructions:
+* Clone the git repository or download the zip file by clicking on the green "Code" button
+* Open a terminal inside the `/ISpy` folder
+* Continue to the frontend setup guide
+
 ### Frontend
 #### Requirements
 * [nodeJS 16.13.0 or newer (LTS)](https://nodejs.org/en/)
