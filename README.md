@@ -7,7 +7,7 @@ The main goal of this project is to provide an easy user interface to decrease t
 
 [//]: # ([IOS Installer download]&#40;url&#41;)
 
-[Linux Installer download](url)
+[Linux Installer download](https://github.com/JIE-1350/ISpy/raw/development/installer/Linux/ISpy-1.0.0.AppImage)
 
 There files can also be found in the `installer/` folder.
 
@@ -53,6 +53,7 @@ There files can also be found in the `installer/` folder.
 * Fixed chart domain and type for Insights
 
 #### Known Issues
+* Problem associated with compiling installer for IOS: moderate
 * Sometimes switching to the Search Tab takes a long time; moderate
 * Potential problem with incorrect filter value data type; moderate
 * Some datasets generate graphs with text that are cutoff at default size, but are easily resized; minor
@@ -138,7 +139,7 @@ Solution 1:
   + Click reset button.
   
 Solution 2:
-  + Go to backend folder.
+  + Go to `backend/` folder.
   + Delete settings.json.
   + Reload the app.
 
@@ -147,7 +148,7 @@ Solution 2:
 Cause: There may be corruption or wrong format in a data file.
   
 Solution:
-  + Go to backend\data folder.
+  + Go to `backend/data` folder.
   + Delete the corrupted/wrong format data files.
   + Restart the app.
   
