@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
 import InsightSelectBarStyle from './../../jss/components/InsightSelectBarStyle.js';
+import AddIcon from '@mui/icons-material/Add';
 
 const useStyles = createUseStyles(InsightSelectBarStyle)
 
@@ -26,7 +27,7 @@ const InsightSelectBar = (props) => {
     ]
 
     const generate = () => {
-        fetch('http://127.0.0.1:8000/generate-insight?type=' + insightType)
+        fetch('http://127.0.0.1:8000/insight/generate?type=' + insightType)
         .then((res)=>{
             return res.json();
         }).then((obj)=>{
@@ -66,7 +67,14 @@ const InsightSelectBar = (props) => {
                     </MenuItem>
                 ))}
             </TextField>
-            <Button variant="contained" disabled = {false} onClick={generate}>Generate</Button>
+            <Button
+                startIcon={<AddIcon />}
+                variant="contained"
+                onClick={generate}
+                disabled={props.files.length === 0}
+            >
+                Generate
+            </Button>
         </div>
     );
 }

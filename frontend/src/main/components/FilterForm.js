@@ -44,7 +44,7 @@ const FilterForm = (props) => {
                 throw(JSON.stringify(obj))
             }
         }).catch(e => {
-            alert(e);
+            console.log(e);
         })
     };
 
@@ -61,6 +61,7 @@ const FilterForm = (props) => {
                 className={classes.addButton}
                 variant="contained"
                 onClick={handleClick}
+                disabled={props.files.length === 0}
             > + </Button>
 
             <Popover

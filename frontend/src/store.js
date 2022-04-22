@@ -85,6 +85,8 @@ function insights(state = [], action) {
             return action.payload.data.insights
         case 'REMOVE_FILE':
             return action.payload.data.insights
+        case 'SEARCH_COMPLETED':
+            return action.payload.data.insights
         default:
             return state
     }
@@ -103,13 +105,23 @@ function fileIndex(state = 0, action) {
     }
 }
 
+function settings(state = {}, action) {
+    switch (action.type) {
+        case 'LOAD_SEARCH_TAB':
+            return action.payload.data.settings
+        default:
+            return state
+    }
+}
+
 const reducers = combineReducers({
     files,
     table,
     filters,
     searching,
     insights,
-    fileIndex
+    fileIndex,
+    settings
 })
 
 const store = createStore(reducers, {})

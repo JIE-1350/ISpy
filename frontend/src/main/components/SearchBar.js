@@ -5,6 +5,11 @@ import {createUseStyles} from 'react-jss';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
+
+import SettingButton from "./../components/SettingButton";
+
 
 import SearchBarStyle from './../../jss/components/SearchBarStyle.js';
 
@@ -33,7 +38,7 @@ const SearchBar = (props) => {
         if (props.searching === true) {
             getAbortController().current.abort()
             getAbortController().current = null
-            fetch('http://127.0.0.1:8000/cancel-search')
+            fetch('http://127.0.0.1:8000/search/cancel')
                 .then((res) => {
                     return res.json();
                 }).then((obj) => {
@@ -43,10 +48,10 @@ const SearchBar = (props) => {
                     throw(JSON.stringify(obj))
                 }
             }).catch(e => {
-                alert(e);
+                console.log(e);
             })
         } else {
-            fetch('http://127.0.0.1:8000/search?' +
+            fetch('http://127.0.0.1:8000/search/start?' +
                 'user=' + user +
                 '&word=' + word +
                 '&days=' + days +
@@ -65,7 +70,7 @@ const SearchBar = (props) => {
             }).catch(e => {
                 props.dispatch({type: "SEARCHING", payload: false})
                 if (e.name !== 'AbortError') {
-                    alert(e);
+                    console.log(e);
                 }
             })
             props.dispatch({type: "SEARCHING", payload: true})
@@ -98,45 +103,50 @@ const SearchBar = (props) => {
 
     return (
         <div className={classes.searchBar}>
-            <TextField select defaultValue="Keyword" label="Search Type:" className={classes.textField}
-                       onChange={handleSearchChange} size={'small'} sx={TextFieldStyle}>
-                {searchType.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField label={search_type} className={classes.textField} variant="outlined"
-                       onChange={e => setWord(e.target.value)} size={'small'} sx={TextFieldStyle}/>
-            <TextField label="Username" className={classes.textField} variant="outlined"
-                       onChange={e => setUser(e.target.value)} size={'small'} sx={TextFieldStyle}/>
-            <TextField select defaultValue="date_range" label="Search by:" className={classes.textField}
-                       onChange={handleTimeChange} size={'small'} sx={TextFieldStyle}>
-                {timeRange.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
-            {is_Days
-                ? <div className={classes.searchDay}>
-                    <TextField label="Days" className={classes.textFieldDay} variant="outlined"
-                               onChange={e => setDays(e.target.value)} size={'small'} sx={TextFieldStyle}/>
-                </div>
-                : <div className={classes.searchRange}>
-                    <TextField label="Start Date" className={classes.textFieldRange} variant="outlined"
-                               onChange={e => setSince(e.target.value)} size={'small'} sx={TextFieldStyle}/>
-                    <TextField label="To Date" className={classes.textFieldRange} variant="outlined"
-                               onChange={e => setUntil(e.target.value)} size={'small'} sx={TextFieldStyle}/>
-                </div>
-            }
+            <div className={classes.textFieldBar}>
+                <TextField select defaultValue="Keyword" label="Search Type:" className={classes.textField}
+                           onChange={handleSearchChange} size={'small'} sx={TextFieldStyle}>
+                    {searchType.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField label={search_type} className={classes.textField} variant="outlined"
+                           onChange={e => setWord(e.target.value)} size={'small'} sx={TextFieldStyle}/>
+                <TextField label="Username" className={classes.textField} variant="outlined"
+                           onChange={e => setUser(e.target.value)} size={'small'} sx={TextFieldStyle}/>
+                <TextField select defaultValue="date_range" label="Search by:" className={classes.textField}
+                           onChange={handleTimeChange} size={'small'} sx={TextFieldStyle}>
+                    {timeRange.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                {is_Days
+                    ? <div className={classes.searchDay}>
+                        <TextField label="Days" className={classes.textFieldDay} variant="outlined"
+                                   onChange={e => setDays(e.target.value)} size={'small'} sx={TextFieldStyle}/>
+                    </div>
+                    : <div className={classes.searchRange}>
+                        <TextField label="Start Date" className={classes.textFieldRange} variant="outlined"
+                                   onChange={e => setSince(e.target.value)} size={'small'} sx={TextFieldStyle}/>
+                        <TextField label="To Date" className={classes.textFieldRange} variant="outlined"
+                                   onChange={e => setUntil(e.target.value)} size={'small'} sx={TextFieldStyle}/>
+                    </div>
+                }
+            </div>
             <Button
+                startIcon={props.searching ?<SearchOffIcon/> : <SearchIcon/>}
                 variant="contained"
                 disabled={!word && !user && !props.searching}
                 onClick={search}
             >
-                { props.searching ? 'Cancel' : 'Search'}
+                { props.searching ? 'Stop' : 'Search'}
             </Button>
+
+            <SettingButton/>
         </div>
     );
 }
